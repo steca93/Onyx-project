@@ -1,18 +1,21 @@
-import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { Link, type AppHref } from "@/i18n/navigation";
 
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  hrefForPage: (page: number) => string;
+  hrefForPage: (page: number) => AppHref;
 }
 
 export function Pagination({ currentPage, totalPages, hrefForPage }: PaginationProps) {
+  const t = useTranslations("Pagination");
+
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <nav aria-label="Stranice" className="flex items-center gap-6">
+    <nav aria-label={t("ariaLabel")} className="flex items-center gap-6">
       {pages.map((page) => {
         const isCurrent = page === currentPage;
         return (

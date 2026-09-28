@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import type { ProductImage } from "@/lib/repo/types";
 
@@ -10,6 +11,7 @@ export interface ProductGalleryProps {
 }
 
 export function ProductGallery({ mainImage, gallery }: ProductGalleryProps) {
+  const t = useTranslations("ProductGallery");
   const images = [mainImage, ...gallery].filter(
     (img): img is ProductImage => Boolean(img),
   );
@@ -28,7 +30,7 @@ export function ProductGallery({ mainImage, gallery }: ProductGalleryProps) {
             <button
               key={img.sourceUrl + img.altText + i}
               type="button"
-              aria-label={`Prikaži sliku ${i + 1}`}
+              aria-label={t("showImage", { index: i + 1 })}
               aria-current={i === activeIndex}
               onClick={() => setActiveIndex(i)}
               className={`relative aspect-square border transition-colors duration-200 ${

@@ -1,3 +1,4 @@
+import type { AppHref } from "@/i18n/navigation";
 import { Button } from "./Button";
 import { Eyebrow } from "./Eyebrow";
 
@@ -7,7 +8,7 @@ export interface CtaBandProps {
   headingLine2: string;
   body: string;
   buttonLabel: string;
-  buttonHref: string;
+  buttonHref: AppHref;
 }
 
 export function CtaBand({

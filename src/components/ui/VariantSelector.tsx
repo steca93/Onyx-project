@@ -78,7 +78,7 @@ export function VariantSelector({
                       : "border-hairline text-text-60 hover:border-accent hover:text-accent"
                   }`}
                 >
-                  {option}
+                  {attr.optionLabels?.[option] ?? option}
                 </button>
               );
             })}

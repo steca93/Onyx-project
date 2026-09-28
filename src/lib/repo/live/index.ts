@@ -64,6 +64,7 @@ function buildWhere(opts: ProductListOptions, extra?: Record<string, unknown>) {
     minPrice: opts.minPrice,
     maxPrice: opts.maxPrice,
     stockStatus: opts.inStockOnly ? "IN_STOCK" : undefined,
+    slugIn: opts.slugs,
     orderby: orderByFromSort(opts.sort),
   };
 }

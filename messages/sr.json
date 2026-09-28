@@ -133,23 +133,416 @@
   },
   "BecomeInstallerPage": {
     "title": "Postani instalater",
-    "metaDescription": "Pridruži se mreži ovlašćenih ONYX centara za montažu PPF folija i keramičkih premaza."
+    "metaDescription": "Pridruži se mreži ovlašćenih ONYX centara za montažu PPF folija i keramičkih premaza.",
+    "eyebrow": "POSTANI DEO MREŽE",
+    "description": "Pridruži se mreži ovlašćenih ONYX centara za montažu PPF folija i keramičkih premaza u Srbiji i regionu.",
+    "benefits": [
+      {
+        "title": "Obuka i sertifikacija",
+        "text": "Besplatna tehnička obuka za montažu PPF folija i keramičkih premaza, uz zvaničan ONYX sertifikat."
+      },
+      {
+        "title": "Marketinška podrška",
+        "text": "Mesto u zvaničnoj mreži ovlašćenih centara na sajtu, promotivni materijali i zajedničke kampanje."
+      },
+      {
+        "title": "Prioritetne zalihe",
+        "text": "Direktna nabavka po distributerskim cenama i prioritet pri ograničenim serijama proizvoda."
+      }
+    ],
+    "requirementsEyebrow": "USLOVI",
+    "requirementsHeading": "Šta je potrebno",
+    "requirements": [
+      {
+        "number": "01",
+        "text": "Posedovanje radionice ili prostora za montažu vozila"
+      },
+      {
+        "number": "02",
+        "text": "Završena ONYX obuka za montažu folija i premaza"
+      },
+      {
+        "number": "03",
+        "text": "Potpisan ugovor o distribuciji sa ONYX Evolution"
+      }
+    ],
+    "applyEyebrow": "PRIJAVA",
+    "applyHeading": "Pošalji prijavu",
+    "successMessage": "Prijava je poslata. Naš tim za razvoj mreže će te kontaktirati u narednih nekoliko dana.",
+    "companyLabel": "NAZIV FIRME",
+    "pibLabel": "PIB",
+    "cityLabel": "GRAD",
+    "contactNameLabel": "KONTAKT OSOBA",
+    "emailLabel": "EMAIL",
+    "phoneLabel": "TELEFON",
+    "messageLabel": "PORUKA",
+    "submitLabel": "POŠALJI PRIJAVU",
+    "submittingLabel": "ŠALJE SE…",
+    "companyError": "Unesi naziv firme.",
+    "pibError": "PIB mora imati tačno 9 cifara.",
+    "cityError": "Unesi grad.",
+    "contactNameError": "Unesi ime kontakt osobe.",
+    "emailError": "Unesi ispravnu email adresu.",
+    "phoneError": "Unesi broj telefona.",
+    "messageError": "Poruka mora imati bar 10 karaktera."
   },
   "CartPage": {
-    "title": "Korpa"
+    "title": "Korpa",
+    "eyebrow": "VAŠA PORUDŽBINA",
+    "heading": "Korpa",
+    "empty": "Vaša korpa je prazna",
+    "continueShopping": "NASTAVI KUPOVINU",
+    "proceedToCheckout": "NASTAVI NA PLAĆANJE"
   },
   "WarrantyPage": {
     "title": "Registruj garanciju",
-    "metaDescription": "Registruj ONYX Warranty garanciju na montiranu PPF foliju ili keramički premaz i dobij digitalni sertifikat."
+    "metaDescription": "Registruj ONYX Warranty garanciju na montiranu PPF foliju ili keramički premaz i dobij digitalni sertifikat.",
+    "breadcrumb": "Garancija",
+    "description": "Svaka montaža u ovlašćenom centru nosi {years}-godišnju garanciju na žutljenje, pucanje i odvajanje folije.",
+    "steps": [
+      {
+        "number": "01",
+        "text": "Unesi broj šasije i datum montaže"
+      },
+      {
+        "number": "02",
+        "text": "Priloži račun ovlašćenog centra"
+      },
+      {
+        "number": "03",
+        "text": "Dobijaš digitalni sertifikat na mejl"
+      }
+    ],
+    "successEyebrow": "GARANCIJA REGISTROVANA",
+    "successTitle": "Hvala ti",
+    "successBody": "Digitalni sertifikat je poslat na tvoju email adresu.",
+    "certificateNumberLabel": "BROJ SERTIFIKATA",
+    "chassisNumberLabel": "BROJ ŠASIJE",
+    "installationDateLabel": "DATUM MONTAŽE",
+    "installerLabel": "OVLAŠĆENI CENTAR",
+    "installerPlaceholder": "Izaberi centar",
+    "ownerNameLabel": "IME I PREZIME VLASNIKA",
+    "emailLabel": "EMAIL",
+    "phoneLabel": "TELEFON",
+    "receiptLabel": "RAČUN (PDF/SLIKA)",
+    "consentLabel": "Slažem se sa uslovima ONYX Warranty programa.",
+    "submitLabel": "REGISTRUJ GARANCIJU",
+    "submittingLabel": "OBRAĐUJE SE…"
   },
   "InstallersPage": {
     "title": "Ovlašćeni centri",
-    "metaDescription": "Mreža ovlašćenih ONYX instalatera za montažu PPF folija i keramičkih premaza u Srbiji."
+    "metaDescription": "Mreža ovlašćenih ONYX instalatera za montažu PPF folija i keramičkih premaza u Srbiji.",
+    "description": "Mreža ovlašćenih instalatera za montažu ONYX folija i premaza u Srbiji.",
+    "cityFilterLabel": "Filter po gradu",
+    "allCities": "SVI",
+    "viewOnMap": "POGLEDAJ NA MAPI →",
+    "noResults": "Nema centara u ovom gradu.",
+    "days": {
+      "monFri": "Pon–Pet",
+      "monSat": "Pon–Sub",
+      "sat": "Sub"
+    },
+    "hoursRange": "{days} {from}–{to}h"
   },
   "CheckoutPage": {
-    "title": "Kasa"
+    "title": "Kasa",
+    "eyebrow": "NAPLATA",
+    "heading": "Kasa",
+    "emptyCart": "Vaša korpa je prazna — dodajte proizvode pre nego što nastavite na plaćanje",
+    "backToCart": "NAZAD U KORPU",
+    "shippingNotice": "Dostava 1–3 radna dana · Besplatno preko {amount}",
+    "sectionDelivery": "DOSTAVA",
+    "sectionPayment": "PLAĆANJE",
+    "sectionReview": "PREGLED",
+    "deliverTo": "Dostava na: {address}",
+    "notesLabel": "NAPOMENA UZ PORUDŽBINU (OPCIONO)",
+    "notesPlaceholder": "Npr. dodatna uputstva za kurira, željeni termin dostave…",
+    "acceptTerms": "Slažem se sa <termsLink>uslovima korišćenja</termsLink> i politikom privatnosti.",
+    "submitting": "OBRAĐUJE SE…",
+    "submit": "POTVRDI PORUDŽBINU"
   },
   "OrderConfirmationPage": {
-    "title": "Potvrda porudžbine"
+    "title": "Potvrda porudžbine",
+    "noOrderEyebrow": "POTVRDA",
+    "noOrderHeading": "Nema porudžbine",
+    "noOrderBody": "Nismo pronašli nedavnu porudžbinu za prikaz.",
+    "backHome": "NAZAD NA POČETNU",
+    "eyebrow": "PORUDŽBINA PRIMLJENA",
+    "heading": "Hvala na porudžbini",
+    "emailNotice": "Poslaćemo potvrdu i detalje dostave na {email}.",
+    "orderNumber": "BROJ PORUDŽBINE",
+    "items": "STAVKE",
+    "notes": "NAPOMENA",
+    "total": "Ukupno",
+    "continueShopping": "NASTAVI KUPOVINU"
+  },
+  "ProductPage": {
+    "tabs": {
+      "description": "OPIS",
+      "specs": "SPECIFIKACIJA",
+      "installation": "MONTAŽA",
+      "warranty": "GARANCIJA"
+    },
+    "descriptionSoon": "Opis uskoro.",
+    "specsSoon": "Specifikacija uskoro.",
+    "installationSoon": "Uputstvo za montažu uskoro.",
+    "warrantySoon": "Podaci o garanciji uskoro.",
+    "relatedEyebrow": "SLIČNI PROIZVODI",
+    "relatedTitle": "Povezani proizvodi"
+  },
+  "CategoryPage": {
+    "sort": {
+      "featured": "ISTAKNUTO",
+      "priceAsc": "CENA RASTUĆE",
+      "priceDesc": "CENA OPADAJUĆE",
+      "nameAsc": "NAZIV A-Š",
+      "newest": "NAJNOVIJE"
+    },
+    "priceLabel": "CENA (RSD)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max",
+    "minPriceAria": "Minimalna cena",
+    "maxPriceAria": "Maksimalna cena",
+    "inStockOnly": "Samo na stanju",
+    "sortLabel": "Sortiraj",
+    "applyFilters": "PRIMENI FILTERE",
+    "clearFilters": "OČISTI FILTERE →",
+    "productCount": "{count, plural, one {# PROIZVOD} few {# PROIZVODA} other {# PROIZVODA}}",
+    "empty": "NEMA PROIZVODA KOJI ODGOVARAJU IZABRANIM FILTERIMA."
+  },
+  "SearchPage": {
+    "title": "Pretraga",
+    "titleWithQuery": "Pretraga: \"{query}\"",
+    "resultsFor": "Rezultati za \"{query}\"",
+    "allProducts": "Svi proizvodi",
+    "productCount": "{count, plural, one {# PROIZVOD} few {# PROIZVODA} other {# PROIZVODA}}",
+    "empty": "NEMA REZULTATA ZA OVU PRETRAGU.",
+    "backHome": "NAZAD NA POČETNU"
+  },
+  "ProductPurchasePanel": {
+    "addToCart": "DODAJ U KORPU",
+    "addedToCart": "DODATO U KORPU",
+    "askInstallation": "PITAJ ZA MONTAŽU"
+  },
+  "ProductGallery": {
+    "showImage": "Prikaži sliku {index}"
+  },
+  "StockStatus": {
+    "outOfStock": "TRENUTNO NEDOSTUPNO",
+    "onBackorder": "DOSTUPNO PO PORUDŽBINI"
+  },
+  "HomePage": {
+    "title": "ONYX EVOLUTION — PPF folije i keramički premazi",
+    "metaDescription": "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji. Garancija do {years} godina, montaža u ovlašćenim centrima.",
+    "ogDescription": "PPF folije i keramički premazi sa fabričkom garancijom. Ovlašćena distribucija i mreža instalatera u Srbiji i regionu.",
+    "organizationDescription": "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji.",
+    "ctaEyebrow": "OGRANIČENA SERIJA",
+    "ctaHeadingLine1": "Nova generacija",
+    "ctaHeadingLine2": "PPF zaštite",
+    "ctaBody": "Debljina 200 µm, samoobnavljajući sloj i lepak koji ne ostavlja tragove pri skidanju.",
+    "ctaButton": "ISTRAŽI NOVITETE"
+  },
+  "SpecTicker": {
+    "warranty": "{years} GODINA GARANCIJE",
+    "selfHealing": "SAMOOBNAVLJAJUĆI TOP COAT",
+    "thickness": "8 MIL / 200 µm",
+    "clarity": "PROZIRNOST 99%",
+    "centers": "40+ OVLAŠĆENIH CENTARA"
+  },
+  "Hero": {
+    "eyebrow": "PPF WARRANTY PROGRAM",
+    "heading": "Zaštita<br></br>koja se <accent>ne vidi</accent>",
+    "body": "Samoobnavljajuće PPF folije za lak, farove i felne. Optička prozirnost 99%, montaža u ovlašćenim centrima i garancija do <strong>{years} godina</strong>.",
+    "exploreFilms": "ISTRAŽI FOLIJE",
+    "registerWarranty": "REGISTRUJ GARANCIJU"
+  },
+  "KitCarousel": {
+    "eyebrow": "IZDVOJENO",
+    "heading": "Setovi za montažu",
+    "previous": "Prethodni setovi",
+    "next": "Sledeći setovi",
+    "goToPage": "Idi na stranicu {page}"
+  },
+  "SplitPromo": {
+    "imageAlt": "ULOŠCI ZA PROFESIONALNO POLIRANJE",
+    "eyebrow": "NOVO U PONUDI",
+    "headingLine1": "Profesionalno",
+    "headingLine2": "poliranje",
+    "body": "Kompletna linija uložaka za poliranje — od grubog izravnavanja laka do finalnog sjaja, za svaki korak pripreme vozila.",
+    "button": "KUPI ODMAH"
+  },
+  "Bestsellers": {
+    "eyebrow": "NAŠI FAVORITI",
+    "heading": "Najprodavanije",
+    "viewAll": "POGLEDAJ SVE →"
+  },
+  "WarrantyBlock": {
+    "imageAlt": "FACETED ONYX · DETALJ FOLIJE",
+    "headingLine1": "Registruj",
+    "headingLine2": "svoju garanciju",
+    "body": "Svaka montaža u ovlašćenom centru nosi {years}-godišnju garanciju na žutljenje, pucanje i odvajanje folije. Registracija traje dva minuta.",
+    "step1": "Unesi broj šasije i datum montaže",
+    "step2": "Priloži račun ovlašćenog centra",
+    "step3": "Dobijaš digitalni sertifikat na mejl",
+    "button": "REGISTRUJ GARANCIJU"
+  },
+  "CategoriesSection": {
+    "eyebrow": "PRONAĐI ŠTO TI TREBA",
+    "heading": "Kupuj po kategoriji",
+    "productCount": "{count, plural, one {# PROIZVOD} few {# PROIZVODA} other {# PROIZVODA}}"
+  },
+  "CategoryTile": {
+    "view": "POGLEDAJ"
+  },
+  "ProductCard": {
+    "newBadge": "NOVO"
+  },
+  "Breadcrumb": {
+    "ariaLabel": "Navigacija"
+  },
+  "Pagination": {
+    "ariaLabel": "Stranice"
+  },
+  "QuantityStepper": {
+    "decrease": "Smanji količinu",
+    "increase": "Povećaj količinu"
+  },
+  "ImageSlot": {
+    "placeholder": "SLIKA UBRZO"
+  },
+  "NotFound": {
+    "eyebrow": "GREŠKA 404",
+    "heading": "404 / STRANICA NIJE PRONAĐENA",
+    "body": "Stranica koju tražiš ne postoji ili je premeštena.",
+    "backHome": "NAZAD NA POČETNU"
+  },
+  "CartDrawer": {
+    "dialogLabel": "Korpa",
+    "heading": "KORPA",
+    "closeLabel": "Zatvori korpu",
+    "removeLabel": "Ukloni",
+    "empty": "Vaša korpa je prazna",
+    "continueShopping": "NASTAVI KUPOVINU",
+    "subtotal": "Međuzbir",
+    "proceedToCheckout": "NASTAVI NA PLAĆANJE",
+    "viewCart": "PRIKAŽI KORPU"
+  },
+  "CartLineItem": {
+    "remove": "UKLONI",
+    "quantity": "Količina: {quantity}"
+  },
+  "OrderSummary": {
+    "heading": "PREGLED PORUDŽBINE",
+    "subtotal": "Međuzbir",
+    "remainingForFreeShipping": "Još {amount} do besplatne dostave",
+    "freeShippingReached": "Ostvarena besplatna dostava",
+    "total": "Ukupno"
+  },
+  "DeliveryForm": {
+    "fullName": "IME I PREZIME",
+    "email": "EMAIL",
+    "phone": "TELEFON",
+    "address": "ADRESA",
+    "city": "GRAD",
+    "postalCode": "POŠTANSKI BROJ"
+  },
+  "PaymentMethods": {
+    "codTitle": "Pouzećem",
+    "codDescription": "Platiš kuriru gotovinom ili karticom pri preuzimanju",
+    "cardTitle": "Kartično plaćanje (Banka Intesa)",
+    "cardDescription": "Sigurno plaćanje karticom, stiže uskoro",
+    "comingSoon": "USKORO"
+  },
+  "CookieConsent": {
+    "message": "Ovaj sajt koristi neophodne kolačiće da bi tvoja korpa i sesija ostale aktivne. Detalje pogledaj u <privacyLink>politici privatnosti</privacyLink>.",
+    "accept": "RAZUMEM"
+  },
+  "CheckoutErrors": {
+    "validation": {
+      "fullName": "Unesi ime i prezime.",
+      "email": "Unesi ispravnu email adresu.",
+      "phone": "Unesi broj telefona.",
+      "address": "Unesi adresu za dostavu.",
+      "city": "Unesi grad.",
+      "postalCode": "Unesi poštanski broj.",
+      "notesTooLong": "Napomena može imati najviše 500 karaktera.",
+      "acceptTerms": "Moraš prihvatiti uslove korišćenja."
+    },
+    "submit": {
+      "generic": "Greška prilikom slanja porudžbine. Pokušaj ponovo.",
+      "outOfStock": "Neki proizvodi iz korpe trenutno nisu dostupni u traženoj količini. Proveri korpu i pokušaj ponovo.",
+      "invalidDetails": "Podaci za dostavu nisu ispravni. Proveri unete podatke i pokušaj ponovo.",
+      "sessionExpired": "Sesija je istekla. Osveži stranicu i pokušaj ponovo.",
+      "paymentMethod": "Izabrani način plaćanja trenutno nije dostupan.",
+      "emptyCart": "Korpa je prazna — dodaj proizvode pre potvrde porudžbine."
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Jezik"
+  },
+  "WarrantyForm": {
+    "chassisNumberMin": "Unesi ispravan broj šasije.",
+    "chassisNumberFormat": "Broj šasije sadrži samo slova i brojeve.",
+    "installationDateRequired": "Unesi datum montaže.",
+    "installationDateFuture": "Datum montaže ne može biti u budućnosti.",
+    "installerRequired": "Izaberi ovlašćeni centar.",
+    "ownerNameRequired": "Unesi ime i prezime.",
+    "emailInvalid": "Unesi ispravnu email adresu.",
+    "phoneRequired": "Unesi broj telefona.",
+    "consentRequired": "Moraš prihvatiti uslove garancije."
+  },
+  "InstallGuidePage": {
+    "title": "Uputstva za montažu",
+    "metaDescription": "Priprema, uslovi i koraci za pravilnu montažu ONYX PPF folija i keramičkih premaza.",
+    "description": "Osnovne smernice za pripremu i montažu — pun tehnički list dobijaš uz svaki proizvod.",
+    "surfaceHeading": "Priprema površine",
+    "surfaceBody1": "Lak mora biti čist, dekontaminiran i bez tragova voska ili silikonskih zaštita pre montaže. Preporučujemo pranje, dekontaminaciju glinom i brisanje IPA rastvorom neposredno pre postavljanja folije ili premaza.",
+    "surfaceBody2": "Sve nepravilnosti na laku — ogrebotine, udubljenja, tragove korozije — treba sanirati pre montaže. Folija prati kontinuitet površine i ne prikriva postojeća oštećenja.",
+    "environmentHeading": "Uslovi u prostoru za montažu",
+    "environmentBody": "Montaža se izvodi u zatvorenom, kontrolisanom prostoru bez prašine, na temperaturi između 18°C i 26°C. Prenizak vlažnost vazduha otežava aktivaciju lepka, dok prevelika vlažnost produžava vreme sušenja — oba faktora prate ovlašćeni centri prilikom zakazivanja termina.",
+    "curingHeading": "Sušenje i prva nega",
+    "curingBody1": "Nakon montaže PPF folije potrebno je minimum 48h sušenja pre prvog pranja vozila. Izbegavaj automatske perionice i visokopritisnu vodu direktno na ivice folije prvih 7 dana.",
+    "curingBody2": "Keramički premazi zahtevaju period sušenja naveden na deklaraciji proizvoda, obično 12–24h pre izlaganja vlazi, i dodatnih 7 dana pre nanošenja dodatnog sloja ili voska preko premaza.",
+    "authorizedHeading": "Montaža u ovlašćenom centru",
+    "authorizedBody": "Ova uputstva pokrivaju opštu pripremu i negu — puna {years}-godišnja garancija na materijal i rad važi isključivo uz montažu u <centersLink>ovlašćenom ONYX centru</centersLink> i registraciju u <warrantyLink>ONYX Warranty programu</warrantyLink>. Detaljno tehničko uputstvo za svaki proizvod dobijaš u ovlašćenom centru prilikom montaže."
+  },
+  "TermsPage": {
+    "title": "Uslovi korišćenja",
+    "metaDescription": "Uslovi korišćenja ONYX EVOLUTION sajta i politika privatnosti — narudžbine, plaćanje, dostava, reklamacije i zaštita ličnih podataka.",
+    "description": "Korišćenjem ONYX EVOLUTION sajta i kupovinom u našoj prodavnici prihvataš uslove i politiku privatnosti u nastavku.",
+    "siteUseTitle": "Korišćenje sajta",
+    "siteUseBody": "Sajt ONYX EVOLUTION namenjen je ličnoj i nekomercijalnoj upotrebi. Slažeš se da nećeš koristiti sajt u nezakonite svrhe, pokušavati neovlašćeni pristup sistemu niti prenositi štetan sadržaj. Zadržavamo pravo ograničavanja pristupa u slučaju kršenja ovih uslova.",
+    "ordersTitle": "Narudžbine i plaćanje",
+    "ordersBody": "Postavljanjem narudžbine potvrđuješ da su svi uneti podaci tačni. Narudžbine su uslovljene dostupnošću artikla i zadržavamo pravo otkazivanja u slučaju nedostupnosti. Cene su prikazane u dinarima (RSD) i uključuju PDV po zakonom propisanoj stopi. Plaćanje se vrši pouzećem ili karticom, u skladu sa opcijama ponuđenim na strani <checkoutLink>Kasa</checkoutLink>.",
+    "conversionTitle": "Izjava o konverziji",
+    "conversionBody": "Sva plaćanja se izvršavaju u dinarima (RSD). Ukoliko je platna kartica izdata u drugoj valuti, iznos zaduženja biće izražen u lokalnoj valuti po kursu koji u trenutku transakcije primenjuje banka izdavalac kartice, što može rezultovati neznatnom razlikom u odnosu na cenu istaknutu na sajtu.",
+    "shippingTitle": "Dostava i povraćaj",
+    "shippingBody": "Rokovi dostave, cena dostave i uslovi povraćaja detaljno su opisani na strani <shippingLink>Dostava i povraćaj</shippingLink>. Ukratko: standardna dostava na teritoriji Srbije traje 1–3 radna dana i besplatna je za porudžbine preko {amount}. Neotvorene i nekorišćene proizvode možeš vratiti u roku od 14 dana od prijema pošiljke.",
+    "warrantyTitle": "Reklamacije i garancija",
+    "warrantyBody": "Za PPF folije i keramičke premaze koji su montirani preko ovlašćenog instalatera, garancija na materijal i rad ostvaruje se isključivo kroz ONYX Warranty program, ne kroz povraćaj proizvoda. Detalje o pokrivenosti, isključenjima i postupku prijave pogledaj na strani <warrantyLink>Garancija</warrantyLink>.",
+    "ipTitle": "Intelektualna svojina",
+    "ipBody": "Sav sadržaj na ovom sajtu — tekst, slike, logotipi i informacije o proizvodima — vlasništvo je ONYX EVOLUTION ili njenih davalaca licence. Sadržaj se ne sme reprodukovati, distribuirati niti koristiti bez prethodnog pisanog odobrenja.",
+    "liabilityTitle": "Ograničenje odgovornosti",
+    "liabilityBody": "U meri dozvoljenoj zakonom, ONYX EVOLUTION neće biti odgovoran za indirektnu, slučajnu ili posledičnu štetu nastalu korišćenjem sajta ili naših proizvoda. Ukupna odgovornost neće premašiti kupoprodajnu cenu relevantne narudžbine.",
+    "lawTitle": "Merodavno pravo",
+    "lawBody": "Ovi uslovi regulisani su zakonima Republike Srbije. Svi sporovi nastali na osnovu ovih uslova podležu isključivoj nadležnosti nadležnih sudova u Srbiji.",
+    "legalEyebrow": "PRAVNE INFORMACIJE",
+    "privacyHeading": "Politika privatnosti",
+    "privacyIntro": "Kako prikupljamo, koristimo i štitimo tvoje lične podatke.",
+    "merchantTitle": "Osnovni podaci o trgovcu",
+    "merchantInfo": "Pravno lice: ONYX EVOLUTION d.o.o.\nSedište: {address}\nEmail: {email}\nTelefon: {phone}\nRadno vreme: {hours}",
+    "merchantPending": "Matični broj, PIB i tekući račun se dopunjuju po registraciji privrednog subjekta.",
+    "dataCollectedTitle": "Podaci koje prikupljamo",
+    "dataCollectedBody": "Kada napraviš porudžbinu ili se prijaviš na bilten, prikupljamo lične podatke poput imena, email adrese, adrese dostave i broja telefona. Možemo prikupljati i nepersonalne podatke, poput ponašanja pri pretraživanju, radi unapređenja sajta.",
+    "dataUseTitle": "Kako koristimo podatke",
+    "dataUseBody": "Lični podaci koriste se isključivo za obradu narudžbina, komunikaciju o statusu porudžbine i garancije, i pružanje korisničke podrške. Uz tvoju saglasnost možemo slati promotivne mejlove o novim proizvodima i ponudama — odjava je moguća u svakom trenutku putem linka u mejlu.",
+    "transactionTitle": "Zaštita podataka o transakciji",
+    "transactionBody": "Podaci o platnoj kartici prenose se u zaštićenoj (kriptovanoj) formi putem SSL protokola i nikada nisu dostupni našem sistemu — kompletan proces naplate obavlja se na stranicama banke, uz proveru identiteta kroz 3D Secure protokol. Ne čuvamo broj kartice, datum isteka niti CVV/CVC kod.",
+    "cookiesTitle": "Kolačići",
+    "cookiesBody": "Koristimo neophodne kolačiće za održavanje korpe i sesije aktivnim. Ne koristimo kolačiće za praćenje trećih lica bez tvoje izričite saglasnosti. Preferencijama kolačića možeš upravljati putem podešavanja pretraživača.",
+    "rightsTitle": "Tvoja prava",
+    "rightsBody": "Prema važećem zakonu o zaštiti podataka o ličnosti, imaš pravo pristupa, ispravke ili brisanja svojih ličnih podataka. Zahtev šalješ preko strane <contactLink>Kontakt</contactLink> — obradićemo ga u roku od 30 dana.",
+    "lastUpdated": "Poslednje ažuriranje: septembar 2026.",
+    "questionLink": "Imaš pitanje? →"
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,40 +11,26 @@ import { Input } from "@/components/ui/Input";
 import { Lattice } from "@/components/ui/Lattice";
 import { StepRow } from "@/components/ui/StepRow";
 
-const applicationSchema = z.object({
-  company: z.string().min(2, "Unesi naziv firme."),
-  pib: z.string().regex(/^\d{9}$/, "PIB mora imati tačno 9 cifara."),
-  city: z.string().min(2, "Unesi grad."),
-  contactName: z.string().min(2, "Unesi ime kontakt osobe."),
-  contactEmail: z.string().email("Unesi ispravnu email adresu."),
-  contactPhone: z.string().min(6, "Unesi broj telefona."),
-  message: z.string().min(10, "Poruka mora imati bar 10 karaktera."),
-});
-
-type ApplicationValues = z.infer<typeof applicationSchema>;
-
-const BENEFITS = [
-  {
-    title: "Obuka i sertifikacija",
-    text: "Besplatna tehnička obuka za montažu PPF folija i keramičkih premaza, uz zvaničan ONYX sertifikat.",
-  },
-  {
-    title: "Marketinška podrška",
-    text: "Mesto u zvaničnoj mreži ovlašćenih centara na sajtu, promotivni materijali i zajedničke kampanje.",
-  },
-  {
-    title: "Prioritetne zalihe",
-    text: "Direktna nabavka po distributerskim cenama i prioritet pri ograničenim serijama proizvoda.",
-  },
-];
-
-const REQUIREMENTS = [
-  { number: "01", text: "Posedovanje radionice ili prostora za montažu vozila" },
-  { number: "02", text: "Završena ONYX obuka za montažu folija i premaza" },
-  { number: "03", text: "Potpisan ugovor o distribuciji sa ONYX Evolution" },
-];
-
 export default function BecomeInstallerPage() {
+  const t = useTranslations("BecomeInstallerPage");
+
+  const applicationSchema = z.object({
+    company: z.string().min(2, t("companyError")),
+    pib: z.string().regex(/^\d{9}$/, t("pibError")),
+    city: z.string().min(2, t("cityError")),
+    contactName: z.string().min(2, t("contactNameError")),
+    contactEmail: z.string().email(t("emailError")),
+    contactPhone: z.string().min(6, t("phoneError")),
+    message: z.string().min(10, t("messageError")),
+  });
+  type ApplicationValues = z.infer<typeof applicationSchema>;
+
+  const benefits = t.raw("benefits") as { title: string; text: string }[];
+  const requirements = t.raw("requirements") as {
+    number: string;
+    text: string;
+  }[];
+
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -64,18 +51,17 @@ export default function BecomeInstallerPage() {
     <div>
       <div className="border-b border-accent-line bg-onyx-900">
         <div className="container-onyx flex flex-col justify-center gap-5 py-16 sm:py-20">
-          <Eyebrow rule>POSTANI DEO MREŽE</Eyebrow>
-          <h1 className="text-[40px] sm:text-page-h1">Postani instalater</h1>
+          <Eyebrow rule>{t("eyebrow")}</Eyebrow>
+          <h1 className="text-[40px] sm:text-page-h1">{t("title")}</h1>
           <p className="max-w-[560px] text-body text-text-60">
-            Pridruži se mreži ovlašćenih ONYX centara za montažu PPF folija i
-            keramičkih premaza u Srbiji i regionu.
+            {t("description")}
           </p>
         </div>
       </div>
 
       <div className="container-onyx py-16 sm:py-20 lg:py-24">
         <Lattice className="mb-20 grid-cols-1 sm:grid-cols-3">
-          {BENEFITS.map((b) => (
+          {benefits.map((b) => (
             <div key={b.title} className="flex flex-col gap-3 p-8">
               <div className="text-h3-card text-[20px] text-text">{b.title}</div>
               <p className="text-body-sm text-text-60">{b.text}</p>
@@ -84,20 +70,19 @@ export default function BecomeInstallerPage() {
         </Lattice>
 
         <div className="mb-20">
-          <Eyebrow className="mb-4">USLOVI</Eyebrow>
-          <h2 className="mb-8 text-[28px] sm:text-h2">Šta je potrebno</h2>
-          <StepRow steps={REQUIREMENTS} className="max-w-[860px]" />
+          <Eyebrow className="mb-4">{t("requirementsEyebrow")}</Eyebrow>
+          <h2 className="mb-8 text-[28px] sm:text-h2">{t("requirementsHeading")}</h2>
+          <StepRow steps={requirements} className="max-w-[860px]" />
         </div>
 
         <div className="max-w-[720px] border-t border-hairline pt-12">
-          <Eyebrow className="mb-4">PRIJAVA</Eyebrow>
-          <h2 className="mb-8 text-[28px] sm:text-h2">Pošalji prijavu</h2>
+          <Eyebrow className="mb-4">{t("applyEyebrow")}</Eyebrow>
+          <h2 className="mb-8 text-[28px] sm:text-h2">{t("applyHeading")}</h2>
 
           {submitted ? (
             <div className="border border-hairline bg-onyx-800 px-8 py-10">
               <p className="text-body text-text-60">
-                Prijava je poslata. Naš tim za razvoj mreže će te kontaktirati
-                u narednih nekoliko dana.
+                {t("successMessage")}
               </p>
             </div>
           ) : (
@@ -112,36 +97,36 @@ export default function BecomeInstallerPage() {
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Input
-                  label="NAZIV FIRME"
+                  label={t("companyLabel")}
                   {...register("company")}
                   error={errors.company?.message}
                 />
                 <Input
-                  label="PIB"
+                  label={t("pibLabel")}
                   {...register("pib")}
                   error={errors.pib?.message}
                 />
                 <div className="sm:col-span-2">
                   <Input
-                    label="GRAD"
+                    label={t("cityLabel")}
                     {...register("city")}
                     error={errors.city?.message}
                   />
                 </div>
                 <Input
-                  label="KONTAKT OSOBA"
+                  label={t("contactNameLabel")}
                   {...register("contactName")}
                   error={errors.contactName?.message}
                 />
                 <Input
-                  label="EMAIL"
+                  label={t("emailLabel")}
                   type="email"
                   {...register("contactEmail")}
                   error={errors.contactEmail?.message}
                 />
                 <div className="sm:col-span-2">
                   <Input
-                    label="TELEFON"
+                    label={t("phoneLabel")}
                     type="tel"
                     {...register("contactPhone")}
                     error={errors.contactPhone?.message}
@@ -149,7 +134,7 @@ export default function BecomeInstallerPage() {
                 </div>
                 <div className="sm:col-span-2">
                   <label className="mb-2 block label-column text-text-40">
-                    PORUKA
+                    {t("messageLabel")}
                   </label>
                   <textarea
                     rows={5}
@@ -167,7 +152,7 @@ export default function BecomeInstallerPage() {
 
               <div className="mt-10">
                 <Button type="submit" disabled={isSubmitting} trailingArrow>
-                  {isSubmitting ? "ŠALJE SE…" : "POŠALJI PRIJAVU"}
+                  {isSubmitting ? t("submittingLabel") : t("submitLabel")}
                 </Button>
               </div>
             </form>

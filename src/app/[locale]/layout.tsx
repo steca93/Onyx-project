@@ -9,7 +9,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { UtilityBar } from "@/components/layout/UtilityBar";
 import { routing, toLocale } from "@/i18n/routing";
-import { getAllCategories } from "@/lib/repo";
+import { ProductNamesProvider } from "@/i18n/catalog/ProductNamesProvider";
+import { getAllCategories, getProductNameTranslations } from "@/lib/repo";
 import "../globals.css";
 
 const questrial = Questrial({
@@ -83,12 +84,14 @@ export default async function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-onyx-850 font-sans text-text">
         <NextIntlClientProvider>
-          <UtilityBar />
-          <Header categories={navCategories} />
-          <main className="flex flex-1 flex-col">{children}</main>
-          <Footer categories={navCategories} />
-          <CartDrawer />
-          <CookieConsent />
+          <ProductNamesProvider names={getProductNameTranslations(locale)}>
+            <UtilityBar />
+            <Header categories={navCategories} />
+            <main className="flex flex-1 flex-col">{children}</main>
+            <Footer categories={navCategories} />
+            <CartDrawer />
+            <CookieConsent />
+          </ProductNamesProvider>
         </NextIntlClientProvider>
       </body>
     </html>

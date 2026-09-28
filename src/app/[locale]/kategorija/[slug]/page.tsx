@@ -1,27 +1,30 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Pagination } from "@/components/ui/Pagination";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Select } from "@/components/ui/Select";
+import { toLocale } from "@/i18n/routing";
 import { getCategoryBySlug, getProductsByCategory } from "@/lib/repo";
 import type { ProductSort } from "@/lib/repo/types";
 import { stripHtml } from "@/lib/utils/strip-html";
 
-const SORT_OPTIONS: { value: ProductSort; label: string }[] = [
-  { value: "featured", label: "ISTAKNUTO" },
-  { value: "price-asc", label: "CENA RASTUĆE" },
-  { value: "price-desc", label: "CENA OPADAJUĆE" },
-  { value: "name-asc", label: "NAZIV A-Š" },
-  { value: "newest", label: "NAJNOVIJE" },
-];
+// Sort value -> message key under `CategoryPage.sort`.
+const SORT_OPTIONS = [
+  { value: "featured", labelKey: "featured" },
+  { value: "price-asc", labelKey: "priceAsc" },
+  { value: "price-desc", labelKey: "priceDesc" },
+  { value: "name-asc", labelKey: "nameAsc" },
+  { value: "newest", labelKey: "newest" },
+] as const satisfies readonly { value: ProductSort; labelKey: string }[];
 
 const PER_PAGE = 6;
 
 interface CategoryPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
@@ -51,8 +54,11 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: CategoryPageProps) {
-  const { slug } = await params;
+  const { locale: requested, slug } = await params;
   const sp = await searchParams;
+  const locale = toLocale(requested);
+  const t = await getTranslations({ locale, namespace: "CategoryPage" });
+  const tCommon = await getTranslations({ locale, namespace: "Common" });
 
   const page = Math.max(1, readNumber(sp.page) ?? 1);
   const sort = (readString(sp.sort) ?? "featured") as ProductSort;
@@ -77,20 +83,19 @@ export default async function CategoryPage({
     inStockOnly || minPrice !== undefined || maxPrice !== undefined || sort !== "featured";
 
   function hrefForPage(targetPage: number) {
-    const query = new URLSearchParams();
-    if (sort !== "featured") query.set("sort", sort);
-    if (inStockOnly) query.set("inStock", "1");
-    if (minPrice !== undefined) query.set("minPrice", String(minPrice));
-    if (maxPrice !== undefined) query.set("maxPrice", String(maxPrice));
-    if (targetPage > 1) query.set("page", String(targetPage));
-    const qs = query.toString();
-    return `/kategorija/${slug}${qs ? `?${qs}` : ""}`;
+    const query: Record<string, string> = {};
+    if (sort !== "featured") query.sort = sort;
+    if (inStockOnly) query.inStock = "1";
+    if (minPrice !== undefined) query.minPrice = String(minPrice);
+    if (maxPrice !== undefined) query.maxPrice = String(maxPrice);
+    if (targetPage > 1) query.page = String(targetPage);
+    return { pathname: "/kategorija/[slug]" as const, params: { slug }, query };
   }
 
   return (
     <>
       <PageHeader
-        breadcrumb={[{ label: "Početna", href: "/" }, { label: category.name }]}
+        breadcrumb={[{ label: tCommon("home"), href: "/" }, { label: category.name }]}
         title={category.name}
         description={category.description ?? undefined}
       />
@@ -100,15 +105,15 @@ export default async function CategoryPage({
           <aside className="min-w-0">
             <form method="GET" className="lattice grid-cols-1">
               <div className="p-5">
-                <div className="label-column mb-4 text-text-40">CENA (RSD)</div>
+                <div className="label-column mb-4 text-text-40">{t("priceLabel")}</div>
                 <div className="flex gap-3">
                   <input
                     type="number"
                     name="minPrice"
                     min={0}
                     defaultValue={minPrice}
-                    placeholder="Min"
-                    aria-label="Minimalna cena"
+                    placeholder={t("minPlaceholder")}
+                    aria-label={t("minPriceAria")}
                     className="notch notch-12 h-11 w-full min-w-0 border border-hairline bg-onyx-800 px-3 font-mono text-[10.5px] text-text placeholder:text-text-34 outline-none focus:border-[rgba(42,179,230,.55)]"
                   />
                   <input
@@ -116,8 +121,8 @@ export default async function CategoryPage({
                     name="maxPrice"
                     min={0}
                     defaultValue={maxPrice}
-                    placeholder="Max"
-                    aria-label="Maksimalna cena"
+                    placeholder={t("maxPlaceholder")}
+                    aria-label={t("maxPriceAria")}
                     className="notch notch-12 h-11 w-full min-w-0 border border-hairline bg-onyx-800 px-3 font-mono text-[10.5px] text-text placeholder:text-text-34 outline-none focus:border-[rgba(42,179,230,.55)]"
                   />
                 </div>
@@ -127,24 +132,27 @@ export default async function CategoryPage({
                   name="inStock"
                   value="1"
                   defaultChecked={inStockOnly}
-                  label="Samo na stanju"
+                  label={t("inStockOnly")}
                 />
               </div>
               <div className="p-5">
                 <Select
                   name="sort"
                   defaultValue={sort}
-                  options={SORT_OPTIONS}
-                  label="Sortiraj"
+                  options={SORT_OPTIONS.map((opt) => ({
+                    value: opt.value,
+                    label: t(`sort.${opt.labelKey}`),
+                  }))}
+                  label={t("sortLabel")}
                 />
               </div>
               <div className="flex flex-col gap-3 p-5">
                 <Button type="submit" compact>
-                  PRIMENI FILTERE
+                  {t("applyFilters")}
                 </Button>
                 {hasActiveFilters && (
-                  <Button href={`/kategorija/${slug}`} variant="secondary" compact>
-                    OČISTI FILTERE →
+                  <Button href={{ pathname: "/kategorija/[slug]", params: { slug: slug } }} variant="secondary" compact>
+                    {t("clearFilters")}
                   </Button>
                 )}
               </div>
@@ -154,17 +162,17 @@ export default async function CategoryPage({
           <div className="min-w-0">
             <div className="mb-8 flex items-center justify-between">
               <div className="label-nav text-text-40">
-                {total ?? 0} PROIZVODA
+                {t("productCount", { count: total ?? 0 })}
               </div>
             </div>
 
             {products.length === 0 ? (
               <div className="flex flex-col items-start gap-6 border border-hairline bg-onyx-800 px-8 py-16">
                 <p className="label-nav text-text-40">
-                  NEMA PROIZVODA KOJI ODGOVARAJU IZABRANIM FILTERIMA.
+                  {t("empty")}
                 </p>
-                <Button href={`/kategorija/${slug}`} variant="secondary" compact>
-                  OČISTI FILTERE →
+                <Button href={{ pathname: "/kategorija/[slug]", params: { slug: slug } }} variant="secondary" compact>
+                  {t("clearFilters")}
                 </Button>
               </div>
             ) : (

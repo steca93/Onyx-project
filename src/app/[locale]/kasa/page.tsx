@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -13,21 +14,27 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Textarea } from "@/components/ui/Textarea";
 import { siteSettings } from "@/data/site-settings";
 import { cartSubtotal, useCartStore } from "@/lib/cart/store";
+import { CheckoutError } from "@/lib/checkout/live-client";
 import {
-  checkoutSchema,
+  createCheckoutSchema,
   type CheckoutFormValues,
 } from "@/lib/checkout/schema";
 import { storeLastOrder, submitOrder } from "@/lib/checkout/submit-order";
 import { formatPrice } from "@/lib/utils/format-price";
 
-const SECTIONS = [
-  { number: "01", title: "DOSTAVA" },
-  { number: "02", title: "PLAĆANJE" },
-  { number: "03", title: "PREGLED" },
-];
-
 export default function CheckoutPage() {
+  const t = useTranslations("CheckoutPage");
+  const tErrors = useTranslations("CheckoutErrors");
   const router = useRouter();
+
+  const SECTIONS = [
+    { number: "01", title: t("sectionDelivery") },
+    { number: "02", title: t("sectionPayment") },
+    { number: "03", title: t("sectionReview") },
+  ];
+
+  const checkoutSchema = createCheckoutSchema((key) => tErrors(`validation.${key}`));
+
   const hasHydrated = useCartStore((s) => s.hasHydrated);
   const items = useCartStore((s) => s.items);
   const clearCart = useCartStore((s) => s.clearCart);
@@ -72,10 +79,9 @@ export default function CheckoutPage() {
       clearCart();
       router.push("/potvrda-porudzbine");
     } catch (error) {
+      console.error("onyx-checkout: submitOrder failed", error);
       setSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Greška prilikom slanja porudžbine. Pokušaj ponovo.",
+        tErrors(`submit.${error instanceof CheckoutError ? error.code : "generic"}`),
       );
     }
   }
@@ -87,15 +93,14 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="container-onyx py-16 sm:py-20 lg:py-24">
-        <Eyebrow className="mb-4">NAPLATA</Eyebrow>
-        <h1 className="text-[32px] sm:text-h2">Kasa</h1>
+        <Eyebrow className="mb-4">{t("eyebrow")}</Eyebrow>
+        <h1 className="text-[32px] sm:text-h2">{t("heading")}</h1>
         <div className="mt-16 flex flex-col items-start gap-6 border-t border-hairline pt-12">
           <p className="font-mono text-[11px] tracking-[.1em] text-text-40 uppercase">
-            Vaša korpa je prazna — dodajte proizvode pre nego što nastavite
-            na plaćanje
+            {t("emptyCart")}
           </p>
           <Button href="/korpa" trailingArrow>
-            NAZAD U KORPU
+            {t("backToCart")}
           </Button>
         </div>
       </div>
@@ -104,12 +109,13 @@ export default function CheckoutPage() {
 
   return (
     <div className="container-onyx py-16 sm:py-20 lg:py-24">
-      <Eyebrow className="mb-4">NAPLATA</Eyebrow>
-      <h1 className="text-[32px] sm:text-h2">Kasa</h1>
+      <Eyebrow className="mb-4">{t("eyebrow")}</Eyebrow>
+      <h1 className="text-[32px] sm:text-h2">{t("heading")}</h1>
 
       <p className="mt-6 max-w-[620px] border border-hairline bg-onyx-800 px-5 py-4 font-mono text-[11px] tracking-[.08em] text-text-60 uppercase">
-        Dostava 1–3 radna dana · Besplatno preko{" "}
-        {formatPrice(siteSettings.freeShippingThresholdRsd)}
+        {t("shippingNotice", {
+          amount: formatPrice(siteSettings.freeShippingThresholdRsd),
+        })}
       </p>
 
       <form
@@ -158,15 +164,17 @@ export default function CheckoutPage() {
             <div className="flex flex-col gap-6">
               {values.address && (
                 <p className="text-body-sm text-text-40">
-                  Dostava na: {values.address}
-                  {values.city ? `, ${values.city}` : ""}
-                  {values.postalCode ? ` ${values.postalCode}` : ""}
+                  {t("deliverTo", {
+                    address: `${values.address}${values.city ? `, ${values.city}` : ""}${
+                      values.postalCode ? ` ${values.postalCode}` : ""
+                    }`,
+                  })}
                 </p>
               )}
               <Textarea
-                label="NAPOMENA UZ PORUDŽBINU (OPCIONO)"
+                label={t("notesLabel")}
                 rows={3}
-                placeholder="Npr. dodatna uputstva za kurira, željeni termin dostave…"
+                placeholder={t("notesPlaceholder")}
                 {...register("notes")}
                 error={errors.notes?.message}
               />
@@ -177,19 +185,17 @@ export default function CheckoutPage() {
         <div className="min-w-0 lg:sticky lg:top-24 lg:self-start">
           <OrderSummary items={items} showItems>
             <Checkbox
-              label={
-                <>
-                  Slažem se sa{" "}
+              label={t.rich("acceptTerms", {
+                termsLink: (chunks) => (
                   <Link
                     href="/uslovi-koriscenja"
                     target="_blank"
                     className="text-accent underline underline-offset-2 hover:no-underline"
                   >
-                    uslovima korišćenja
-                  </Link>{" "}
-                  i politikom privatnosti.
-                </>
-              }
+                    {chunks}
+                  </Link>
+                ),
+              })}
               {...register("acceptTerms")}
               error={errors.acceptTerms?.message}
             />
@@ -199,7 +205,7 @@ export default function CheckoutPage() {
               trailingArrow
               className="mt-5 w-full"
             >
-              {isSubmitting ? "OBRAĐUJE SE…" : "POTVRDI PORUDŽBINU"}
+              {isSubmitting ? t("submitting") : t("submit")}
             </Button>
           </OrderSummary>
         </div>

@@ -1,8 +1,10 @@
+import type { AppHref } from "@/i18n/navigation";
+
 export interface FooterLink {
   /** Key into the Footer.links.* messages namespace — labels live in the
    * translation catalogs, not here, so this list stays locale-agnostic. */
   labelKey: "warranty" | "authorizedCenters" | "shipping" | "installGuide" | "faq" | "contact" | "terms" | "privacy";
-  href: string;
+  href: AppHref;
 }
 
 // "Prodavnica" links are rendered from real categories (see Footer.tsx),
@@ -16,6 +18,6 @@ export const footerLinks: { podrska: FooterLink[] } = {
     { labelKey: "faq", href: "/cesta-pitanja" },
     { labelKey: "contact", href: "/kontakt" },
     { labelKey: "terms", href: "/uslovi-koriscenja" },
-    { labelKey: "privacy", href: "/uslovi-koriscenja#politika-privatnosti" },
+    { labelKey: "privacy", href: { pathname: "/uslovi-koriscenja", hash: "politika-privatnosti" } },
   ],
 };

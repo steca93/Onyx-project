@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import type { ProductImage } from "@/lib/repo/types";
 
@@ -25,6 +26,7 @@ export function ImageSlot({
   className = "",
   diamond,
 }: ImageSlotProps) {
+  const t = useTranslations("ImageSlot");
   const shapeClass = diamond ? "diamond" : "";
   const sizingStyle: CSSProperties = fill
     ? {}
@@ -37,7 +39,7 @@ export function ImageSlot({
         style={sizingStyle}
       >
         <span className="px-6 text-center text-[10px] leading-relaxed tracking-[.2em] text-text-40 uppercase font-mono">
-          {image?.altText ?? "SLIKA UBRZO"}
+          {image?.altText ?? t("placeholder")}
         </span>
       </div>
     );

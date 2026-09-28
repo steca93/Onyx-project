@@ -1,10 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { installers } from "@/data/installers";
 
 export default function InstallerNetworkPage() {
+  const t = useTranslations("InstallersPage");
+  const tCommon = useTranslations("Common");
   const cities = useMemo(
     () => Array.from(new Set(installers.map((i) => i.city))).sort((a, b) => a.localeCompare(b, "sr")),
     [],
@@ -19,15 +22,15 @@ export default function InstallerNetworkPage() {
     <div>
       <PageHeader
         breadcrumb={[
-          { label: "Početna", href: "/" },
-          { label: "Ovlašćeni centri" },
+          { label: tCommon("home"), href: "/" },
+          { label: t("title") },
         ]}
-        title="Ovlašćeni centri"
-        description="Mreža ovlašćenih instalatera za montažu ONYX folija i premaza u Srbiji."
+        title={t("title")}
+        description={t("description")}
       />
 
       <div className="container-onyx py-16 sm:py-20 lg:py-24">
-        <div className="mb-12 flex flex-wrap gap-3" role="group" aria-label="Filter po gradu">
+        <div className="mb-12 flex flex-wrap gap-3" role="group" aria-label={t("cityFilterLabel")}>
           <button
             type="button"
             onClick={() => setActiveCity(null)}
@@ -38,7 +41,7 @@ export default function InstallerNetworkPage() {
                 : "border-hairline text-text-60 hover:border-accent hover:text-accent"
             }`}
           >
-            SVI
+            {t("allCities")}
           </button>
           {cities.map((city) => (
             <button
@@ -78,7 +81,13 @@ export default function InstallerNetworkPage() {
               <div className="flex flex-col gap-1.5 text-body-sm text-text-60">
                 <span>{installer.address}</span>
                 <span>{installer.phone}</span>
-                <span>{installer.workingHours}</span>
+                <span>
+                  {installer.workingHours
+                    .map(({ days, from, to }) =>
+                      t("hoursRange", { days: t(`days.${days}`), from, to }),
+                    )
+                    .join(", ")}
+                </span>
               </div>
               <a
                 href={installer.mapsUrl}
@@ -86,7 +95,7 @@ export default function InstallerNetworkPage() {
                 rel="noopener noreferrer"
                 className="label-nav mt-2 text-accent transition-colors duration-200 hover:text-accent-hi"
               >
-                POGLEDAJ NA MAPI →
+                {t("viewOnMap")}
               </a>
             </div>
           ))}
@@ -94,7 +103,7 @@ export default function InstallerNetworkPage() {
 
         {filtered.length === 0 && (
           <p className="font-mono text-[11px] tracking-[.1em] text-text-40 uppercase">
-            Nema centara u ovom gradu.
+            {t("noResults")}
           </p>
         )}
       </div>

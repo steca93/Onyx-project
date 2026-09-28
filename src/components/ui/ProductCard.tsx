@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { AnyProduct } from "@/lib/repo/types";
 import { formatPrice } from "@/lib/utils/format-price";
@@ -10,11 +11,12 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({ product, badge }: ProductCardProps) {
-  const displayBadge = badge ?? (product.newArrival ? "NOVO" : undefined);
+  const t = useTranslations("ProductCard");
+  const displayBadge = badge ?? (product.newArrival ? t("newBadge") : undefined);
 
   return (
     <Link
-      href={`/proizvod/${product.slug}`}
+      href={{ pathname: "/proizvod/[slug]", params: { slug: product.slug } }}
       className="group notch notch-18 flex min-w-0 flex-col border border-hairline bg-onyx-800 transition-colors duration-200 hover:border-[rgba(42,179,230,.4)]"
     >
       <div className="relative h-[232px] border-b border-hairline">
