@@ -1,6 +1,6 @@
 # Phase 3 — Technical SEO
 
-All checks below were run against `next build && next start` with live data. [`audit.txt`](audit.txt) is the automated audit output (non-indexable/local mode, so `robots` shows `noindex` there by design).
+All checks below were run against `next build && next start` with live data. [`audit.txt`](audit.txt) is the automated audit output, run in production-like mode (`SITE_INDEXABLE=true`, `NEXT_PUBLIC_SITE_URL=https://onyx.com`).
 
 ## What's in place
 | Item | Implementation |
