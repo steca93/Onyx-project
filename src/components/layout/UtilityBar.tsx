@@ -1,22 +1,29 @@
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { siteSettings } from "@/data/site-settings";
 
 export function UtilityBar() {
+  const t = useTranslations("UtilityBar");
+
   return (
     <div className="border-b border-hairline bg-onyx-900">
-      <div className="container-onyx flex h-[38px] items-center justify-between label-nav text-text-60">
-        <div className="flex items-center gap-7">
-          <span className="text-accent">{siteSettings.distributorClaim}</span>
-          <span className="hidden sm:inline">
-            BESPLATNA DOSTAVA PREKO{" "}
-            {siteSettings.freeShippingThresholdRsd.toLocaleString("sr-RS")} RSD
+      <div className="container-onyx flex h-[38px] items-center justify-between gap-4 label-nav text-text-60">
+        <div className="flex min-w-0 items-center gap-7 overflow-hidden">
+          <span className="shrink-0 text-accent">{t("distributorClaim")}</span>
+          <span className="hidden truncate sm:inline">
+            {t("freeShipping", {
+              amount: siteSettings.freeShippingThresholdRsd.toLocaleString(
+                "sr-RS",
+              ),
+            })}
           </span>
         </div>
-        <div className="flex items-center gap-7">
+        <div className="flex shrink-0 items-center gap-7">
           <span className="hidden md:inline">
-            PODRŠKA {siteSettings.supportPhone}
+            {t("support", { phone: siteSettings.supportPhone })}
           </span>
           <span className="hidden text-text-34 md:inline">|</span>
-          <span>SR / EN</span>
+          <LanguageSwitcher />
         </div>
       </div>
     </div>

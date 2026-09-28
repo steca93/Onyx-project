@@ -1,0 +1,155 @@
+{
+  "Metadata": {
+    "title": "ONYX EVOLUTION",
+    "description": "Authorized distributor of PPF films and ceramic coatings for cars in Serbia."
+  },
+  "UtilityBar": {
+    "distributorClaim": "AUTHORIZED DISTRIBUTOR FOR SERBIA",
+    "freeShipping": "FREE SHIPPING OVER {amount} RSD",
+    "support": "SUPPORT {phone}"
+  },
+  "Header": {
+    "logoAriaLabel": "ONYX EVOLUTION — home",
+    "cart": "CART",
+    "warranty": "WARRANTY",
+    "installerCta": "BECOME AN INSTALLER →",
+    "categoryNavAriaLabel": "Product categories",
+    "menu": "MENU",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "SearchBar": {
+    "placeholder": "SEARCH FILMS, TOOLS, COATINGS…",
+    "ariaLabel": "Search products",
+    "clearAriaLabel": "Clear search",
+    "submitAriaLabel": "Search",
+    "noResults": "NO RESULTS FOR \"{query}\"",
+    "noResultsHint": "Try another term or browse categories",
+    "showAllResults": "SHOW ALL RESULTS FOR \"{query}\""
+  },
+  "Footer": {
+    "tagline": "PPF films and ceramic coatings with factory warranty. Authorized distribution and installer network across Serbia and the region.",
+    "shopHeading": "SHOP",
+    "supportHeading": "SUPPORT",
+    "newsletterHeading": "NEWSLETTER",
+    "newsletterBody": "New products, technical guides and training for installers.",
+    "newsletterPlaceholder": "your@email.com",
+    "newsletterAriaLabel": "Email address for the newsletter",
+    "newsletterSubmit": "SUBSCRIBE",
+    "newsletterSuccess": "You're subscribed to the newsletter.",
+    "newsletterEmailError": "Enter a valid email address.",
+    "copyright": "© {year} ONYX EVOLUTION · ALL RIGHTS RESERVED",
+    "links": {
+      "warranty": "Warranty registration",
+      "authorizedCenters": "Authorized centers",
+      "shipping": "Shipping & returns",
+      "installGuide": "Installation guides",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "terms": "Terms of service",
+      "privacy": "Privacy policy"
+    }
+  },
+  "Site": {
+    "workingHours": "Mon–Fri 9am–5pm"
+  },
+  "Common": {
+    "home": "Home"
+  },
+  "ContactPage": {
+    "title": "Contact",
+    "description": "Questions about products, installation, or orders — get in touch.",
+    "metaDescription": "Questions about products, installation, or orders — contact ONYX EVOLUTION support.",
+    "successMessage": "Thanks for your message. We'll reply within one business day.",
+    "fullNameLabel": "FULL NAME",
+    "emailLabel": "EMAIL",
+    "subjectLabel": "SUBJECT",
+    "messageLabel": "MESSAGE",
+    "submitLabel": "SEND MESSAGE",
+    "submittingLabel": "SENDING…",
+    "fullNameError": "Enter your full name.",
+    "emailError": "Enter a valid email address.",
+    "subjectError": "Enter a subject.",
+    "messageError": "Message must be at least 10 characters.",
+    "detailEmail": "EMAIL",
+    "detailPhone": "PHONE",
+    "detailAddress": "ADDRESS",
+    "detailWorkingHours": "WORKING HOURS"
+  },
+  "FaqPage": {
+    "title": "FAQ",
+    "metaDescription": "Answers to the most common questions about PPF films, ceramic coatings, installation, warranty, and shipping.",
+    "description": "Answers to the questions installers and vehicle owners ask us most often.",
+    "items": [
+      {
+        "question": "How long is the warranty on PPF film?",
+        "answer": "The warranty runs up to 12 years, depending on the film model, and covers yellowing, cracking, and lifting from the surface. It requires installation at an authorized ONYX center and registration in the ONYX Warranty program within 30 days of installation."
+      },
+      {
+        "question": "Does the film change the look of the original paint?",
+        "answer": "Gloss variants have 99% optical clarity and don't change the paint's color or shine. Matte variants change the finish to a satin matte texture, without an orange-peel effect."
+      },
+      {
+        "question": "How long does installing one film take?",
+        "answer": "Installing a single panel takes 1–2 hours. A full-body wrap on a mid-size vehicle usually takes one working day, depending on how complex the body shape is."
+      },
+      {
+        "question": "Can I install ONYX film myself?",
+        "answer": "Yes, with the ONYX Pro Install Kit and basic PPF handling skill. For the full 12-year warranty, installation must be done at an authorized center — self-installation only carries a warranty on the material, not the labor."
+      },
+      {
+        "question": "How long does shipping take?",
+        "answer": "Standard shipping within Serbia takes 1–3 business days. Shipping is free for orders over 15,000 RSD; below that it's charged per the courier's price list."
+      },
+      {
+        "question": "Can I return a product if it doesn't work out?",
+        "answer": "Unopened, unused films and coatings can be returned within 14 days of receipt, with a receipt. Custom-cut kits made to a vehicle's measurements can't be returned."
+      },
+      {
+        "question": "How long should I wait between ceramic coating and PPF film?",
+        "answer": "ONYX Ceramic Top Coat can be applied over PPF film after the film has cured for at least 7 days, so the coating bonds properly to the surface."
+      },
+      {
+        "question": "How do I register the warranty after installation?",
+        "answer": "Registration happens on the /garancija page — enter the chassis number and installation date, pick the authorized center, and attach the receipt. The digital warranty certificate arrives by email within a few minutes."
+      }
+    ]
+  },
+  "ShippingReturnsPage": {
+    "title": "Shipping & Returns",
+    "metaDescription": "Shipping times, shipping cost, and return terms for orders from the ONYX EVOLUTION store.",
+    "description": "Everything you need to know before you order.",
+    "shippingHeading": "Shipping",
+    "shippingBody1": "We process orders on business days, within 24 hours of receiving payment or order confirmation for cash on delivery. Standard shipping within Serbia takes 1–3 business days, depending on the delivery location.",
+    "shippingBody2": "Shipping is free for orders over <amount></amount>. Below that amount, the shipping cost is calculated per the courier's current price list and shown before you confirm the order on the <checkoutLink>Checkout</checkoutLink> page.",
+    "trackingHeading": "Order tracking",
+    "trackingBody": "Once your parcel ships, you'll get a tracking number at the email address given with your order. For any questions about delivery status, contact support at <phoneLink></phoneLink>.",
+    "returnsHeading": "Returns",
+    "returnsBody1": "Unopened, unused films, coatings, and tools can be returned within 14 days of receiving the parcel, with the receipt attached. The product must be in its original packaging and show no signs of use.",
+    "returnsBody2": "PPF films that have been cut to a vehicle's measurements or already installed can't be returned or exchanged — once installation is done, the warranty on material and labor is honored exclusively through the <warrantyLink>ONYX Warranty program</warrantyLink>, not through a product return.",
+    "returnsBody3": "The customer covers return shipping costs, except when the product arrived damaged in transit or the wrong item was shipped — in that case ONYX EVOLUTION covers the cost of the return and replacement.",
+    "howToHeading": "How to start a return",
+    "howToBody": "Contact support via the <contactLink>Contact</contactLink> page with your order number and the reason for the return. You'll get shipping instructions and the warehouse address by email within one business day."
+  },
+  "BecomeInstallerPage": {
+    "title": "Become an Installer",
+    "metaDescription": "Join the network of authorized ONYX centers for installing PPF films and ceramic coatings."
+  },
+  "CartPage": {
+    "title": "Cart"
+  },
+  "WarrantyPage": {
+    "title": "Register Your Warranty",
+    "metaDescription": "Register your ONYX Warranty for an installed PPF film or ceramic coating and get a digital certificate."
+  },
+  "InstallersPage": {
+    "title": "Authorized Centers",
+    "metaDescription": "Network of authorized ONYX installers for PPF film and ceramic coating installation in Serbia."
+  },
+  "CheckoutPage": {
+    "title": "Checkout"
+  },
+  "OrderConfirmationPage": {
+    "title": "Order Confirmation"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "Metadata": {
+    "title": "ONYX EVOLUTION",
+    "description": "Autorisierter Vertriebspartner für PPF-Folien und Keramikversiegelungen für Fahrzeuge in Serbien."
+  },
+  "UtilityBar": {
+    "distributorClaim": "AUTORISIERTER VERTRIEBSPARTNER FÜR SERBIEN",
+    "freeShipping": "KOSTENLOSER VERSAND AB {amount} RSD",
+    "support": "SUPPORT {phone}"
+  },
+  "Header": {
+    "logoAriaLabel": "ONYX EVOLUTION — Startseite",
+    "cart": "WARENKORB",
+    "warranty": "GARANTIE",
+    "installerCta": "INSTALLATEUR WERDEN →",
+    "categoryNavAriaLabel": "Produktkategorien",
+    "menu": "MENÜ",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "SearchBar": {
+    "placeholder": "FOLIEN, WERKZEUG, VERSIEGELUNGEN SUCHEN…",
+    "ariaLabel": "Produktsuche",
+    "clearAriaLabel": "Suche löschen",
+    "submitAriaLabel": "Suchen",
+    "noResults": "KEINE ERGEBNISSE FÜR \"{query}\"",
+    "noResultsHint": "Versuchen Sie einen anderen Begriff oder durchsuchen Sie die Kategorien",
+    "showAllResults": "ALLE ERGEBNISSE FÜR \"{query}\" ANZEIGEN"
+  },
+  "Footer": {
+    "tagline": "PPF-Folien und Keramikversiegelungen mit Werksgarantie. Autorisierter Vertrieb und Installateurnetzwerk in Serbien und der Region.",
+    "shopHeading": "SHOP",
+    "supportHeading": "SUPPORT",
+    "newsletterHeading": "NEWSLETTER",
+    "newsletterBody": "Neue Produkte, technische Anleitungen und Schulungen für Installateure.",
+    "newsletterPlaceholder": "ihre@email.com",
+    "newsletterAriaLabel": "E-Mail-Adresse für den Newsletter",
+    "newsletterSubmit": "ANMELDEN",
+    "newsletterSuccess": "Sie sind für den Newsletter angemeldet.",
+    "newsletterEmailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "copyright": "© {year} ONYX EVOLUTION · ALLE RECHTE VORBEHALTEN",
+    "links": {
+      "warranty": "Garantie registrieren",
+      "authorizedCenters": "Autorisierte Zentren",
+      "shipping": "Versand & Rückgabe",
+      "installGuide": "Montageanleitungen",
+      "faq": "Häufige Fragen",
+      "contact": "Kontakt",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklärung"
+    }
+  },
+  "Site": {
+    "workingHours": "Mo–Fr 9–17 Uhr"
+  },
+  "Common": {
+    "home": "Startseite"
+  },
+  "ContactPage": {
+    "title": "Kontakt",
+    "description": "Fragen zu Produkten, Montage oder Bestellungen — melden Sie sich bei uns.",
+    "metaDescription": "Fragen zu Produkten, Montage oder Bestellungen — kontaktieren Sie den ONYX EVOLUTION Support.",
+    "successMessage": "Vielen Dank für Ihre Nachricht. Wir antworten innerhalb eines Werktages.",
+    "fullNameLabel": "VOR- UND NACHNAME",
+    "emailLabel": "E-MAIL",
+    "subjectLabel": "BETREFF",
+    "messageLabel": "NACHRICHT",
+    "submitLabel": "NACHRICHT SENDEN",
+    "submittingLabel": "WIRD GESENDET…",
+    "fullNameError": "Bitte geben Sie Ihren Namen ein.",
+    "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "subjectError": "Bitte geben Sie einen Betreff ein.",
+    "messageError": "Die Nachricht muss mindestens 10 Zeichen lang sein.",
+    "detailEmail": "E-MAIL",
+    "detailPhone": "TELEFON",
+    "detailAddress": "ADRESSE",
+    "detailWorkingHours": "ÖFFNUNGSZEITEN"
+  },
+  "FaqPage": {
+    "title": "Häufige Fragen",
+    "metaDescription": "Antworten auf die häufigsten Fragen zu PPF-Folien, Keramikversiegelungen, Montage, Garantie und Versand.",
+    "description": "Antworten auf die Fragen, die uns Installateure und Fahrzeughalter am häufigsten stellen.",
+    "items": [
+      {
+        "question": "Wie lange gilt die Garantie auf PPF-Folie?",
+        "answer": "Die Garantie gilt je nach Folienmodell bis zu 12 Jahre und deckt Vergilbung, Rissbildung und Ablösen der Folie vom Untergrund ab. Voraussetzung ist die Montage in einem autorisierten ONYX-Zentrum und die Registrierung im ONYX Warranty-Programm innerhalb von 30 Tagen nach der Montage."
+      },
+      {
+        "question": "Verändert die Folie das Aussehen des Originallacks?",
+        "answer": "Glänzende Varianten haben eine optische Klarheit von 99 % und verändern weder Farbe noch Glanz des Lacks. Matte Varianten verändern das Finish zu einer satinierten Mattstruktur, ohne Orangenhaut-Effekt."
+      },
+      {
+        "question": "Wie lange dauert die Montage einer Folie?",
+        "answer": "Die Montage eines einzelnen Panels dauert 1–2 Stunden. Eine komplette Fahrzeugfolierung eines mittelgroßen Fahrzeugs dauert in der Regel einen Arbeitstag, abhängig von der Komplexität der Karosserieform."
+      },
+      {
+        "question": "Kann ich die ONYX-Folie selbst montieren?",
+        "answer": "Ja, mit dem ONYX Pro Install Kit und grundlegenden PPF-Kenntnissen. Für die volle 12-jährige Garantie muss die Montage in einem autorisierten Zentrum erfolgen — bei Eigenmontage gilt die Garantie nur für das Material, nicht für die Arbeitsleistung."
+      },
+      {
+        "question": "Wie lange dauert der Versand?",
+        "answer": "Der Standardversand innerhalb Serbiens dauert 1–3 Werktage. Der Versand ist kostenlos für Bestellungen über 15.000 RSD, darunter wird er nach der aktuellen Preisliste des Kurierdienstes berechnet."
+      },
+      {
+        "question": "Kann ich ein Produkt zurückgeben, wenn es mir nicht passt?",
+        "answer": "Ungeöffnete und unbenutzte Folien und Versiegelungen können innerhalb von 14 Tagen nach Erhalt mit Rechnung zurückgegeben werden. Individuell zugeschnittene Sets, die auf ein Fahrzeug abgestimmt wurden, können nicht zurückgegeben werden."
+      },
+      {
+        "question": "Wie lange sollte man zwischen Keramikversiegelung und PPF-Folie warten?",
+        "answer": "Der ONYX Ceramic Top Coat kann nach einer Aushärtezeit der Folie von mindestens 7 Tagen aufgetragen werden, damit sich die Versiegelung richtig mit der Oberfläche verbindet."
+      },
+      {
+        "question": "Wie registriere ich die Garantie nach der Montage?",
+        "answer": "Die Registrierung erfolgt auf der Seite /garancija — durch Eingabe der Fahrgestellnummer, des Montagedatums, Auswahl des autorisierten Zentrums und Anhängen der Rechnung. Das digitale Garantiezertifikat kommt innerhalb weniger Minuten per E-Mail."
+      }
+    ]
+  },
+  "ShippingReturnsPage": {
+    "title": "Versand & Rückgabe",
+    "metaDescription": "Versandzeiten, Versandkosten und Rückgabebedingungen für Bestellungen im ONYX EVOLUTION Shop.",
+    "description": "Alles, was Sie vor der Bestellung wissen müssen.",
+    "shippingHeading": "Versand",
+    "shippingBody1": "Wir bearbeiten Bestellungen an Werktagen, innerhalb von 24 Stunden nach Zahlungseingang bzw. Bestellbestätigung bei Nachnahme. Der Standardversand innerhalb Serbiens dauert 1–3 Werktage, abhängig vom Lieferort.",
+    "shippingBody2": "Der Versand ist kostenlos für Bestellungen über <amount></amount>. Darunter wird die Versandkosten nach der aktuellen Preisliste des Kurierdienstes berechnet und vor Bestellbestätigung auf der Seite <checkoutLink>Kasse</checkoutLink> angezeigt.",
+    "trackingHeading": "Sendungsverfolgung",
+    "trackingBody": "Nach dem Versand erhalten Sie eine Sendungsnummer an die bei der Bestellung angegebene E-Mail-Adresse. Bei Fragen zum Lieferstatus wenden Sie sich an den Support unter <phoneLink></phoneLink>.",
+    "returnsHeading": "Rückgabe",
+    "returnsBody1": "Ungeöffnete und unbenutzte Folien, Versiegelungen und Werkzeuge können innerhalb von 14 Tagen nach Erhalt der Sendung mit beigefügter Rechnung zurückgegeben werden. Das Produkt muss sich in der Originalverpackung befinden und darf keine Gebrauchsspuren aufweisen.",
+    "returnsBody2": "PPF-Folien, die auf die Maße eines Fahrzeugs zugeschnitten oder bereits montiert wurden, können nicht zurückgegeben oder umgetauscht werden — nach erfolgter Montage gilt die Garantie auf Material und Arbeit ausschließlich über das <warrantyLink>ONYX Warranty-Programm</warrantyLink>, nicht über eine Produktrückgabe.",
+    "returnsBody3": "Die Rücksendekosten trägt der Kunde, außer wenn das Produkt beim Transport beschädigt wurde oder der falsche Artikel geliefert wurde — in diesem Fall trägt ONYX EVOLUTION die Kosten für Rückgabe und Ersatz.",
+    "howToHeading": "So starten Sie eine Rückgabe",
+    "howToBody": "Wenden Sie sich über die Seite <contactLink>Kontakt</contactLink> mit Ihrer Bestellnummer und dem Grund der Rückgabe an den Support. Sie erhalten die Versandanleitung und die Lageradresse innerhalb eines Werktages per E-Mail."
+  },
+  "BecomeInstallerPage": {
+    "title": "Installateur werden",
+    "metaDescription": "Werden Sie Teil des Netzwerks autorisierter ONYX-Zentren für die Montage von PPF-Folien und Keramikversiegelungen."
+  },
+  "CartPage": {
+    "title": "Warenkorb"
+  },
+  "WarrantyPage": {
+    "title": "Garantie registrieren",
+    "metaDescription": "Registrieren Sie Ihre ONYX Warranty für eine montierte PPF-Folie oder Keramikversiegelung und erhalten Sie ein digitales Zertifikat."
+  },
+  "InstallersPage": {
+    "title": "Autorisierte Zentren",
+    "metaDescription": "Netzwerk autorisierter ONYX-Installateure für die Montage von PPF-Folien und Keramikversiegelungen in Serbien."
+  },
+  "CheckoutPage": {
+    "title": "Kasse"
+  },
+  "OrderConfirmationPage": {
+    "title": "Bestellbestätigung"
+  }
+}

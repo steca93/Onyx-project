@@ -1,0 +1,155 @@
+{
+  "Metadata": {
+    "title": "ONYX EVOLUTION",
+    "description": "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji."
+  },
+  "UtilityBar": {
+    "distributorClaim": "OVLAŠĆENI DISTRIBUTER ZA SRBIJU",
+    "freeShipping": "BESPLATNA DOSTAVA PREKO {amount} RSD",
+    "support": "PODRŠKA {phone}"
+  },
+  "Header": {
+    "logoAriaLabel": "ONYX EVOLUTION — početna",
+    "cart": "KORPA",
+    "warranty": "GARANCIJA",
+    "installerCta": "POSTANI INSTALATER →",
+    "categoryNavAriaLabel": "Kategorije proizvoda",
+    "menu": "MENI",
+    "openMenu": "Otvori meni",
+    "closeMenu": "Zatvori meni"
+  },
+  "SearchBar": {
+    "placeholder": "TRAŽI FOLIJE, ALAT, PREMAZE…",
+    "ariaLabel": "Pretraga proizvoda",
+    "clearAriaLabel": "Obriši pretragu",
+    "submitAriaLabel": "Pretraži",
+    "noResults": "NEMA REZULTATA ZA \"{query}\"",
+    "noResultsHint": "Probaj drugi pojam ili pregledaj kategorije",
+    "showAllResults": "PRIKAŽI SVE REZULTATE ZA \"{query}\""
+  },
+  "Footer": {
+    "tagline": "PPF folije i keramički premazi sa fabričkom garancijom. Ovlašćena distribucija i mreža instalatera u Srbiji i regionu.",
+    "shopHeading": "PRODAVNICA",
+    "supportHeading": "PODRŠKA",
+    "newsletterHeading": "BILTEN",
+    "newsletterBody": "Novi proizvodi, tehnička uputstva i obuke za instalatere.",
+    "newsletterPlaceholder": "vasa@adresa.com",
+    "newsletterAriaLabel": "Email adresa za bilten",
+    "newsletterSubmit": "PRIJAVI SE",
+    "newsletterSuccess": "Prijavljeni ste na bilten.",
+    "newsletterEmailError": "Unesi ispravnu email adresu.",
+    "copyright": "© {year} ONYX EVOLUTION · SVA PRAVA ZADRŽANA",
+    "links": {
+      "warranty": "Registracija garancije",
+      "authorizedCenters": "Ovlašćeni centri",
+      "shipping": "Dostava i povraćaj",
+      "installGuide": "Uputstva za montažu",
+      "faq": "Česta pitanja",
+      "contact": "Kontakt",
+      "terms": "Uslovi korišćenja",
+      "privacy": "Politika privatnosti"
+    }
+  },
+  "Site": {
+    "workingHours": "Pon–Pet 09–17h"
+  },
+  "Common": {
+    "home": "Početna"
+  },
+  "ContactPage": {
+    "title": "Kontakt",
+    "description": "Pitanja o proizvodima, montaži ili porudžbinama — javi nam se.",
+    "metaDescription": "Pitanja o proizvodima, montaži ili porudžbinama — kontaktiraj ONYX EVOLUTION podršku.",
+    "successMessage": "Hvala na poruci. Odgovorićemo najkasnije u roku od jednog radnog dana.",
+    "fullNameLabel": "IME I PREZIME",
+    "emailLabel": "EMAIL",
+    "subjectLabel": "NASLOV",
+    "messageLabel": "PORUKA",
+    "submitLabel": "POŠALJI PORUKU",
+    "submittingLabel": "ŠALJE SE…",
+    "fullNameError": "Unesi ime i prezime.",
+    "emailError": "Unesi ispravnu email adresu.",
+    "subjectError": "Unesi naslov poruke.",
+    "messageError": "Poruka mora imati bar 10 karaktera.",
+    "detailEmail": "EMAIL",
+    "detailPhone": "TELEFON",
+    "detailAddress": "ADRESA",
+    "detailWorkingHours": "RADNO VREME"
+  },
+  "FaqPage": {
+    "title": "Česta pitanja",
+    "metaDescription": "Odgovori na najčešća pitanja o PPF folijama, keramičkim premazima, montaži, garanciji i dostavi.",
+    "description": "Odgovori na pitanja koja nam instalateri i vlasnici vozila najčešće postavljaju.",
+    "items": [
+      {
+        "question": "Koliko traje garancija na PPF foliju?",
+        "answer": "Garancija traje do 12 godina, u zavisnosti od modela folije, i pokriva žutljenje, pucanje i odvajanje folije od podloge. Uslov je montaža u ovlašćenom ONYX centru i registracija u ONYX Warranty programu u roku od 30 dana od montaže."
+      },
+      {
+        "question": "Da li folija menja izgled originalnog laka?",
+        "answer": "Sjajne varijante imaju 99% optičke prozirnosti i ne menjaju boju ni sjaj laka. Mat varijante menjaju završnicu u satensku mat teksturu, bez efekta pomorandžine kore."
+      },
+      {
+        "question": "Koliko traje montaža jedne folije?",
+        "answer": "Montaža pojedinačnog panela traje 1–2 sata. Pun wrap karoserije srednjeg vozila obično traje jedan radni dan, u zavisnosti od složenosti oblika karoserije."
+      },
+      {
+        "question": "Da li mogu sam da montiram ONYX foliju?",
+        "answer": "Da, uz ONYX Pro Install Kit i osnovnu veštinu rada sa PPF folijom. Za punu garanciju od 12 godina montaža mora biti izvršena u ovlašćenom centru — samostalna montaža nosi garanciju samo na materijal, ne i na rad."
+      },
+      {
+        "question": "Koliko traje dostava?",
+        "answer": "Standardna dostava u Srbiji traje 1–3 radna dana. Dostava je besplatna za porudžbine preko 15.000 RSD, dok se ispod tog iznosa naplaćuje po cenovniku kurirske službe."
+      },
+      {
+        "question": "Da li mogu da vratim proizvod ako mi ne odgovara?",
+        "answer": "Neotvorene i nekorišćene folije i premaze možete vratiti u roku od 14 dana od prijema, uz račun. Prekrojeni setovi izrađeni po meri vozila se ne mogu vratiti."
+      },
+      {
+        "question": "Koji je razmak između keramičkog premaza i PPF folije?",
+        "answer": "ONYX Ceramic Top Coat se može naneti preko PPF folije nakon perioda sušenja folije od minimum 7 dana, radi pravilnog vezivanja premaza za površinu."
+      },
+      {
+        "question": "Kako registrujem garanciju nakon montaže?",
+        "answer": "Registracija se obavlja na stranici /garancija — unosom broja šasije, datuma montaže, izborom ovlašćenog centra i prilaganjem računa. Digitalni sertifikat garancije stiže na mejl u roku od nekoliko minuta."
+      }
+    ]
+  },
+  "ShippingReturnsPage": {
+    "title": "Dostava i povraćaj",
+    "metaDescription": "Rokovi dostave, cena dostave i uslovi povraćaja za porudžbine iz ONYX EVOLUTION prodavnice.",
+    "description": "Sve što treba da znaš pre nego što naručiš.",
+    "shippingHeading": "Dostava",
+    "shippingBody1": "Porudžbine obrađujemo radnim danima, u roku od 24 časa od prijema uplate ili potvrde porudžbine za plaćanje pouzećem. Standardna dostava na teritoriji Srbije traje 1–3 radna dana, u zavisnosti od mesta isporuke.",
+    "shippingBody2": "Dostava je besplatna za porudžbine preko <amount></amount>. Za porudžbine ispod tog iznosa cena dostave se obračunava po važećem cenovniku kurirske službe i prikazuje se pre potvrde porudžbine na strani <checkoutLink>Kasa</checkoutLink>.",
+    "trackingHeading": "Praćenje porudžbine",
+    "trackingBody": "Nakon slanja pošiljke dobijaš broj za praćenje na email adresu navedenu prilikom porudžbine. Za sva pitanja o statusu isporuke kontaktiraj podršku na <phoneLink></phoneLink>.",
+    "returnsHeading": "Povraćaj",
+    "returnsBody1": "Neotvorene i nekorišćene folije, premaze i alat možeš vratiti u roku od 14 dana od prijema pošiljke, uz priložen račun. Proizvod mora biti u originalnom pakovanju i bez tragova korišćenja.",
+    "returnsBody2": "PPF folije koje su izrezane po meri vozila ili već montirane ne mogu se vratiti niti zameniti — jednom kada je montaža obavljena, garancija na materijal i rad se ostvaruje isključivo kroz <warrantyLink>ONYX Warranty program</warrantyLink>, ne kroz povraćaj proizvoda.",
+    "returnsBody3": "Trošak povraćaja snosi kupac, osim u slučaju da je proizvod oštećen u transportu ili je isporučen pogrešan artikal — u tom slučaju ONYX EVOLUTION snosi troškove povraćaja i zamene.",
+    "howToHeading": "Kako da pokreneš povraćaj",
+    "howToBody": "Javi se podršci putem stranice <contactLink>Kontakt</contactLink> sa brojem porudžbine i razlogom povraćaja. Uputstvo za slanje pošiljke i adresu magacina dobijaš mejlom u roku od jednog radnog dana."
+  },
+  "BecomeInstallerPage": {
+    "title": "Postani instalater",
+    "metaDescription": "Pridruži se mreži ovlašćenih ONYX centara za montažu PPF folija i keramičkih premaza."
+  },
+  "CartPage": {
+    "title": "Korpa"
+  },
+  "WarrantyPage": {
+    "title": "Registruj garanciju",
+    "metaDescription": "Registruj ONYX Warranty garanciju na montiranu PPF foliju ili keramički premaz i dobij digitalni sertifikat."
+  },
+  "InstallersPage": {
+    "title": "Ovlašćeni centri",
+    "metaDescription": "Mreža ovlašćenih ONYX instalatera za montažu PPF folija i keramičkih premaza u Srbiji."
+  },
+  "CheckoutPage": {
+    "title": "Kasa"
+  },
+  "OrderConfirmationPage": {
+    "title": "Potvrda porudžbine"
+  }
+}

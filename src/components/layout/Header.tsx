@@ -1,18 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BurgerIcon, ChevronRightIcon, CloseIcon } from "@/components/icons";
 import { SearchBar } from "@/components/layout/SearchBar";
-import { installerCta } from "@/data/navigation";
 import { cartItemCount, useCartStore } from "@/lib/cart/store";
 import type { ProductCategory } from "@/lib/repo/types";
 
+const INSTALLER_CTA_HREF = "/postani-instalater";
+
 function Logo() {
+  const t = useTranslations("Header");
   return (
-    <Link href="/" className="flex shrink-0 flex-col gap-1.5" aria-label="ONYX EVOLUTION — početna">
+    <Link href="/" className="flex shrink-0 flex-col gap-1.5" aria-label={t("logoAriaLabel")}>
       <span className="text-[25px] leading-none tracking-[.3em]">
         ON<span className="text-accent">Y</span>X
       </span>
@@ -26,6 +28,7 @@ function Logo() {
 }
 
 function CartChip() {
+  const t = useTranslations("Header");
   const hasHydrated = useCartStore((s) => s.hasHydrated);
   const items = useCartStore((s) => s.items);
   const count = hasHydrated ? cartItemCount(items) : 0;
@@ -35,12 +38,13 @@ function CartChip() {
       href="/korpa"
       className="notch notch-9 flex items-center gap-2.5 border border-[rgba(42,179,230,.4)] px-4 py-2.5 label-nav text-accent transition-colors duration-200 hover:bg-[rgba(42,179,230,.1)]"
     >
-      KORPA <span className="text-text-40">({count})</span>
+      {t("cart")} <span className="text-text-40">({count})</span>
     </Link>
   );
 }
 
 function CategoryNav({ categories }: { categories: ProductCategory[] }) {
+  const t = useTranslations("Header");
   const pathname = usePathname();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -91,10 +95,10 @@ function CategoryNav({ categories }: { categories: ProductCategory[] }) {
           );
         })}
         <Link
-          href={installerCta.href}
+          href={INSTALLER_CTA_HREF}
           className="ml-auto shrink-0 whitespace-nowrap text-accent transition-colors duration-200 hover:text-accent-hi"
         >
-          {installerCta.label}
+          {t("installerCta")}
         </Link>
       </div>
 
@@ -134,6 +138,7 @@ interface MobileMenuDrawerProps {
  * lives at the layout root rather than inside Header.
  */
 function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDrawerProps) {
+  const t = useTranslations("Header");
   return (
     <div
       className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
@@ -149,16 +154,16 @@ function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDra
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Meni"
+        aria-label={t("menu")}
         className={`absolute top-0 right-0 flex h-full w-full flex-col bg-onyx-900 transition-transform duration-300 ease-[cubic-bezier(.22,.61,.36,1)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex h-[72px] shrink-0 items-center justify-between border-b border-hairline px-6">
-          <span className="label-nav text-text">MENI</span>
+          <span className="label-nav text-text">{t("menu")}</span>
           <button
             type="button"
-            aria-label="Zatvori meni"
+            aria-label={t("closeMenu")}
             onClick={onClose}
             className="cursor-pointer text-text-60 transition-colors duration-200 hover:text-text"
           >
@@ -169,7 +174,7 @@ function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDra
         <div className="flex-1 overflow-y-auto px-6 py-7">
           <SearchBar />
 
-          <nav aria-label="Kategorije proizvoda" className="mt-8 flex flex-col">
+          <nav aria-label={t("categoryNavAriaLabel")} className="mt-8 flex flex-col">
             {categories.map((category) => {
               const href = `/kategorija/${category.slug}`;
               const active = pathname.startsWith(href);
@@ -190,16 +195,16 @@ function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDra
 
           <div className="mt-8 flex flex-col gap-1">
             <Link
-              href={installerCta.href}
+              href={INSTALLER_CTA_HREF}
               className="flex min-h-[44px] items-center font-mono text-[13px] tracking-[.14em] text-accent uppercase transition-colors duration-200 hover:text-accent-hi"
             >
-              {installerCta.label}
+              {t("installerCta")}
             </Link>
             <Link
               href="/garancija"
               className="flex min-h-[44px] items-center font-mono text-[13px] tracking-[.14em] text-text-60 uppercase transition-colors duration-200 hover:text-text"
             >
-              GARANCIJA
+              {t("warranty")}
             </Link>
           </div>
         </div>
@@ -213,6 +218,7 @@ export interface HeaderProps {
 }
 
 export function Header({ categories }: HeaderProps) {
+  const t = useTranslations("Header");
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
@@ -258,7 +264,7 @@ export function Header({ categories }: HeaderProps) {
 
           <div className="ml-auto hidden items-center gap-6.5 label-nav text-text-60 lg:flex">
             <Link href="/garancija" className="transition-colors duration-200 hover:text-text">
-              GARANCIJA
+              {t("warranty")}
             </Link>
             <CartChip />
           </div>
@@ -267,7 +273,7 @@ export function Header({ categories }: HeaderProps) {
             <CartChip />
             <button
               type="button"
-              aria-label={drawerOpen ? "Zatvori meni" : "Otvori meni"}
+              aria-label={drawerOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen((v) => !v)}
               className="text-text"
@@ -278,7 +284,7 @@ export function Header({ categories }: HeaderProps) {
         </div>
 
         <nav
-          aria-label="Kategorije proizvoda"
+          aria-label={t("categoryNavAriaLabel")}
           className="hidden border-t border-hairline lg:block"
         >
           <div className="container-onyx">

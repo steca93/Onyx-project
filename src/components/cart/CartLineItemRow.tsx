@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import type { CartLineItem } from "@/lib/cart/types";

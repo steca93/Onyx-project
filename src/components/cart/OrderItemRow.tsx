@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import type { CartLineItem } from "@/lib/cart/types";
 import { formatPrice } from "@/lib/utils/format-price";

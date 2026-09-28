@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useEffect } from "react";
 import { CloseIcon } from "@/components/icons";
 import { Button } from "@/components/ui/Button";

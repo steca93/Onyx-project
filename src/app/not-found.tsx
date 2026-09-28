@@ -1,23 +1,35 @@
-import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+// True root fallback — used only when no [locale] segment could be
+// resolved at all (middleware failure / pathological request). Every
+// normal 404 inside a resolved locale is handled by
+// src/app/[locale]/not-found.tsx instead, inside the real site chrome.
+// This file has no parent layout providing <html>/<body>, so it must
+// supply its own — and no resolved locale, so it links to "/" via plain
+// next/link rather than the locale-aware Link in @/i18n/navigation.
+import Link from "next/link";
 
-export default function NotFound() {
+export default function GlobalNotFound() {
   return (
-    <div className="border-b border-accent-line bg-onyx-900">
-      <div className="container-onyx flex h-[260px] flex-col justify-center gap-5">
-        <Eyebrow>GREŠKA 404</Eyebrow>
-        <h1 className="text-[40px] tracking-[.02em] sm:text-page-h1">
-          404 / STRANICA NIJE PRONAĐENA
-        </h1>
-        <p className="max-w-[520px] text-body text-text-60">
-          Stranica koju tražiš ne postoji ili je premeštena.
-        </p>
-        <div className="mt-2">
-          <Button href="/" trailingArrow>
-            NAZAD NA POČETNU
-          </Button>
+    <html lang="sr">
+      <body style={{ margin: 0, background: "#040506", color: "#eaeef1" }}>
+        <div
+          style={{
+            display: "flex",
+            minHeight: "100vh",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "1rem",
+            fontFamily: "sans-serif",
+            textAlign: "center",
+            padding: "0 1.5rem",
+          }}
+        >
+          <h1 style={{ fontSize: "1.5rem" }}>404 / Stranica nije pronađena</h1>
+          <Link href="/" style={{ color: "#2ab3e6" }}>
+            Nazad na početnu →
+          </Link>
         </div>
-      </div>
-    </div>
+      </body>
+    </html>
   );
 }

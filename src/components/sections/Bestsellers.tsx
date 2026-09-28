@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProductCard } from "@/components/ui/ProductCard";
 import type { AnyProduct } from "@/lib/repo/types";

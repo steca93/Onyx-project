@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { AnyProduct } from "@/lib/repo/types";
 import { formatPrice } from "@/lib/utils/format-price";
 import { ImageSlot } from "./ImageSlot";
