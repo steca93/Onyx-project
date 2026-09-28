@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd, organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
+import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { getTranslations } from "next-intl/server";
 import { Bestsellers } from "@/components/sections/Bestsellers";
 import { Categories } from "@/components/sections/Categories";
@@ -9,7 +11,7 @@ import { WarrantyBlock } from "@/components/sections/WarrantyBlock";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { SpecTicker } from "@/components/ui/SpecTicker";
 import { siteSettings } from "@/data/site-settings";
-import { routing, toLocale } from "@/i18n/routing";
+import { toLocale } from "@/i18n/routing";
 import {
   getAllCategories,
   getFeaturedProducts,
@@ -17,8 +19,6 @@ import {
   getProductsByCategory,
   searchProducts,
 } from "@/lib/repo";
-
-const OG_LOCALES = { sr: "sr_RS", en: "en_US", de: "de_DE" } as const;
 
 export async function generateMetadata({
   params,
@@ -29,19 +29,13 @@ export async function generateMetadata({
   const locale = toLocale(requested);
   const t = await getTranslations({ locale, namespace: "HomePage" });
 
-  return {
+  return buildMetadata({
+    locale,
+    href: "/",
     title: t("title"),
+    absoluteTitle: true,
     description: t("metaDescription", { years: siteSettings.warrantyYears }),
-    alternates: {
-      canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
-    },
-    openGraph: {
-      title: "ONYX EVOLUTION",
-      description: t("ogDescription"),
-      type: "website",
-      locale: OG_LOCALES[locale],
-    },
-  };
+  });
 }
 
 const POLISHING_PADS_CATEGORY_SLUG = "ulozak-za-poliranje";
@@ -93,25 +87,17 @@ export default async function Home({
     tTicker("centers"),
   ];
 
-  const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: `${siteSettings.brandName} ${siteSettings.brandSuffix}`,
-    description: t("organizationDescription"),
-    telephone: siteSettings.contact.phone,
-    email: siteSettings.contact.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteSettings.contact.address,
-      addressCountry: "RS",
-    },
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      <JsonLd
+        data={[
+          organizationJsonLd(t("organizationDescription")),
+          webSiteJsonLd({
+            homeUrl: absoluteUrl("/", locale),
+            language: locale,
+            searchUrlTemplate: `${absoluteUrl("/pretraga", locale)}?q={search_term_string}`,
+          }),
+        ]}
       />
       <Hero />
       <SpecTicker items={specTickerItems} />

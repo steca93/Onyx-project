@@ -20,6 +20,7 @@ export function Bestsellers({ products }: BestsellersProps) {
         </div>
         <Link
           href="/pretraga"
+          aria-label={t("viewAllAria")}
           className="label-nav text-text-60 transition-colors duration-200 hover:text-accent"
         >
           {t("viewAll")}

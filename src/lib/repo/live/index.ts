@@ -6,6 +6,7 @@ import type {
   ProductSort,
   SearchIndexProduct,
 } from "../types";
+import { REVALIDATE, TAGS } from "./cache";
 import { graphqlFetch } from "./client";
 import { mapCategory, mapProduct, mapProducts, type RawProductNode } from "./mappers";
 import {
@@ -33,6 +34,13 @@ interface SearchIndexData {
 }
 
 const KIT_CATEGORY_SLUG = "setovi";
+
+/** The PDP query also embeds related products; they go stale at most
+ * REVALIDATE.products after an edit (their own tags aren't known up front). */
+const productCache = (slug: string) => ({
+  revalidate: REVALIDATE.products,
+  tags: [TAGS.product(slug)],
+});
 const DEFAULT_PER_PAGE = 6;
 
 interface ProductsData {
@@ -80,12 +88,17 @@ function buildWhere(opts: ProductListOptions, extra?: Record<string, unknown>) {
 async function fetchPage(
   where: Record<string, unknown>,
   opts: ProductListOptions,
+  tags: string[] = [TAGS.products],
 ): Promise<{ products: AnyProduct[]; hasNextPage: boolean; softTotal: number }> {
   const page = opts.page ?? 1;
   const perPage = opts.perPage ?? DEFAULT_PER_PAGE;
   const limit = page * perPage + 1;
 
-  const data = await graphqlFetch<ProductsData>(PRODUCTS_QUERY, { first: limit, where });
+  const data = await graphqlFetch<ProductsData>(
+    PRODUCTS_QUERY,
+    { first: limit, where },
+    { revalidate: REVALIDATE.products, tags },
+  );
   const nodes = data?.products.nodes ?? [];
   const start = (page - 1) * perPage;
   const windowNodes = nodes.slice(start, start + perPage);
@@ -122,6 +135,8 @@ export const liveRepo: Repo = {
     const data = await graphqlFetch<{ productCategories: { nodes: Parameters<typeof mapCategory>[0][] } }>(
       CATEGORIES_QUERY,
       { first: 50 },
+      // The header/footer nav is built from this list, hence `menu` too.
+      { revalidate: REVALIDATE.categories, tags: [TAGS.categories, TAGS.menu] },
     );
     return (data?.productCategories.nodes ?? [])
       .filter((c) => c.slug !== "uncategorized")
@@ -132,6 +147,7 @@ export const liveRepo: Repo = {
     const data = await graphqlFetch<{ productCategory: Parameters<typeof mapCategory>[0] | null }>(
       CATEGORY_BY_SLUG_QUERY,
       { slug },
+      { revalidate: REVALIDATE.categories, tags: [TAGS.categories, TAGS.category(slug)] },
     );
     return data?.productCategory ? mapCategory(data.productCategory) : null;
   },
@@ -146,31 +162,38 @@ export const liveRepo: Repo = {
     // methods off the object, which drops `this` binding entirely.
     const [category, result] = await Promise.all([
       opts.skipCategory ? Promise.resolve(null) : liveRepo.getCategoryBySlug(slug),
-      fetchPage(where, opts),
+      fetchPage(where, opts, [TAGS.products, TAGS.category(slug)]),
     ]);
     return buildListResult(result, page, category);
   },
 
   async getFeaturedProducts(limit) {
-    const data = await graphqlFetch<ProductsData>(PRODUCTS_QUERY, {
-      first: limit,
-      where: { featured: true, orderby: [{ field: "DATE", order: "DESC" }] },
-    });
+    const data = await graphqlFetch<ProductsData>(
+      PRODUCTS_QUERY,
+      { first: limit, where: { featured: true, orderby: [{ field: "DATE", order: "DESC" }] } },
+      { revalidate: REVALIDATE.products, tags: [TAGS.products] },
+    );
     return mapProducts(data?.products.nodes ?? []);
   },
 
   async getKits(limit) {
-    const data = await graphqlFetch<ProductsData>(PRODUCTS_QUERY, {
-      first: limit ?? 50,
-      where: { categoryIn: [KIT_CATEGORY_SLUG], orderby: [{ field: "MENU_ORDER", order: "ASC" }] },
-    });
+    const data = await graphqlFetch<ProductsData>(
+      PRODUCTS_QUERY,
+      {
+        first: limit ?? 50,
+        where: { categoryIn: [KIT_CATEGORY_SLUG], orderby: [{ field: "MENU_ORDER", order: "ASC" }] },
+      },
+      { revalidate: REVALIDATE.products, tags: [TAGS.products, TAGS.category(KIT_CATEGORY_SLUG)] },
+    );
     return mapProducts(data?.products.nodes ?? []);
   },
 
   async getProductBySlug(slug) {
-    const data = await graphqlFetch<{ product: RawProductNode | null }>(PRODUCT_BY_SLUG_QUERY, {
-      slug,
-    });
+    const data = await graphqlFetch<{ product: RawProductNode | null }>(
+      PRODUCT_BY_SLUG_QUERY,
+      { slug },
+      productCache(slug),
+    );
     if (!data?.product) return null;
     return mapProduct(data.product);
   },
@@ -179,29 +202,43 @@ export const liveRepo: Repo = {
     // Same query+variables as getProductBySlug — Next's fetch memoization
     // dedupes this against that call within a single render, so calling
     // both from the same page costs one network round-trip, not two.
-    const data = await graphqlFetch<{ product: RawProductNode | null }>(PRODUCT_BY_SLUG_QUERY, {
-      slug,
-    });
+    const data = await graphqlFetch<{ product: RawProductNode | null }>(
+      PRODUCT_BY_SLUG_QUERY,
+      { slug },
+      productCache(slug),
+    );
     const related = data?.product?.related?.nodes ?? [];
     return mapProducts(related).slice(0, limit);
   },
 
   async getAllProductSlugs() {
-    const slugs: string[] = [];
+    return (await liveRepo.getProductSitemapEntries()).map((e) => e.slug);
+  },
+
+  async getProductSitemapEntries() {
+    const entries: { slug: string; modified: string | null }[] = [];
     let after: string | null = null;
     let hasNextPage = true;
 
     while (hasNextPage) {
-      const data: { products: { nodes: { slug: string }[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } } } | null =
-        await graphqlFetch(ALL_PRODUCT_SLUGS_QUERY, { first: 100, after });
+      const data: {
+        products: {
+          nodes: { slug: string; modified: string | null }[];
+          pageInfo: { hasNextPage: boolean; endCursor: string | null };
+        };
+      } | null = await graphqlFetch(
+        ALL_PRODUCT_SLUGS_QUERY,
+        { first: 100, after },
+        { revalidate: REVALIDATE.products, tags: [TAGS.products] },
+      );
       const nodes = data?.products.nodes ?? [];
-      slugs.push(...nodes.map((n) => n.slug));
+      entries.push(...nodes.map((n) => ({ slug: n.slug, modified: n.modified ?? null })));
       hasNextPage = data?.products.pageInfo.hasNextPage ?? false;
       after = data?.products.pageInfo.endCursor ?? null;
       if (!after) break;
     }
 
-    return slugs;
+    return entries;
   },
 
   async searchProducts(query, opts = {}) {
@@ -221,9 +258,7 @@ export const liveRepo: Repo = {
       const data: SearchIndexData | null = await graphqlFetch(
         SEARCH_INDEX_QUERY,
         { first: 100, after },
-        // Rebuilt at most once an hour — the whole point is to avoid a
-        // WPGraphQL round trip on every keystroke, see SearchBar.tsx.
-        3600,
+        { revalidate: REVALIDATE.products, tags: [TAGS.products] },
       );
       const nodes = data?.products.nodes ?? [];
       for (const n of nodes) {

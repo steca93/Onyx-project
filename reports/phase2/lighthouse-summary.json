@@ -1,0 +1,46 @@
+[
+  {
+    "page": "home (/)",
+    "score": 95,
+    "lcp": 2914.0721999999996,
+    "cls": 0,
+    "tbt": 0.5,
+    "fcp": 908.7148,
+    "si": 908.7148,
+    "jsKb": 211.3720703125,
+    "totalKb": 427.7138671875
+  },
+  {
+    "page": "category (/kategorija/ulozak-za-poliranje)",
+    "score": 96,
+    "lcp": 2830.006,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 902.5029999999999,
+    "si": 902.5029999999999,
+    "jsKb": 214.193359375,
+    "totalKb": 422.048828125
+  },
+  {
+    "page": "product-simple (/proizvod/onyx-evo-clear-ppf-zastitna-folija)",
+    "score": 95,
+    "lcp": 2906.70835,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 905.1388999999999,
+    "si": 905.1388999999999,
+    "jsKb": 217.0791015625,
+    "totalKb": 398.162109375
+  },
+  {
+    "page": "cart (/korpa)",
+    "score": 93,
+    "lcp": 3232.1466,
+    "cls": 0,
+    "tbt": 7,
+    "fcp": 904.0733,
+    "si": 904.0733,
+    "jsKb": 211.3720703125,
+    "totalKb": 368.3603515625
+  }
+]

@@ -26,8 +26,11 @@ export async function generateMetadata({
   const t = await getTranslations({ locale: toLocale(requested), namespace: "SearchPage" });
   const sp = await searchParams;
   const q = readString(sp.q)?.trim();
+  // Internal search results are thin/duplicate content for search engines:
+  // crawlable for link discovery, never indexed.
   return {
     title: q ? t("titleWithQuery", { query: q }) : t("title"),
+    robots: { index: false, follow: true },
   };
 }
 

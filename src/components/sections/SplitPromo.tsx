@@ -29,11 +29,11 @@ export function SplitPromo({ image }: SplitPromoProps) {
         </div>
         <div className="flex flex-col justify-center border-t border-accent-line bg-promo-panel px-8 py-12 sm:px-12 lg:border-t-0 lg:border-l lg:px-15 lg:py-16.5">
           <Eyebrow className="mb-5">{t("eyebrow")}</Eyebrow>
-          <h3 className="text-[36px] leading-none sm:text-h3-panel">
+          <h2 className="text-[36px] leading-none sm:text-h3-panel">
             {t("headingLine1")}
             <br />
             {t("headingLine2")}
-          </h3>
+          </h2>
           <p className="mt-6 max-w-[380px] text-body text-text-60">
             {t("body")}
           </p>

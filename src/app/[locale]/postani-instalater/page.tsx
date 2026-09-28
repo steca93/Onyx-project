@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod/mini";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Input } from "@/components/ui/Input";
@@ -15,13 +15,13 @@ export default function BecomeInstallerPage() {
   const t = useTranslations("BecomeInstallerPage");
 
   const applicationSchema = z.object({
-    company: z.string().min(2, t("companyError")),
-    pib: z.string().regex(/^\d{9}$/, t("pibError")),
-    city: z.string().min(2, t("cityError")),
-    contactName: z.string().min(2, t("contactNameError")),
-    contactEmail: z.string().email(t("emailError")),
-    contactPhone: z.string().min(6, t("phoneError")),
-    message: z.string().min(10, t("messageError")),
+    company: z.string().check(z.minLength(2, t("companyError"))),
+    pib: z.string().check(z.regex(/^\d{9}$/, t("pibError"))),
+    city: z.string().check(z.minLength(2, t("cityError"))),
+    contactName: z.string().check(z.minLength(2, t("contactNameError"))),
+    contactEmail: z.email(t("emailError")),
+    contactPhone: z.string().check(z.minLength(6, t("phoneError"))),
+    message: z.string().check(z.minLength(10, t("messageError"))),
   });
   type ApplicationValues = z.infer<typeof applicationSchema>;
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { toLocale } from "@/i18n/routing";
+import { staticPageMetadata } from "@/lib/seo/metadata";
 import { Accordion } from "@/components/ui/Accordion";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -9,11 +10,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale: requested } = await params;
-  const locale = toLocale(requested);
-  const t = await getTranslations({ locale, namespace: "FaqPage" });
-
-  return { title: t("title"), description: t("metaDescription") };
+  const { locale } = await params;
+  return staticPageMetadata(toLocale(locale), "/cesta-pitanja", "faq", "FaqPage");
 }
 
 export default async function FaqPage({

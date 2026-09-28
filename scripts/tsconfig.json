@@ -1,0 +1,12 @@
+{
+  // Scripts run directly under Node's type stripping (`node scripts/x.mts`),
+  // which requires explicit .ts import paths — hence their own config.
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["./**/*.mts"],
+  "exclude": []
+}
