@@ -31,8 +31,11 @@ function server(port: number, indexable: boolean, distDir: string) {
 export default defineConfig({
   testDir: "tests",
   timeout: 60_000,
-  // Live backend: keep load modest.
+  // Live backend: keep load modest, and allow one retry — the very first
+  // (uncached) render of a dynamic page waits on WordPress, which is
+  // occasionally slow enough to hit the storefront's 8 s fetch timeout.
   workers: 2,
+  retries: 1,
   reporter: [["list"]],
   webServer: [
     server(PROD_PORT, true, ".next-seo-prod"),

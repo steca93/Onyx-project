@@ -74,7 +74,11 @@ const nextConfig: NextConfig = {
   },
   // Lets the SEO test suite build production-mode and preview-mode copies
   // side by side (see playwright.config.ts). Unset everywhere else.
-  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
+  // Its own tsconfig too, so Next doesn't rewrite tsconfig.json with the
+  // test dist dirs' type paths.
+  ...(process.env.NEXT_DIST_DIR
+    ? { distDir: process.env.NEXT_DIST_DIR, typescript: { tsconfigPath: "tsconfig.seo-test.json" } }
+    : {}),
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
