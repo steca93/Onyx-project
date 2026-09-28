@@ -152,6 +152,7 @@ function MobileMenuDrawer({ open, onClose, categories }: MobileMenuDrawerProps) 
     <div
       className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
       aria-hidden={!open}
+      inert={!open}
     >
       <div
         onClick={onClose}
