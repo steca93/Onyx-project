@@ -8,11 +8,11 @@ import { Pagination } from "@/components/ui/Pagination";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Select } from "@/components/ui/Select";
 import { toLocale } from "@/i18n/routing";
-import { getCategoryBySlug, getProductsByCategory } from "@/lib/repo";
+import { availableLocales, getCategoryBySlug, getProductsByCategory } from "@/lib/repo";
 import type { ProductSort } from "@/lib/repo/types";
 import { stripHtml } from "@/lib/utils/strip-html";
 import { Link } from "@/i18n/navigation";
-import { breadcrumbJsonLd, itemListJsonLd, JsonLd } from "@/lib/seo/jsonld";
+import { breadcrumbJsonLd, itemListJsonLd, JsonLd, webPageJsonLd } from "@/lib/seo/jsonld";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 
 // Sort value -> message key under `CategoryPage.sort`.
@@ -63,6 +63,7 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     href,
+    locales: availableLocales("category", slug),
     title:
       page > 1
         ? t("categoryTitlePaged", { name: category.name, page })
@@ -141,13 +142,19 @@ export default async function CategoryPage({
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd(breadcrumbs.map((b) => ({ name: b.label, url: b.url }))),
-          itemListJsonLd(
-            tSeo("productListName", { name: category.name }),
-            products.map((p) =>
-              absoluteUrl({ pathname: "/proizvod/[slug]", params: { slug: p.slug } }, locale),
+          webPageJsonLd({
+            type: "CollectionPage",
+            url: absoluteUrl(categoryHref(slug), locale),
+            name: category.name,
+            language: locale,
+            breadcrumb: breadcrumbJsonLd(breadcrumbs.map((b) => ({ name: b.label, url: b.url }))),
+            mainEntity: itemListJsonLd(
+              tSeo("productListName", { name: category.name }),
+              products.map((p) =>
+                absoluteUrl({ pathname: "/proizvod/[slug]", params: { slug: p.slug } }, locale),
+              ),
             ),
-          ),
+          }),
         ]}
       />
       <PageHeader

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClientMessages } from "@/i18n/ClientMessages";
 import { JsonLd, organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { getTranslations } from "next-intl/server";
@@ -88,7 +89,7 @@ export default async function Home({
   ];
 
   return (
-    <>
+    <ClientMessages locale={locale} route="">
       <JsonLd
         data={[
           organizationJsonLd(t("organizationDescription")),
@@ -114,6 +115,6 @@ export default async function Home({
         buttonLabel={t("ctaButton")}
         buttonHref={{ pathname: "/kategorija/[slug]", params: { slug: "ppf-auto-folija" } }}
       />
-    </>
+    </ClientMessages>
   );
 }

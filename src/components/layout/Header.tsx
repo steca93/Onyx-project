@@ -1,8 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useParams } from "next/navigation";
+import { usePathname as useRealPathname } from "next/navigation";
+import { matchRoute } from "@/i18n/match-route";
+import type { Locale } from "@/i18n/routing";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BurgerIcon, ChevronRightIcon, CloseIcon } from "@/components/icons";
@@ -44,13 +46,13 @@ function CartChip() {
   );
 }
 
-/** Slug of the category page currently open, if any. `usePathname()` from
- * next-intl returns the internal route template ("/kategorija/[slug]") once
- * localized pathnames are configured, so the slug has to come from params. */
+/** Slug of the category page currently open, if any — matched from the
+ * real URL, since next-intl's usePathname() returns the filled-in internal
+ * path ("/kategorija/abc"), not the route template. */
 function useActiveCategorySlug(): string | null {
-  const pathname = usePathname();
-  const params = useParams<{ slug?: string }>();
-  return pathname === "/kategorija/[slug]" ? (params.slug ?? null) : null;
+  const locale = useLocale() as Locale;
+  const route = matchRoute(useRealPathname(), locale);
+  return route?.pathname === "/kategorija/[slug]" ? (route.params.slug ?? null) : null;
 }
 
 function CategoryNav({ categories }: { categories: ProductCategory[] }) {

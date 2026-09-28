@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { siteSettings } from "@/data/site-settings";
+import type { UntranslatedSlugs } from "@/lib/repo";
 
-export function UtilityBar() {
+export function UtilityBar({ untranslated }: { untranslated: UntranslatedSlugs }) {
   const t = useTranslations("UtilityBar");
 
   return (
@@ -23,7 +24,7 @@ export function UtilityBar() {
             {t("support", { phone: siteSettings.supportPhone })}
           </span>
           <span className="hidden text-text-34 md:inline">|</span>
-          <LanguageSwitcher />
+          <LanguageSwitcher untranslated={untranslated} />
         </div>
       </div>
     </div>

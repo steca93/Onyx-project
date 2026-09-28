@@ -64,14 +64,19 @@ export interface PageSeo {
   /** Override: canonical points somewhere other than `href` (e.g. a
    * filtered listing → its clean URL). Alternates still follow `href`. */
   canonicalHref?: HrefForPathname;
+  /** Locales this page exists in (default: all). Untranslated EN/DE
+   * versions are left out of hreflang — never pointed at a fallback. */
+  locales?: readonly Locale[];
 }
 
 export function buildMetadata(seo: PageSeo): Metadata {
   const description = clamp(seo.description, DESCRIPTION_MAX);
   const url = absoluteUrl(seo.href, seo.locale);
   const canonical = seo.canonicalHref ? absoluteUrl(seo.canonicalHref, seo.locale) : url;
+  const available = seo.locales ?? routing.locales;
   const languages = Object.fromEntries([
-    ...routing.locales.map((l) => [l, absoluteUrl(seo.canonicalHref ?? seo.href, l)]),
+    ...available.map((l) => [l, absoluteUrl(seo.canonicalHref ?? seo.href, l)]),
+    // x-default → the Serbian version (the primary market), which always exists.
     ["x-default", absoluteUrl(seo.canonicalHref ?? seo.href, routing.defaultLocale)],
   ]);
   const image = seo.image?.url ? { ...seo.image, url: publicImageUrl(seo.image.url, 1200) } : DEFAULT_OG_IMAGE;
@@ -89,7 +94,7 @@ export function buildMetadata(seo: PageSeo): Metadata {
       title: socialTitle,
       description,
       locale: OG_LOCALES[seo.locale],
-      alternateLocale: routing.locales.filter((l) => l !== seo.locale).map((l) => OG_LOCALES[l]),
+      alternateLocale: available.filter((l) => l !== seo.locale).map((l) => OG_LOCALES[l]),
       images: [image],
     },
     twitter: {

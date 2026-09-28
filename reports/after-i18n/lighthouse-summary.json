@@ -1,0 +1,79 @@
+[
+  {
+    "page": "home (/)",
+    "score": 95,
+    "lcp": 2904.28035,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 906.1868999999999,
+    "si": 906.1868999999999,
+    "jsKb": 212.02734375,
+    "totalKb": 416.6279296875
+  },
+  {
+    "page": "category (/kategorija/ulozak-za-poliranje)",
+    "score": 98,
+    "lcp": 2335.0036,
+    "cls": 0,
+    "tbt": 0.5,
+    "fcp": 905.0018,
+    "si": 905.0018,
+    "jsKb": 214.8486328125,
+    "totalKb": 413.740234375
+  },
+  {
+    "page": "product-simple (/proizvod/onyx-evo-clear-ppf-zastitna-folija)",
+    "score": 95,
+    "lcp": 2907.3232,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 905.5488,
+    "si": 905.5488,
+    "jsKb": 214.8486328125,
+    "totalKb": 382.8759765625
+  },
+  {
+    "page": "cart (/korpa)",
+    "score": 94,
+    "lcp": 3083.1834,
+    "cls": 0,
+    "tbt": 6,
+    "fcp": 754.5917,
+    "si": 754.5917,
+    "jsKb": 212.02734375,
+    "totalKb": 358.759765625
+  },
+  {
+    "page": "en-home (/en)",
+    "score": 94,
+    "lcp": 3058.0235000000007,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 905.3489999999999,
+    "si": 905.3489999999999,
+    "jsKb": 212.02734375,
+    "totalKb": 417.0947265625
+  },
+  {
+    "page": "en-category (/en/category/ulozak-za-poliranje)",
+    "score": 95,
+    "lcp": 2910.0453999999995,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 905.0227,
+    "si": 905.0227,
+    "jsKb": 214.8486328125,
+    "totalKb": 414.9013671875
+  },
+  {
+    "page": "de-product (/de/produkt/onyx-peskir-za-susenje-auta-onyx-evolution-rapid-dryer)",
+    "score": 95,
+    "lcp": 2910.2734,
+    "cls": 0,
+    "tbt": 0,
+    "fcp": 905.1367,
+    "si": 905.1367,
+    "jsKb": 214.8486328125,
+    "totalKb": 397.1318359375
+  }
+]

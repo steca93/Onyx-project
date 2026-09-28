@@ -13,6 +13,11 @@ export const REVALIDATE = {
   static: 60 * 60 * 24,
 } as const;
 
+/** Product pages prerendered per locale at build time; the rest render on
+ * first request and are cached. Keeps build time (×3 locales) bounded as
+ * the catalog grows. */
+export const STATIC_PRODUCTS_LIMIT = 200;
+
 export const TAGS = {
   products: "products",
   categories: "categories",

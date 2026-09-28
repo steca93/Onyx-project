@@ -17,6 +17,7 @@ export interface ParsedPage {
   robots: string | null;
   ogImage: string | null;
   ogLocale: string | null;
+  ogLocaleAlternates: string[];
   hreflang: Record<string, string>;
   jsonLd: Record<string, unknown>[];
   h1Count: number;
@@ -53,10 +54,30 @@ export async function fetchPage(request: APIRequestContext, path: string): Promi
     robots: meta(head, "name", "robots"),
     ogImage: meta(head, "property", "og:image"),
     ogLocale: meta(head, "property", "og:locale"),
+    ogLocaleAlternates: [...head.matchAll(/<meta property="og:locale:alternate" content="([^"]+)"/g)].map((m) => m[1]),
     hreflang,
     jsonLd,
     h1Count: (html.split("<body")[1] ?? "").match(/<h1[\s>]/g)?.length ?? 0,
   };
 }
 
-export const byType = (page: ParsedPage, type: string) => page.jsonLd.filter((o) => o["@type"] === type);
+/** Every JSON-LD node of a type, including nested ones (Product lives in
+ * WebPage.mainEntity, BreadcrumbList in WebPage.breadcrumb). */
+export function byType(page: ParsedPage, type: string): Record<string, unknown>[] {
+  const found: Record<string, unknown>[] = [];
+  const walk = (value: unknown) => {
+    if (Array.isArray(value)) return value.forEach(walk);
+    if (value && typeof value === "object") {
+      const obj = value as Record<string, unknown>;
+      if (obj["@type"] === type) found.push(obj);
+      Object.values(obj).forEach(walk);
+    }
+  };
+  walk(page.jsonLd);
+  return found;
+}
+
+export const allTypes = (page: ParsedPage) =>
+  ["Product", "BreadcrumbList", "ItemList", "Organization", "WebSite", "WebPage", "CollectionPage"].filter(
+    (type) => byType(page, type).length > 0,
+  );

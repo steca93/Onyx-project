@@ -12,7 +12,8 @@ import type { Result as LHResult } from "lighthouse";
 import { BASE_URL, PAGES } from "./pages.mts";
 
 const outDir = process.argv[2] ?? "reports/lighthouse";
-const RUNS = 3;
+const RUNS = Number(process.env.LH_RUNS ?? 3);
+const ONLY = process.env.LH_PAGES?.split(",");
 mkdirSync(outDir, { recursive: true });
 
 interface Summary {
@@ -31,7 +32,7 @@ const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless=new", "--
 const summaries: Summary[] = [];
 
 try {
-  for (const page of PAGES) {
+  for (const page of PAGES.filter((p) => !ONLY || ONLY.includes(p.id))) {
     const runs: { lhr: LHResult; report: string }[] = [];
     for (let i = 0; i < RUNS; i++) {
       const result = await lighthouse(`${BASE_URL}${page.path}`, {
