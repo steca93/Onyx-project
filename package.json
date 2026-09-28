@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts",
+    "perf:graphql": "node scripts/graphql-timing.mts",
+    "perf:lighthouse": "node scripts/lighthouse.mts",
+    "perf:bundle": "node scripts/route-js.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
@@ -19,12 +23,15 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "chrome-launcher": "^1.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
+    "lighthouse": "^13.5.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

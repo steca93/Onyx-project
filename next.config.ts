@@ -9,6 +9,16 @@ const wpHostname = new URL(
 ).hostname;
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Build-time only: cap how many pages prerender at once. Every page
+    // prerender queries WPGraphQL (uncached at the backend — Varnish skips
+    // /graphql), and an unthrottled build of ~150 pages × several queries
+    // was enough to make the Cloudways server stop responding. Runtime
+    // behavior is unaffected.
+    cpus: 2,
+    staticGenerationMaxConcurrency: 2,
+    staticGenerationRetryCount: 1,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
