@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { redirects as redirectMap } from "./src/data/redirects";
 import { routing } from "./src/i18n/routing";
 
 /**
@@ -32,6 +33,26 @@ const privatePaths = (["/korpa", "/kasa", "/potvrda-porudzbine"] as const).flatM
   }),
 );
 
+/** Locale-prefixed path for a dynamic route in a given locale. */
+function localizedDynamicPath(route: "/proizvod/[slug]" | "/kategorija/[slug]", locale: string, slug: string) {
+  const localized = routing.pathnames[route];
+  const path = (typeof localized === "string" ? localized : localized[locale as keyof typeof localized]).replace(
+    "[slug]",
+    slug,
+  );
+  return locale === routing.defaultLocale ? path : `/${locale}${path}`;
+}
+
+const slugRedirects = redirectMap.flatMap((entry) => {
+  if (entry.type === "path") return [{ source: entry.from, destination: entry.to, permanent: true }];
+  const route = entry.type === "product" ? "/proizvod/[slug]" : "/kategorija/[slug]";
+  return routing.locales.map((locale) => ({
+    source: localizedDynamicPath(route, locale, entry.from),
+    destination: localizedDynamicPath(route, locale, entry.to),
+    permanent: true,
+  }));
+});
+
 const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -59,6 +80,9 @@ const nextConfig: NextConfig = {
       hostname,
       pathname: "/wp-content/uploads/**",
     })),
+  },
+  async redirects() {
+    return slugRedirects;
   },
   async headers() {
     return [

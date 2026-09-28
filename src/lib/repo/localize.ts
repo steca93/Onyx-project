@@ -27,11 +27,16 @@ function localizeCategoryRef(catalog: Catalog, ref: ProductCategoryRef): Product
 
 export function localizeCategory(catalog: Catalog, category: ProductCategory): ProductCategory {
   const t = catalog.categories[category.slug];
-  if (!t) return category;
+  const name = t?.name ?? category.name;
   return {
     ...category,
-    name: t.name ?? category.name,
-    description: t.description ?? category.description,
+    name,
+    description: t?.description ?? category.description,
+    image: category.image && t?.name ? { ...category.image, altText: name } : category.image,
+    ...(category.parent ? { parent: localizeCategoryRef(catalog, category.parent) } : {}),
+    ...(category.children
+      ? { children: category.children.map((c) => ({ ...c, ...localizeCategoryRef(catalog, c) })) }
+      : {}),
   };
 }
 

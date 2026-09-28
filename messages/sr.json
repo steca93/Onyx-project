@@ -308,7 +308,8 @@
     "applyFilters": "PRIMENI FILTERE",
     "clearFilters": "OČISTI FILTERE →",
     "productCount": "{count, plural, one {# PROIZVOD} few {# PROIZVODA} other {# PROIZVODA}}",
-    "empty": "NEMA PROIZVODA KOJI ODGOVARAJU IZABRANIM FILTERIMA."
+    "empty": "NEMA PROIZVODA KOJI ODGOVARAJU IZABRANIM FILTERIMA.",
+    "subcategories": "PODKATEGORIJE"
   },
   "SearchPage": {
     "title": "Pretraga",
@@ -374,7 +375,8 @@
   "Bestsellers": {
     "eyebrow": "NAŠI FAVORITI",
     "heading": "Najprodavanije",
-    "viewAll": "POGLEDAJ SVE →"
+    "viewAll": "POGLEDAJ SVE →",
+    "viewAllAria": "Pogledaj sve proizvode"
   },
   "WarrantyBlock": {
     "imageAlt": "FACETED ONYX · DETALJ FOLIJE",
@@ -414,7 +416,9 @@
     "eyebrow": "GREŠKA 404",
     "heading": "404 / STRANICA NIJE PRONAĐENA",
     "body": "Stranica koju tražiš ne postoji ili je premeštena.",
-    "backHome": "NAZAD NA POČETNU"
+    "backHome": "NAZAD NA POČETNU",
+    "browseCategories": "POGLEDAJ KATEGORIJE",
+    "searchHint": "Ili potraži proizvod:"
   },
   "CartDrawer": {
     "dialogLabel": "Korpa",
@@ -544,5 +548,23 @@
     "rightsBody": "Prema važećem zakonu o zaštiti podataka o ličnosti, imaš pravo pristupa, ispravke ili brisanja svojih ličnih podataka. Zahtev šalješ preko strane <contactLink>Kontakt</contactLink> — obradićemo ga u roku od 30 dana.",
     "lastUpdated": "Poslednje ažuriranje: septembar 2026.",
     "questionLink": "Imaš pitanje? →"
+  },
+  "Seo": {
+    "pages": {
+      "contact": "Kontakt — podrška za PPF folije i premaze",
+      "faq": "Česta pitanja o PPF folijama i premazima",
+      "shipping": "Dostava i povraćaj — rokovi i troškovi",
+      "becomeInstaller": "Postani ovlašćeni ONYX instalater",
+      "warranty": "Registracija garancije za PPF foliju",
+      "installers": "Ovlašćeni centri za montažu PPF folije",
+      "installGuide": "Uputstva za montažu PPF folija i premaza",
+      "terms": "Uslovi korišćenja i politika privatnosti"
+    },
+    "productTitleWithCategory": "{name} — {category}",
+    "productDescriptionFallback": "{name} iz kategorije {category}. Kupite online uz dostavu širom Srbije za 1–3 radna dana i fabričku garanciju ONYX EVOLUTION.",
+    "categoryTitle": "{name} — kupite online",
+    "categoryTitlePaged": "{name} — strana {page}",
+    "categoryDescriptionFallback": "{name} u ONYX EVOLUTION prodavnici: profesionalna oprema za detailing i zaštitu vozila. Dostava širom Srbije i fabrička garancija.",
+    "productListName": "Proizvodi: {name}"
   }
 }

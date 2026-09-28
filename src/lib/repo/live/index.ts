@@ -212,25 +212,33 @@ export const liveRepo: Repo = {
   },
 
   async getAllProductSlugs() {
-    const slugs: string[] = [];
+    return (await liveRepo.getProductSitemapEntries()).map((e) => e.slug);
+  },
+
+  async getProductSitemapEntries() {
+    const entries: { slug: string; modified: string | null }[] = [];
     let after: string | null = null;
     let hasNextPage = true;
 
     while (hasNextPage) {
-      const data: { products: { nodes: { slug: string }[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } } } | null =
-        await graphqlFetch(
-          ALL_PRODUCT_SLUGS_QUERY,
-          { first: 100, after },
-          { revalidate: REVALIDATE.products, tags: [TAGS.products] },
-        );
+      const data: {
+        products: {
+          nodes: { slug: string; modified: string | null }[];
+          pageInfo: { hasNextPage: boolean; endCursor: string | null };
+        };
+      } | null = await graphqlFetch(
+        ALL_PRODUCT_SLUGS_QUERY,
+        { first: 100, after },
+        { revalidate: REVALIDATE.products, tags: [TAGS.products] },
+      );
       const nodes = data?.products.nodes ?? [];
-      slugs.push(...nodes.map((n) => n.slug));
+      entries.push(...nodes.map((n) => ({ slug: n.slug, modified: n.modified ?? null })));
       hasNextPage = data?.products.pageInfo.hasNextPage ?? false;
       after = data?.products.pageInfo.endCursor ?? null;
       if (!after) break;
     }
 
-    return slugs;
+    return entries;
   },
 
   async searchProducts(query, opts = {}) {

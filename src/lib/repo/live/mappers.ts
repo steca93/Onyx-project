@@ -52,14 +52,17 @@ export interface RawProductNode {
   stockStatus?: StockStatus;
   sku?: string | null;
   featured?: boolean | null;
+  dateOnSaleTo?: string | null;
   attributes?: { nodes: RawAttribute[] };
   variations?: { nodes: RawVariation[] };
   related?: { nodes: RawProductNode[] };
 }
 
-function image(raw: RawImage | null): ProductImage | null {
+/** WordPress alt text is often empty — fall back to the product/category
+ * name so every image has a meaningful alt. */
+function image(raw: RawImage | null, fallbackAlt = ""): ProductImage | null {
   if (!raw) return null;
-  return { sourceUrl: raw.sourceUrl, altText: raw.altText ?? "" };
+  return { sourceUrl: raw.sourceUrl, altText: raw.altText?.trim() || fallbackAlt };
 }
 
 function isNewArrival(dateString: string | null): boolean {
@@ -93,8 +96,10 @@ export function mapProduct(raw: RawProductNode): AnyProduct | null {
     slug: raw.slug,
     description: raw.description ?? null,
     shortDescription: raw.shortDescription ?? null,
-    image: image(raw.image),
-    galleryImages: { nodes: (raw.galleryImages?.nodes ?? []).map((n) => image(n)!).filter(Boolean) },
+    image: image(raw.image, raw.name),
+    galleryImages: {
+      nodes: (raw.galleryImages?.nodes ?? []).map((n, i) => image(n, `${raw.name} (${i + 2})`)!).filter(Boolean),
+    },
     productCategories: { nodes: raw.productCategories.nodes },
     specs: specsFromAttributes(raw.attributes?.nodes),
     // No custom-field convention exists on the live backend yet for these —
@@ -103,6 +108,7 @@ export function mapProduct(raw: RawProductNode): AnyProduct | null {
     warrantyNotes: null,
     featured: Boolean(raw.featured),
     newArrival: isNewArrival(raw.date),
+    saleEndsAt: raw.dateOnSaleTo ?? null,
   };
 
   if (raw.__typename === "SimpleProduct") {
@@ -135,7 +141,7 @@ export function mapProduct(raw: RawProductNode): AnyProduct | null {
           regularPrice: v.regularPrice,
           salePrice: v.salePrice,
           stockStatus: v.stockStatus,
-          image: image(v.image),
+          image: image(v.image, raw.name),
           attributes: v.attributes.nodes,
         })),
       },
@@ -157,6 +163,8 @@ export interface RawCategoryNode {
   count: number | null;
   description: string | null;
   image: RawImage | null;
+  parent?: { node: { name: string; slug: string } | null } | null;
+  children?: { nodes: { name: string; slug: string; count: number | null }[] };
 }
 
 export function mapCategory(raw: RawCategoryNode): ProductCategory {
@@ -166,6 +174,8 @@ export function mapCategory(raw: RawCategoryNode): ProductCategory {
     slug: raw.slug,
     count: raw.count,
     description: raw.description,
-    image: image(raw.image),
+    image: image(raw.image, raw.name),
+    ...(raw.parent !== undefined ? { parent: raw.parent?.node ?? null } : {}),
+    ...(raw.children ? { children: raw.children.nodes } : {}),
   };
 }

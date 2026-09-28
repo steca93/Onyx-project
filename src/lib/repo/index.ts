@@ -60,6 +60,7 @@ export async function getRelatedProducts(slug: string, limit: number) {
 }
 
 export const getAllProductSlugs = repo.getAllProductSlugs;
+export const getProductSitemapEntries = repo.getProductSitemapEntries;
 
 export async function searchProducts(...[query, opts = {}]: Parameters<Repo["searchProducts"]>) {
   const c = await catalog();

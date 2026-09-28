@@ -1,0 +1,70 @@
+200 /
+   title[47]='ONYX EVOLUTION — PPF folije i keramički premazi'
+   desc[132] canon=https://onyx.com robots=index, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=122222 imgs=9 noalt=0 ld=['Organization', 'WebSite']
+200 /en
+   title[47]='ONYX EVOLUTION — PPF films and ceramic coatings'
+   desc[140] canon=https://onyx.com/en robots=index, follow
+   lang=en hreflang=[] og=https://onyx.com/og-default.png
+   h=122222 imgs=9 noalt=0 ld=['Organization', 'WebSite']
+200 /de
+   title[53]='ONYX EVOLUTION — PPF-Folien und Keramikversiegelungen'
+   desc[148] canon=https://onyx.com/de robots=index, follow
+   lang=de hreflang=[] og=https://onyx.com/og-default.png
+   h=122222 imgs=9 noalt=0 ld=['Organization', 'WebSite']
+200 /kategorija/ulozak-za-poliranje
+   title[0]=None
+   desc[0] canon=None robots=None
+   lang=sr hreflang=[] og=None
+   h=1 imgs=6 noalt=0 ld=['BreadcrumbList', 'ItemList']
+200 /en/category/ulozak-za-poliranje
+   title[45]='Polishing Pads — shop online | ONYX EVOLUTION'
+   desc[138] canon=https://onyx.com/en/category/ulozak-za-poliranje robots=index, follow
+   lang=en hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=6 noalt=0 ld=['BreadcrumbList', 'ItemList']
+200 /kategorija/ciscenje-eksterijera
+   title[0]=None
+   desc[0] canon=None robots=None
+   lang=sr hreflang=[] og=None
+   h=1 imgs=4 noalt=0 ld=['BreadcrumbList', 'ItemList']
+200 /proizvod/onyx-evo-clear-ppf-zastitna-folija
+   title[52]='ONYX EVO Clear PPF Zaštitna Folija — PPF auto folija'
+   desc[148] canon=https://onyx.com/proizvod/onyx-evo-clear-ppf-zastitna-folija robots=index, follow
+   lang=sr hreflang=[] og=https://onyx.com/_next/image?url=https%3A%2F%2Fwoocommerce-1
+   h=12 imgs=4 noalt=0 ld=['Product', 'BreadcrumbList']
+200 /de/produkt/onyx-peskir-za-susenje-auta-onyx-evolution-rapid-dryer
+   title[50]='Onyx Auto-Trockentuch | Onyx Evolution Rapid Dryer'
+   desc[150] canon=https://onyx.com/de/produkt/onyx-peskir-za-susenje-auta-onyx-evolution-rapid-dryer robots=index, follow
+   lang=de hreflang=[] og=https://onyx.com/_next/image?url=https%3A%2F%2Fwoocommerce-1
+   h=12 imgs=2 noalt=0 ld=['Product', 'BreadcrumbList']
+200 /kontakt
+   title[58]='Kontakt — podrška za PPF folije i premaze | ONYX EVOLUTION'
+   desc[85] canon=https://onyx.com/kontakt robots=index, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=0 noalt=0 ld=[]
+200 /en/faq
+   title[57]='FAQ about PPF films and ceramic coatings | ONYX EVOLUTION'
+   desc[109] canon=https://onyx.com/en/faq robots=index, follow
+   lang=en hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=0 noalt=0 ld=[]
+200 /korpa
+   title[22]='Korpa | ONYX EVOLUTION'
+   desc[77] canon=None robots=noindex, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=0 noalt=0 ld=[]
+200 /pretraga?q=krpa
+   title[33]='Pretraga: "krpa" | ONYX EVOLUTION'
+   desc[77] canon=None robots=noindex, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=5 noalt=0 ld=[]
+200 /kategorija/ulozak-za-poliranje?page=2
+   title[47]='Uložak za poliranje — strana 2 | ONYX EVOLUTION'
+   desc[143] canon=https://onyx.com/kategorija/ulozak-za-poliranje?page=2 robots=index, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=6 noalt=0 ld=['BreadcrumbList', 'ItemList']
+200 /kategorija/ulozak-za-poliranje?sort=price-asc
+   title[52]='Uložak za poliranje — kupite online | ONYX EVOLUTION'
+   desc[143] canon=https://onyx.com/kategorija/ulozak-za-poliranje robots=index, follow
+   lang=sr hreflang=[] og=https://onyx.com/og-default.png
+   h=1 imgs=6 noalt=0 ld=['BreadcrumbList', 'ItemList']

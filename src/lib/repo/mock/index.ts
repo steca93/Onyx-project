@@ -156,6 +156,10 @@ export const mockRepo: Repo = {
     return products.map((p) => p.slug);
   },
 
+  async getProductSitemapEntries() {
+    return products.map((p) => ({ slug: p.slug, modified: null }));
+  },
+
   async searchProducts(query, opts = {}) {
     const needle = query.trim().toLowerCase();
     // An empty query browses the full catalog — lets "POGLEDAJ SVE →" and a

@@ -67,10 +67,12 @@ const ATTRIBUTE_FIELDS = /* GraphQL */ `
 
 const DETAIL_SIMPLE_FIELDS = /* GraphQL */ `
   sku
+  dateOnSaleTo
   ${ATTRIBUTE_FIELDS}
 `;
 
 const DETAIL_VARIABLE_FIELDS = /* GraphQL */ `
+  dateOnSaleTo
   ${ATTRIBUTE_FIELDS}
   variations(first: 50) {
     nodes {
@@ -182,6 +184,7 @@ export const ALL_PRODUCT_SLUGS_QUERY = /* GraphQL */ `
     products(first: $first, after: $after) {
       nodes {
         slug
+        modified
       }
       pageInfo {
         hasNextPage
@@ -249,6 +252,19 @@ export const CATEGORY_BY_SLUG_QUERY = /* GraphQL */ `
       image {
         sourceUrl
         altText
+      }
+      parent {
+        node {
+          name
+          slug
+        }
+      }
+      children(first: 50) {
+        nodes {
+          name
+          slug
+          count
+        }
       }
     }
   }

@@ -7,7 +7,8 @@ export interface SiteSettings {
   supportPhone: string;
   freeShippingThresholdRsd: number;
   warrantyYears: number;
-  social: { label: string; href: string }[];
+  /** `label` is the compact chip text; `name` the accessible name. */
+  social: { label: string; name: string; href: string }[];
   contact: {
     email: string;
     phone: string;
@@ -23,9 +24,9 @@ export const siteSettings: SiteSettings = {
   freeShippingThresholdRsd: 15000,
   warrantyYears: 12,
   social: [
-    { label: "IG", href: "https://instagram.com" },
-    { label: "FB", href: "https://facebook.com" },
-    { label: "YT", href: "https://youtube.com" },
+    { label: "IG", name: "Instagram", href: "https://instagram.com" },
+    { label: "FB", name: "Facebook", href: "https://facebook.com" },
+    { label: "YT", name: "YouTube", href: "https://youtube.com" },
   ],
   contact: {
     email: "podrska@onyxevolution.rs",

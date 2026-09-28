@@ -308,7 +308,8 @@
     "applyFilters": "FILTER ANWENDEN",
     "clearFilters": "FILTER ZURÜCKSETZEN →",
     "productCount": "{count, plural, one {# PRODUKT} other {# PRODUKTE}}",
-    "empty": "KEINE PRODUKTE ENTSPRECHEN DEN GEWÄHLTEN FILTERN."
+    "empty": "KEINE PRODUKTE ENTSPRECHEN DEN GEWÄHLTEN FILTERN.",
+    "subcategories": "UNTERKATEGORIEN"
   },
   "SearchPage": {
     "title": "Suche",
@@ -374,7 +375,8 @@
   "Bestsellers": {
     "eyebrow": "UNSERE FAVORITEN",
     "heading": "Bestseller",
-    "viewAll": "ALLE ANSEHEN →"
+    "viewAll": "ALLE ANSEHEN →",
+    "viewAllAria": "Alle Produkte ansehen"
   },
   "WarrantyBlock": {
     "imageAlt": "FACETED ONYX · FOLIENDETAIL",
@@ -414,7 +416,9 @@
     "eyebrow": "FEHLER 404",
     "heading": "404 / SEITE NICHT GEFUNDEN",
     "body": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
-    "backHome": "ZURÜCK ZUR STARTSEITE"
+    "backHome": "ZURÜCK ZUR STARTSEITE",
+    "browseCategories": "KATEGORIEN DURCHSUCHEN",
+    "searchHint": "Oder suchen Sie nach einem Produkt:"
   },
   "CartDrawer": {
     "dialogLabel": "Warenkorb",
@@ -544,5 +548,23 @@
     "rightsBody": "Nach dem geltenden Datenschutzgesetz haben Sie das Recht auf Auskunft, Berichtigung oder Löschung Ihrer personenbezogenen Daten. Senden Sie Ihre Anfrage über die Seite <contactLink>Kontakt</contactLink> — wir bearbeiten sie innerhalb von 30 Tagen.",
     "lastUpdated": "Zuletzt aktualisiert: September 2026",
     "questionLink": "Haben Sie eine Frage? →"
+  },
+  "Seo": {
+    "pages": {
+      "contact": "Kontakt — Support zu PPF-Folien",
+      "faq": "FAQ zu PPF-Folien und Keramikversiegelung",
+      "shipping": "Versand & Rückgabe — Zeiten und Kosten",
+      "becomeInstaller": "Autorisierter ONYX-Installateur werden",
+      "warranty": "Garantie für Ihre PPF-Folie registrieren",
+      "installers": "Autorisierte Montagezentren für PPF-Folien",
+      "installGuide": "Montageanleitungen für PPF-Folien",
+      "terms": "Nutzungsbedingungen und Datenschutz"
+    },
+    "productTitleWithCategory": "{name} — {category}",
+    "productDescriptionFallback": "{name} aus der Kategorie {category}. Online bestellen — Versand in ganz Serbien in 1–3 Werktagen, mit ONYX EVOLUTION Werksgarantie.",
+    "categoryTitle": "{name} — online kaufen",
+    "categoryTitlePaged": "{name} — Seite {page}",
+    "categoryDescriptionFallback": "{name} im ONYX EVOLUTION Shop: professionelles Zubehör für Fahrzeugpflege und Lackschutz. Versand in ganz Serbien, mit Werksgarantie.",
+    "productListName": "Produkte: {name}"
   }
 }

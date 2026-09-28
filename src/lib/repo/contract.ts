@@ -3,6 +3,7 @@ import type {
   ProductCategory,
   ProductListOptions,
   ProductListResult,
+  ProductSitemapEntry,
   SearchIndexProduct,
 } from "./types";
 
@@ -24,6 +25,8 @@ export interface Repo {
   getProductBySlug(slug: string): Promise<AnyProduct | null>;
   getRelatedProducts(slug: string, limit: number): Promise<AnyProduct[]>;
   getAllProductSlugs(): Promise<string[]>;
+  /** Every product slug with its last-modified date (for the sitemap). */
+  getProductSitemapEntries(): Promise<ProductSitemapEntry[]>;
   searchProducts(
     query: string,
     opts?: ProductListOptions,

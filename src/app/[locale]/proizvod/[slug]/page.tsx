@@ -15,6 +15,10 @@ import {
 import { toLocale } from "@/i18n/routing";
 import { stripHtml } from "@/lib/utils/strip-html";
 import { rewriteWpHtml } from "@/lib/utils/wp-html";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Link } from "@/i18n/navigation";
+import { breadcrumbJsonLd, JsonLd, productJsonLd } from "@/lib/seo/jsonld";
+import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 
 interface ProductPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -28,20 +32,28 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale: requested, slug } = await params;
+  const locale = toLocale(requested);
   const product = await getProductBySlug(slug);
   if (!product) return {};
-  return {
-    title: product.name,
-    description: stripHtml(product.shortDescription) || undefined,
-  };
-}
+  const t = await getTranslations({ locale, namespace: "Seo" });
+  const category = product.productCategories.nodes[0]?.name;
 
-const STOCK_AVAILABILITY: Record<string, string> = {
-  IN_STOCK: "https://schema.org/InStock",
-  OUT_OF_STOCK: "https://schema.org/OutOfStock",
-  ON_BACKORDER: "https://schema.org/BackOrder",
-};
+  return buildMetadata({
+    locale,
+    href: { pathname: "/proizvod/[slug]", params: { slug } },
+    // Short names get their category appended so titles carry a keyword.
+    title:
+      category && product.name.length < 35
+        ? t("productTitleWithCategory", { name: product.name, category })
+        : product.name,
+    description:
+      stripHtml(product.shortDescription) ||
+      stripHtml(product.description) ||
+      t("productDescriptionFallback", { name: product.name, category: category ?? "" }),
+    image: product.image ? { url: product.image.sourceUrl, alt: product.image.altText } : null,
+  });
+}
 
 async function RelatedProducts({
   slug,
@@ -69,42 +81,51 @@ async function RelatedProducts({
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { locale: requested, slug } = await params;
+  const locale = toLocale(requested);
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const t = await getTranslations({ locale: toLocale(requested), namespace: "ProductPage" });
+  const t = await getTranslations({ locale, namespace: "ProductPage" });
 
   const category = product.productCategories.nodes[0];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description:
-      stripHtml(product.shortDescription) || stripHtml(product.description) || undefined,
-    image: product.image?.sourceUrl || undefined,
-    sku: product.__typename === "SimpleProduct" ? product.sku ?? undefined : undefined,
-    offers: {
-      "@type": "Offer",
-      price: product.price ?? undefined,
-      priceCurrency: "RSD",
-      availability: STOCK_AVAILABILITY[product.stockStatus],
-    },
-  };
+  const tCommon = await getTranslations({ locale, namespace: "Common" });
+  const productUrl = absoluteUrl({ pathname: "/proizvod/[slug]", params: { slug } }, locale);
+  const categoryHref = category
+    ? { pathname: "/kategorija/[slug]" as const, params: { slug: category.slug } }
+    : null;
+  const breadcrumbs = [
+    { label: tCommon("home"), href: "/" as const, url: absoluteUrl("/", locale) },
+    ...(category && categoryHref
+      ? [{ label: category.name, href: categoryHref, url: absoluteUrl(categoryHref, locale) }]
+      : []),
+    { label: product.name, url: productUrl },
+  ];
 
   return (
     <div className="container-onyx mt-12 mb-24 lg:mt-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <JsonLd
+        data={[
+          productJsonLd(product, productUrl),
+          breadcrumbJsonLd(breadcrumbs.map((b) => ({ name: b.label, url: b.url }))),
+        ]}
       />
+
+      <div className="mb-8">
+        <Breadcrumb items={breadcrumbs.map(({ label, href }) => ({ label, href }))} />
+      </div>
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-18">
         <ProductGallery mainImage={product.image} gallery={product.galleryImages.nodes} />
 
         <div className="min-w-0">
-          {category && (
-            <div className="label-nav mb-4 text-text-40">{category.name}</div>
+          {category && categoryHref && (
+            <Link
+              href={categoryHref}
+              className="label-nav mb-4 inline-block text-text-40 transition-colors duration-200 hover:text-accent"
+            >
+              {category.name}
+            </Link>
           )}
           <h1 className="text-[32px] tracking-[.03em] uppercase sm:text-[44px]">
             {product.name}

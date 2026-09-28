@@ -18,6 +18,9 @@ export interface ProductCategory {
   count: number | null;
   description?: string | null;
   image?: ProductImage | null;
+  /** Only populated by getCategoryBySlug (category page breadcrumbs/links). */
+  parent?: ProductCategoryRef | null;
+  children?: (ProductCategoryRef & { count: number | null })[];
 }
 
 export interface ProductCategoryRef {
@@ -75,6 +78,8 @@ interface BaseProduct {
   warrantyNotes: string | null;
   featured: boolean;
   newArrival: boolean;
+  /** ISO date the current sale price ends (WooCommerce "sale to"), if any. */
+  saleEndsAt?: string | null;
 }
 
 export interface SimpleProduct extends BaseProduct {
@@ -144,4 +149,10 @@ export interface SearchIndexProduct {
   slug: string;
   price: string | null;
   image: ProductImage | null;
+}
+
+export interface ProductSitemapEntry {
+  slug: string;
+  /** ISO date-time from WordPress, or null when unknown (mock data). */
+  modified: string | null;
 }

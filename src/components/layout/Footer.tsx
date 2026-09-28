@@ -30,7 +30,7 @@ export function Footer({ categories }: FooterProps) {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={s.label}
+                aria-label={s.name}
                 className="border border-hairline-strong px-2.5 py-1.5 transition-colors duration-200 hover:border-accent hover:text-accent"
               >
                 {s.label}

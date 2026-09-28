@@ -11,6 +11,8 @@ import { UtilityBar } from "@/components/layout/UtilityBar";
 import { routing, toLocale } from "@/i18n/routing";
 import { ProductNamesProvider } from "@/i18n/catalog/ProductNamesProvider";
 import { getAllCategories, getProductNameTranslations } from "@/lib/repo";
+import { BRAND, IS_INDEXABLE, SITE_URL, TITLE_SUFFIX } from "@/lib/seo/env";
+import { DEFAULT_OG_IMAGE, OG_LOCALES } from "@/lib/seo/metadata";
 import "../globals.css";
 
 const questrial = Questrial({
@@ -45,12 +47,26 @@ export async function generateMetadata({
   const locale = toLocale(requested);
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
+  // Site-wide defaults; every page overrides title/description/canonical
+  // via buildMetadata() (src/lib/seo/metadata.ts).
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
-      default: t("title"),
-      template: `%s · ${t("title")}`,
+      default: BRAND,
+      template: `%s${TITLE_SUFFIX}`,
     },
     description: t("description"),
+    applicationName: BRAND,
+    robots: IS_INDEXABLE
+      ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } }
+      : { index: false, follow: false },
+    openGraph: {
+      siteName: BRAND,
+      type: "website",
+      locale: OG_LOCALES[locale],
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: { card: "summary_large_image" },
   };
 }
 

@@ -5,12 +5,7 @@
  * isn't the storefront's domain. Route those through the Next.js image
  * optimizer instead (same allowlist as next/image), and lazy-load them.
  */
-const OPTIMIZER_WIDTH = 1080; // one of Next's default deviceSizes
-const OPTIMIZER_QUALITY = 75; // Next 16 default `qualities`
-
-function optimizerUrl(src: string): string {
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${OPTIMIZER_WIDTH}&q=${OPTIMIZER_QUALITY}`;
-}
+import { optimizedImagePath } from "./image-url";
 
 export function rewriteWpHtml(html: string | null | undefined): string {
   if (!html) return "";
@@ -20,7 +15,7 @@ export function rewriteWpHtml(html: string | null | undefined): string {
     return tag
       .replace(/\ssrcset=["'][^"']*["']/gi, "")
       .replace(/\ssizes=["'][^"']*["']/gi, "")
-      .replace(/\ssrc=["'][^"']+["']/i, ` src="${optimizerUrl(src)}"`)
+      .replace(/\ssrc=["'][^"']+["']/i, ` src="${optimizedImagePath(src)}"`)
       .replace(/<img\b/i, (m) => (/\sloading=/i.test(tag) ? m : `${m} loading="lazy" decoding="async"`));
   });
 }
