@@ -41,7 +41,7 @@ export function Button({
   href,
   ...rest
 }: ButtonProps) {
-  const base = `notch notch-12 label-button inline-flex items-center justify-center gap-3 px-[30px] transition-colors duration-200 ${
+  const base = `notch notch-12 label-button inline-flex cursor-pointer items-center justify-center gap-3 px-[30px] transition-colors duration-200 disabled:cursor-not-allowed ${
     compact ? "h-12" : "h-[54px]"
   } ${variantClasses[variant]} ${className}`;
 

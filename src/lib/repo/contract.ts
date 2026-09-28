@@ -3,6 +3,7 @@ import type {
   ProductCategory,
   ProductListOptions,
   ProductListResult,
+  SearchIndexProduct,
 } from "./types";
 
 /**
@@ -27,4 +28,5 @@ export interface Repo {
     query: string,
     opts?: ProductListOptions,
   ): Promise<ProductListResult>;
+  getSearchIndex(): Promise<SearchIndexProduct[]>;
 }

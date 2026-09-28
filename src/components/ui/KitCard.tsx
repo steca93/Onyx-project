@@ -15,7 +15,7 @@ export function KitCard({ product, kicker, className = "" }: KitCardProps) {
       href={`/proizvod/${product.slug}`}
       className={`group notch notch-22 flex w-[424px] shrink-0 flex-col border border-hairline bg-onyx-800 transition-colors duration-200 hover:border-[rgba(42,179,230,.4)] ${className}`}
     >
-      <div className="h-[300px] border-b border-hairline">
+      <div className="relative h-[300px] border-b border-hairline">
         <ImageSlot image={product.image} fill sizes="424px" />
       </div>
       <div className="flex flex-col gap-4 p-[26px]">

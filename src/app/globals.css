@@ -32,6 +32,11 @@
   /* §2 Typography — Questrial is the default "sans", Space Mono the default "mono" */
   --font-sans: var(--font-questrial), "Century Gothic", sans-serif;
   --font-mono: var(--font-space-mono), monospace;
+
+  /* §8 Responsive — the design only has two real breakpoints: 768 and 1200.
+     Override Tailwind's default `lg` (1024) to line up with the spec's
+     desktop tier so `md:`/`lg:` map directly to the tablet/desktop split. */
+  --breakpoint-lg: 1200px;
 }
 
 /* §1 Gradients — only these three exist anywhere in the app. */
@@ -154,6 +159,16 @@
   /* The brand's one shaped image. At most once per page. */
   .diamond {
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+
+  /* Hides the scrollbar on an overflow-x-auto strip (category nav, carousels)
+     without hiding the content behind a fixed row height. */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   /* §3 The hairline lattice — the house way to group adjacent cells. */
@@ -310,5 +325,37 @@
     font-family: var(--font-mono);
     font-size: 22px;
     line-height: 1;
+  }
+
+  /* Wraps HTML rendered from WordPress/WooCommerce rich-text fields
+     (product & category descriptions) — spacing for tags a WYSIWYG editor
+     actually produces, in the existing type scale. Never add color/size
+     rules per-page; extend this instead. */
+  .prose-onyx :where(p, ul, ol) {
+    margin-top: 0;
+    margin-bottom: 1.25em;
+  }
+  .prose-onyx :where(p, ul, ol):last-child {
+    margin-bottom: 0;
+  }
+  .prose-onyx :where(ul, ol) {
+    padding-left: 1.25em;
+  }
+  .prose-onyx ul {
+    list-style: disc;
+  }
+  .prose-onyx ol {
+    list-style: decimal;
+  }
+  .prose-onyx li + li {
+    margin-top: 0.4em;
+  }
+  .prose-onyx strong {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+  .prose-onyx a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 }

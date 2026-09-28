@@ -24,7 +24,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           aria-invalid={error ? true : undefined}
           aria-describedby={errorId}
-          className={`notch notch-12 h-11 border border-hairline bg-onyx-800 px-4 font-mono text-[10.5px] tracking-[.18em] text-text placeholder:text-text-34 outline-none focus:border-[rgba(42,179,230,.55)] ${className}`}
+          className={`notch notch-12 h-11 border border-hairline bg-onyx-800 px-4 font-sans text-[13.5px] tracking-normal text-text outline-none placeholder:font-mono placeholder:text-[10.5px] placeholder:tracking-[.18em] placeholder:text-text-34 focus:border-[rgba(42,179,230,.55)] ${className}`}
           {...rest}
         />
         {error && (

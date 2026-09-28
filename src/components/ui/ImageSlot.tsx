@@ -45,7 +45,7 @@ export function ImageSlot({
 
   if (fill) {
     return (
-      <div className={`relative overflow-hidden ${shapeClass} ${className}`}>
+      <div className={`absolute inset-0 overflow-hidden ${shapeClass} ${className}`}>
         <Image
           src={image.sourceUrl}
           alt={image.altText}

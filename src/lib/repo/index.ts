@@ -14,6 +14,7 @@ export const {
   getRelatedProducts,
   getAllProductSlugs,
   searchProducts,
+  getSearchIndex,
 } = repo;
 
 export type * from "./types";

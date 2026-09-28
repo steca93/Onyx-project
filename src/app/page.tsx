@@ -1,69 +1,111 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Bestsellers } from "@/components/sections/Bestsellers";
+import { Categories } from "@/components/sections/Categories";
+import { Hero } from "@/components/sections/Hero";
+import { KitCarousel } from "@/components/sections/KitCarousel";
+import { SplitPromo } from "@/components/sections/SplitPromo";
+import { WarrantyBlock } from "@/components/sections/WarrantyBlock";
+import { CtaBand } from "@/components/ui/CtaBand";
+import { SpecTicker } from "@/components/ui/SpecTicker";
+import { siteSettings } from "@/data/site-settings";
+import {
+  getAllCategories,
+  getFeaturedProducts,
+  getKits,
+  getProductsByCategory,
+  searchProducts,
+} from "@/lib/repo";
 
-export default function Home() {
+const SPEC_TICKER_ITEMS = [
+  `${siteSettings.warrantyYears} GODINA GARANCIJE`,
+  "SAMOOBNAVLJAJUĆI TOP COAT",
+  "8 MIL / 200 µm",
+  "PROZIRNOST 99%",
+  "40+ OVLAŠĆENIH CENTARA",
+];
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: `${siteSettings.brandName} ${siteSettings.brandSuffix}`,
+  description:
+    "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji.",
+  telephone: siteSettings.contact.phone,
+  email: siteSettings.contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteSettings.contact.address,
+    addressCountry: "RS",
+  },
+};
+
+export const metadata: Metadata = {
+  title: "ONYX EVOLUTION — PPF folije i keramički premazi",
+  description:
+    "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji. Garancija do 12 godina, montaža u ovlašćenim centrima.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "ONYX EVOLUTION",
+    description:
+      "PPF folije i keramički premazi sa fabričkom garancijom. Ovlašćena distribucija i mreža instalatera u Srbiji i regionu.",
+    type: "website",
+    locale: "sr_RS",
+  },
+};
+
+const POLISHING_PADS_CATEGORY_SLUG = "ulozak-za-poliranje";
+
+export default async function Home() {
+  const [kits, featured, categories, polishingPads] = await Promise.all([
+    getKits(4),
+    getFeaturedProducts(8),
+    getAllCategories(),
+    // Only the image off the first product is used below — skip the
+    // category lookup entirely instead of fetching and discarding it.
+    getProductsByCategory(POLISHING_PADS_CATEGORY_SLUG, { perPage: 1, skipCategory: true }),
+  ]);
+
+  // Nothing is flagged "Featured" in WooCommerce yet — fall back to the
+  // newest real products instead of leaving the homepage section empty.
+  const bestsellers = featured.length
+    ? featured
+    : (await searchProducts("", { perPage: 8, sort: "newest" })).products;
+
+  // Parent terms with no products of their own (WooCommerce category tree —
+  // e.g. "Poliranje" holding only the "Uložak za poliranje" child) would
+  // otherwise show up as a tile leading to an empty page.
+  const shoppableCategories = categories.filter((c) => (c.count ?? 0) > 0);
+
+  const kitCards = kits.map((product) => ({
+    product,
+    kicker: (
+      product.productCategories.nodes[1]?.name ??
+      product.productCategories.nodes[0]?.name ??
+      ""
+    ).toUpperCase(),
+  }));
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+      />
+      <Hero />
+      <SpecTicker items={SPEC_TICKER_ITEMS} />
+      {kitCards.length > 0 && <KitCarousel kits={kitCards} />}
+      <SplitPromo image={polishingPads.products[0]?.image} />
+      <Bestsellers products={bestsellers} />
+      <WarrantyBlock />
+      <Categories categories={shoppableCategories} />
+      <CtaBand
+        eyebrow="OGRANIČENA SERIJA"
+        headingLine1="Nova generacija"
+        headingLine2="PPF zaštite"
+        body="Debljina 200 µm, samoobnavljajući sloj i lepak koji ne ostavlja tragove pri skidanju."
+        buttonLabel="ISTRAŽI NOVITETE"
+        buttonHref="/kategorija/ppf-auto-folija"
+      />
+    </>
   );
 }

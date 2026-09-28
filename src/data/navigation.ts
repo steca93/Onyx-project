@@ -3,14 +3,9 @@ export interface NavItem {
   href: string;
 }
 
-export const navItems: NavItem[] = [
-  { label: "PPF FOLIJE", href: "/kategorija/ppf-folije" },
-  { label: "MAT PPF", href: "/kategorija/mat-ppf" },
-  { label: "FAROVI I SVETLA", href: "/kategorija/farovi-i-svetla" },
-  { label: "KERAMIČKI PREMAZI", href: "/kategorija/keramicki-premazi" },
-  { label: "ALAT I MONTAŽA", href: "/kategorija/alat-i-montaza" },
-  { label: "SETOVI", href: "/kategorija/setovi" },
-];
+// Category nav items are no longer hardcoded here — Header/Footer render
+// them straight from getAllCategories() (src/lib/repo), fetched server-side
+// in src/app/layout.tsx, so they always reflect what's actually in WooCommerce.
 
 export const installerCta: NavItem = {
   label: "POSTANI INSTALATER →",

@@ -38,6 +38,9 @@ export interface VariationAttributeValue {
 
 export interface ProductVariation {
   id: string;
+  /** WooCommerce's own numeric post ID — absent in mock data, present (and
+   * required by the Store API's cart/add-item call) once live. */
+  databaseId?: number;
   sku: string | null;
   price: string | null;
   regularPrice: string | null;
@@ -119,4 +122,19 @@ export interface ProductListOptions {
   inStockOnly?: boolean;
   /** Attribute-slug -> selected option values, e.g. { sirina: ["152cm"] } */
   attributes?: Record<string, string[]>;
+  /** Skip the category lookup and return `category: null` — for callers
+   * (e.g. the homepage) that only want the product list and would otherwise
+   * pay for a category fetch whose result they'd immediately discard. */
+  skipCategory?: boolean;
+}
+
+/** Minimal per-product shape for the header's live search dropdown — just
+ * enough to render a result row, fetched once as a flat list and filtered
+ * entirely client-side (see src/components/layout/SearchBar.tsx). */
+export interface SearchIndexProduct {
+  id: string;
+  name: string;
+  slug: string;
+  price: string | null;
+  image: ProductImage | null;
 }

@@ -3,15 +3,9 @@ export interface FooterLink {
   href: string;
 }
 
-export const footerLinks: { prodavnica: FooterLink[]; podrska: FooterLink[] } = {
-  prodavnica: [
-    { label: "PPF folije", href: "/kategorija/ppf-folije" },
-    { label: "Mat PPF", href: "/kategorija/mat-ppf" },
-    { label: "Farovi i svetla", href: "/kategorija/farovi-i-svetla" },
-    { label: "Keramički premazi", href: "/kategorija/keramicki-premazi" },
-    { label: "Alat i montaža", href: "/kategorija/alat-i-montaza" },
-    { label: "Setovi", href: "/kategorija/setovi" },
-  ],
+// "Prodavnica" links are rendered from real categories (see Footer.tsx),
+// not listed here — only the static support pages are fixed.
+export const footerLinks: { podrska: FooterLink[] } = {
   podrska: [
     { label: "Registracija garancije", href: "/garancija" },
     { label: "Ovlašćeni centri", href: "/ovlasceni-centri" },
@@ -19,5 +13,7 @@ export const footerLinks: { prodavnica: FooterLink[]; podrska: FooterLink[] } = 
     { label: "Uputstva za montažu", href: "/uputstva-za-montazu" },
     { label: "Česta pitanja", href: "/cesta-pitanja" },
     { label: "Kontakt", href: "/kontakt" },
+    { label: "Uslovi korišćenja", href: "/uslovi-koriscenja" },
+    { label: "Politika privatnosti", href: "/uslovi-koriscenja#politika-privatnosti" },
   ],
 };

@@ -154,14 +154,26 @@ export const mockRepo: Repo = {
 
   async searchProducts(query, opts = {}) {
     const needle = query.trim().toLowerCase();
-    const list = needle
-      ? products.filter(
+    // An empty query browses the full catalog — lets "POGLEDAJ SVE →" and a
+    // bare /pretraga link double as an all-products view, not just a dead end.
+    const list = !needle
+      ? products
+      : products.filter(
           (p) =>
             p.name.toLowerCase().includes(needle) ||
             (p.shortDescription ?? "").toLowerCase().includes(needle) ||
             (p.description ?? "").toLowerCase().includes(needle),
-        )
-      : [];
+        );
     return buildListResult(list, opts, null);
+  },
+
+  async getSearchIndex() {
+    return products.map((p) => ({
+      id: p.id,
+      name: p.name,
+      slug: p.slug,
+      price: p.price,
+      image: p.image,
+    }));
   },
 };

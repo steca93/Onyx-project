@@ -249,6 +249,49 @@ const films: FilmSpec[] = [
   },
 ];
 
+function buildFilmVariations(f: FilmSpec, sku: string) {
+  const base = Number.parseFloat(f.basePrice);
+  const premium = Number.parseFloat(f.premiumPrice);
+  // premium (180cm/30m) sets the combined scale-up; split it into a width
+  // step and a length step so the two in-between corners of the matrix
+  // (152cm/30m, 180cm/15m) get sensible, distinct prices instead of guesses.
+  const widthFactor = 1.15;
+  const lengthFactor = premium / base / widthFactor;
+
+  const combos: {
+    width: "152cm" | "180cm";
+    length: "15m" | "30m";
+    price: string;
+  }[] = [
+    { width: "152cm", length: "15m", price: f.basePrice },
+    {
+      width: "152cm",
+      length: "30m",
+      price: String(Math.round(base * lengthFactor)),
+    },
+    {
+      width: "180cm",
+      length: "15m",
+      price: String(Math.round(base * widthFactor)),
+    },
+    { width: "180cm", length: "30m", price: f.premiumPrice },
+  ];
+
+  return combos.map((c) => ({
+    id: `${f.slug}-${c.width}-${c.length}`,
+    sku: `${sku}-${c.width}-${c.length}`,
+    price: c.price,
+    regularPrice: c.price,
+    salePrice: null,
+    stockStatus: "IN_STOCK" as const,
+    image: null,
+    attributes: [
+      { name: "sirina", value: c.width },
+      { name: "duzina", value: c.length },
+    ],
+  }));
+}
+
 function filmProduct(f: FilmSpec, secondary?: ProductCategoryRef): AnyProduct {
   const sku = `ONX-${f.slug.replace(/^onyx-/, "").toUpperCase().replace(/-/g, "")}`;
   const categories = secondary ? [f.category, secondary] : [f.category];
@@ -292,36 +335,10 @@ function filmProduct(f: FilmSpec, secondary?: ProductCategoryRef): AnyProduct {
         { name: "duzina", label: "Dužina", options: ["15m", "30m"] },
       ],
     },
-    variations: {
-      nodes: [
-        {
-          id: `${f.slug}-152-15`,
-          sku: `${sku}-152-15`,
-          price: f.basePrice,
-          regularPrice: f.basePrice,
-          salePrice: null,
-          stockStatus: "IN_STOCK",
-          image: null,
-          attributes: [
-            { name: "sirina", value: "152cm" },
-            { name: "duzina", value: "15m" },
-          ],
-        },
-        {
-          id: `${f.slug}-180-30`,
-          sku: `${sku}-180-30`,
-          price: f.premiumPrice,
-          regularPrice: f.premiumPrice,
-          salePrice: null,
-          stockStatus: "IN_STOCK",
-          image: null,
-          attributes: [
-            { name: "sirina", value: "180cm" },
-            { name: "duzina", value: "30m" },
-          ],
-        },
-      ],
-    },
+    // Full 2x2 width x length matrix — every chip combination in the variant
+    // selector must resolve to a real variation, or the selector deadlocks
+    // (picking one attribute can strand the other on an unreachable option).
+    variations: { nodes: buildFilmVariations(f, sku) },
   };
 }
 

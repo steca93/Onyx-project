@@ -23,7 +23,7 @@ export function QuantityStepper({
         aria-label="Smanji količinu"
         disabled={!canDecrease}
         onClick={() => onChange(Math.max(min, value - 1))}
-        className="flex w-10 items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:opacity-30 disabled:hover:text-text-60"
+        className="flex w-10 cursor-pointer items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-text-60"
       >
         <MinusIcon size={12} />
       </button>
@@ -35,7 +35,7 @@ export function QuantityStepper({
         aria-label="Povećaj količinu"
         disabled={!canIncrease}
         onClick={() => onChange(max ? Math.min(max, value + 1) : value + 1)}
-        className="flex w-10 items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:opacity-30 disabled:hover:text-text-60"
+        className="flex w-10 cursor-pointer items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-text-60"
       >
         <PlusIcon size={12} />
       </button>
