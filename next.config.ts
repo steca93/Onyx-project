@@ -46,7 +46,7 @@ function localizedDynamicPath(route: "/proizvod/[slug]" | "/kategorija/[slug]", 
 const slugRedirects = redirectMap.flatMap((entry) => {
   if (entry.type === "path") return [{ source: entry.from, destination: entry.to, permanent: true }];
   const route = entry.type === "product" ? "/proizvod/[slug]" : "/kategorija/[slug]";
-  return routing.locales.map((locale) => ({
+  return (entry.locales ?? routing.locales).map((locale) => ({
     source: localizedDynamicPath(route, locale, entry.from),
     destination: localizedDynamicPath(route, locale, entry.to),
     permanent: true,
@@ -80,6 +80,12 @@ const nextConfig: NextConfig = {
     ? { distDir: process.env.NEXT_DIST_DIR, typescript: { tsconfigPath: "tsconfig.seo-test.json" } }
     : {}),
   poweredByHeader: false,
+  // Crawlers get <title>/canonical/hreflang in <head>, never streamed into
+  // <body>. Next's default list (reproduced first) leaves out Googlebot —
+  // on a cold dynamic render (e.g. category pages) its metadata arrived in
+  // the body. Browsers keep streaming metadata.
+  htmlLimitedBots:
+    /[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight|Googlebot|bot\b|crawler|spider/i,
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [...new Set(wordpressHosts)].map((hostname) => ({

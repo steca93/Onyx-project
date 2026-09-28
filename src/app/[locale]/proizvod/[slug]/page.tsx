@@ -8,6 +8,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Tabs } from "@/components/ui/Tabs";
 import {
+  availableLocales,
   getStaticProductSlugs,
   getProductBySlug,
   getRelatedProducts,
@@ -17,7 +18,7 @@ import { stripHtml } from "@/lib/utils/strip-html";
 import { rewriteWpHtml } from "@/lib/utils/wp-html";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Link } from "@/i18n/navigation";
-import { breadcrumbJsonLd, JsonLd, productJsonLd } from "@/lib/seo/jsonld";
+import { breadcrumbJsonLd, JsonLd, productJsonLd, webPageJsonLd } from "@/lib/seo/jsonld";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 
 interface ProductPageProps {
@@ -44,6 +45,7 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     href: { pathname: "/proizvod/[slug]", params: { slug } },
+    locales: availableLocales("product", slug),
     // Short names get their category appended so titles carry a keyword.
     title:
       category && product.name.length < 35
@@ -108,8 +110,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className="container-onyx mt-12 mb-24 lg:mt-16">
       <JsonLd
         data={[
-          productJsonLd(product, productUrl),
-          breadcrumbJsonLd(breadcrumbs.map((b) => ({ name: b.label, url: b.url }))),
+          webPageJsonLd({
+            type: "WebPage",
+            url: productUrl,
+            name: product.name,
+            language: locale,
+            breadcrumb: breadcrumbJsonLd(breadcrumbs.map((b) => ({ name: b.label, url: b.url }))),
+            mainEntity: productJsonLd(product, productUrl),
+          }),
         ]}
       />
 

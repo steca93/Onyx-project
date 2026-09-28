@@ -6,10 +6,15 @@
  * When you change a slug in wp-admin, add a line here:
  *   { type: "product", from: "old-slug", to: "new-slug" },
  *   { type: "category", from: "old-cat", to: "new-cat" },
- *   { type: "path", from: "/stara-strana", to: "/kontakt" },   // Serbian paths only
+ *   { type: "path", from: "/stara-strana", to: "/kontakt" },   // exact paths, as-is
+ *
+ * Add `locales: ["en"]` to limit a product/category redirect to some
+ * languages (default: all three).
  */
+type RedirectLocale = "sr" | "en" | "de";
+
 export type RedirectEntry =
-  | { type: "product" | "category"; from: string; to: string }
+  | { type: "product" | "category"; from: string; to: string; locales?: RedirectLocale[] }
   | { type: "path"; from: string; to: string };
 
 export const redirects: RedirectEntry[] = [];

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { byType, fetchPage, FIXTURES } from "./helpers";
+import { allTypes, byType, fetchPage, FIXTURES } from "./helpers";
 
 const { productSlug, categorySlug } = FIXTURES;
 
@@ -42,9 +42,20 @@ for (const p of PAGES) {
       expect(page.h1Count, "exactly one <h1>").toBe(1);
     });
 
+    test("language switcher links to the hreflang alternates", async ({ request, baseURL }) => {
+      const page = await fetchPage(request, p.path);
+      const links = Object.fromEntries(
+        [...page.html.matchAll(/<a href="([^"]+)" hrefLang="([^"]+)"/g)].map((m) => [m[2], m[1]]),
+      );
+      for (const [lang, url] of Object.entries(page.hreflang)) {
+        if (lang === "x-default" || lang === p.locale) continue;
+        expect(links[lang], `switcher link to ${lang}`).toBe(url.replace(baseURL!, "") || "/");
+      }
+    });
+
     test("has valid JSON-LD", async ({ request }) => {
       const page = await fetchPage(request, p.path);
-      const types = page.jsonLd.map((o) => o["@type"]);
+      const types = allTypes(page);
       for (const type of p.ld) expect(types).toContain(type);
       for (const obj of page.jsonLd) expect(obj["@context"]).toBe("https://schema.org");
 

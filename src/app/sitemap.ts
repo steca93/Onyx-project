@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getAllCategories, getProductSitemapEntries } from "@/lib/repo";
+import { availableLocales, getAllCategories, getProductSitemapEntries } from "@/lib/repo";
 import { SITE_URL } from "@/lib/seo/env";
 
 type SitemapHref = Parameters<typeof getPathname>[0]["href"];
@@ -32,12 +32,15 @@ function entries(
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"],
   priority: number,
   lastModified?: string | null,
+  locales: readonly Locale[] = routing.locales,
 ): MetadataRoute.Sitemap {
+  // Only locales where the page actually exists (untranslated EN/DE
+  // products/categories 404 and must not be listed or linked).
   const languages = {
-    ...Object.fromEntries(routing.locales.map((l) => [l, url(href, l)])),
+    ...Object.fromEntries(locales.map((l) => [l, url(href, l)])),
     "x-default": url(href, routing.defaultLocale),
   };
-  return routing.locales.map((locale) => ({
+  return locales.map((locale) => ({
     url: url(href, locale),
     ...(lastModified ? { lastModified } : {}),
     changeFrequency,
@@ -54,10 +57,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries(path, path === "/" ? "daily" : "monthly", path === "/" ? 1 : 0.5),
     ),
     ...categories.flatMap((c) =>
-      entries({ pathname: "/kategorija/[slug]", params: { slug: c.slug } }, "weekly", 0.8),
+      entries(
+        { pathname: "/kategorija/[slug]", params: { slug: c.slug } },
+        "weekly",
+        0.8,
+        null,
+        availableLocales("category", c.slug),
+      ),
     ),
     ...products.flatMap((p) =>
-      entries({ pathname: "/proizvod/[slug]", params: { slug: p.slug } }, "weekly", 0.7, p.modified),
+      entries(
+        { pathname: "/proizvod/[slug]", params: { slug: p.slug } },
+        "weekly",
+        0.7,
+        p.modified,
+        availableLocales("product", p.slug),
+      ),
     ),
   ];
 }

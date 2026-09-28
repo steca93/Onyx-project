@@ -41,11 +41,21 @@ export function localizeCategory(catalog: Catalog, category: ProductCategory): P
   return {
     ...category,
     name,
-    description: t?.description ?? category.description,
+    description: t?.description ?? null,
     image: category.image && t?.name ? { ...category.image, altText: name } : category.image,
-    ...(category.parent ? { parent: localizeCategoryRef(catalog, category.parent) } : {}),
+    ...(category.parent
+      ? {
+          parent: isTranslated(catalog, "category", category.parent.slug)
+            ? localizeCategoryRef(catalog, category.parent)
+            : null,
+        }
+      : {}),
     ...(category.children
-      ? { children: category.children.map((c) => ({ ...c, ...localizeCategoryRef(catalog, c) })) }
+      ? {
+          children: category.children
+            .filter((c) => isTranslated(catalog, "category", c.slug))
+            .map((c) => ({ ...c, ...localizeCategoryRef(catalog, c) })),
+        }
       : {}),
   };
 }
@@ -55,14 +65,19 @@ export function localizeProduct(catalog: Catalog, product: AnyProduct): AnyProdu
   const base = {
     ...product,
     name: t.name ?? product.name,
-    shortDescription: t.shortDescription ?? product.shortDescription,
-    description: t.description ?? product.description,
+    // Never fall back to the Serbian text on an EN/DE page: a missing
+    // translation renders as "coming soon" copy and meta descriptions use
+    // the localized template; the SEO audit lists these gaps.
+    shortDescription: t.shortDescription ?? null,
+    description: t.description ?? null,
     image: localizeImage(product.image, t.name),
     galleryImages: {
       nodes: product.galleryImages.nodes.map((img) => localizeImage(img, t.name)!),
     },
     productCategories: {
-      nodes: product.productCategories.nodes.map((c) => localizeCategoryRef(catalog, c)),
+      nodes: product.productCategories.nodes
+        .filter((c) => isTranslated(catalog, "category", c.slug))
+        .map((c) => localizeCategoryRef(catalog, c)),
     },
     specs: product.specs.map((s) => ({
       label: term(catalog, s.label),

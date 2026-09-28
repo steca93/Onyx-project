@@ -11,7 +11,7 @@ import { Header } from "@/components/layout/Header";
 import { UtilityBar } from "@/components/layout/UtilityBar";
 import { routing, toLocale } from "@/i18n/routing";
 import { ProductNamesProvider } from "@/i18n/catalog/ProductNamesProvider";
-import { getAllCategories, getProductNameTranslations } from "@/lib/repo";
+import { getAllCategories, getProductNameTranslations, getUntranslatedSlugs } from "@/lib/repo";
 import { BRAND, IS_INDEXABLE, SITE_URL, TITLE_SUFFIX } from "@/lib/seo/env";
 import { DEFAULT_OG_IMAGE, OG_LOCALES } from "@/lib/seo/metadata";
 import "../globals.css";
@@ -87,7 +87,7 @@ export default async function RootLayout({
   // rendering.
   setRequestLocale(locale);
 
-  const allCategories = await getAllCategories();
+  const [allCategories, untranslated] = await Promise.all([getAllCategories(), getUntranslatedSlugs()]);
   // Nav/footer are for browsing — a category with no products yet (or a
   // parent term with only subcategories, like WooCommerce's "Uncategorized"
   // siblings) would just open onto an empty page, so only list ones that
@@ -102,7 +102,7 @@ export default async function RootLayout({
       <body className="flex min-h-full flex-col bg-onyx-850 font-sans text-text">
         <ClientMessages locale={locale}>
           <ProductNamesProvider names={getProductNameTranslations(locale)}>
-            <UtilityBar />
+            <UtilityBar untranslated={untranslated} />
             <Header categories={navCategories} />
             <main className="flex flex-1 flex-col">{children}</main>
             <Footer categories={navCategories} />

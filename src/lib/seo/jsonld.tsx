@@ -1,5 +1,7 @@
 import type {
   BreadcrumbList,
+  CollectionPage,
+  WebPage,
   ItemList,
   Offer,
   AggregateOffer,
@@ -18,7 +20,9 @@ import { BRAND, SITE_URL } from "./env";
  * Renders structured data. `<` is escaped so text coming from WordPress
  * (names, descriptions) can never close the <script> element.
  */
-export function JsonLd({ data }: { data: WithContext<Product | BreadcrumbList | ItemList | Organization | WebSite>[] }) {
+type JsonLdNode = WithContext<Product | BreadcrumbList | ItemList | Organization | WebSite | WebPage | CollectionPage>;
+
+export function JsonLd({ data }: { data: JsonLdNode[] }) {
   return (
     <script
       type="application/ld+json"
@@ -165,4 +169,35 @@ export function productJsonLd(product: AnyProduct, url: string): WithContext<Pro
     ...(offers ? { offers } : {}),
     // No aggregateRating/review: the store has no real reviews.
   };
+}
+
+/**
+ * The page itself, carrying the language. `inLanguage` isn't a valid
+ * property of Product/BreadcrumbList/ItemList (only of creative works such
+ * as WebPage), so those hang off the page as `mainEntity` / `breadcrumb`.
+ */
+export function webPageJsonLd(opts: {
+  type: "WebPage" | "CollectionPage";
+  url: string;
+  name: string;
+  language: string;
+  breadcrumb: WithContext<BreadcrumbList>;
+  mainEntity: WithContext<Product> | WithContext<ItemList>;
+}): WithContext<WebPage | CollectionPage> {
+  const strip = <T extends object>(node: T) => {
+    const { "@context": _context, ...rest } = node as T & { "@context"?: string };
+    void _context;
+    return rest;
+  };
+  return {
+    "@context": "https://schema.org",
+    "@type": opts.type,
+    "@id": `${opts.url}#webpage`,
+    url: opts.url,
+    name: opts.name,
+    inLanguage: opts.language,
+    isPartOf: { "@type": "WebSite", name: BRAND, url: SITE_URL },
+    breadcrumb: strip(opts.breadcrumb),
+    mainEntity: strip(opts.mainEntity),
+  } as WithContext<WebPage | CollectionPage>;
 }
