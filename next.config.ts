@@ -72,6 +72,9 @@ const nextConfig: NextConfig = {
     staticGenerationMaxConcurrency: 2,
     staticGenerationRetryCount: 1,
   },
+  // Lets the SEO test suite build production-mode and preview-mode copies
+  // side by side (see playwright.config.ts). Unset everywhere else.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],

@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SEO test builds (playwright.config.ts)
+/.next-seo-*/
+/test-results/
+/playwright-report/

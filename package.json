@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p scripts",
     "perf:graphql": "node scripts/graphql-timing.mts",
     "perf:lighthouse": "node scripts/lighthouse.mts",
-    "perf:bundle": "node scripts/route-js.mts"
+    "perf:bundle": "node scripts/route-js.mts",
+    "seo:audit": "node scripts/seo-audit.mts",
+    "test:seo": "playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
