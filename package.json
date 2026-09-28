@@ -13,7 +13,8 @@
     "perf:bundle": "node scripts/route-js.mts",
     "seo:audit": "node scripts/seo-audit.mts",
     "test:seo": "playwright test",
-    "i18n:client-messages": "node scripts/client-messages.mts"
+    "i18n:client-messages": "node scripts/client-messages.mts",
+    "i18n:stamp": "node scripts/stamp-translations.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
