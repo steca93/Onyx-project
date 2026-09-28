@@ -2,7 +2,9 @@ import { getLocale } from "next-intl/server";
 import { getCatalogTranslations } from "@/i18n/catalog";
 import type { Locale } from "@/i18n/routing";
 import type { Repo } from "./contract";
+import { STATIC_PRODUCTS_LIMIT } from "./live/cache";
 import {
+  isTranslated,
   localizeCategory,
   localizeListResult,
   localizeProduct,
@@ -61,6 +63,14 @@ export async function getRelatedProducts(slug: string, limit: number) {
 
 export const getAllProductSlugs = repo.getAllProductSlugs;
 export const getProductSitemapEntries = repo.getProductSitemapEntries;
+
+/** Product slugs to prerender for a locale: at most STATIC_PRODUCTS_LIMIT
+ * (catalog order), and for EN/DE only those that are translated. */
+export async function getStaticProductSlugs(locale: Locale): Promise<string[]> {
+  const c = getCatalogTranslations(locale);
+  const slugs = await repo.getAllProductSlugs();
+  return (c ? slugs.filter((slug) => isTranslated(c, "product", slug)) : slugs).slice(0, STATIC_PRODUCTS_LIMIT);
+}
 
 export async function searchProducts(...[query, opts = {}]: Parameters<Repo["searchProducts"]>) {
   const c = await catalog();

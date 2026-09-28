@@ -33,7 +33,7 @@ curl -X POST https://onyx.com/api/revalidate \
 # → {"ok":true,"tags":["products","product:onyx-evo-clear-ppf-zastitna-folija","category:ppf-auto-folija"]}
 ```
 
-Payload types: `product` (`slug`, `categories`), `category` (`slug`), `menu`, `settings`, `all`.
+Payload types: `product` (`id`, `slug`, `categories`), `category` (`id`, `slug`), `menu`, `settings`, `all`. One call refreshes the sr, en and de pages (translations are applied on top of the same cached data). EN/DE translations live in the storefront repo (`src/i18n/catalog/`), so editing them means a deploy, which clears the cache anyway — no WordPress hook needed.
 
 ### Notes
 

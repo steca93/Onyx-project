@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Tabs } from "@/components/ui/Tabs";
 import {
-  getAllProductSlugs,
+  getStaticProductSlugs,
   getProductBySlug,
   getRelatedProducts,
 } from "@/lib/repo";
@@ -24,8 +24,10 @@ interface ProductPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const slugs = await getAllProductSlugs();
+// Runs once per locale (the parent [locale] layout supplies it). Anything
+// not prerendered renders on first request and is then cached.
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
+  const slugs = await getStaticProductSlugs(toLocale(params.locale));
   return slugs.map((slug) => ({ slug }));
 }
 

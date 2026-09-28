@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ONYX Frontend Revalidation
  * Description: Tells the Next.js storefront to refresh its cached catalog data when products, stock, prices, categories or menus change.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      ONYX EVOLUTION
  *
  * Must-use plugin: copy this file to wp-content/mu-plugins/ (see
@@ -109,13 +109,13 @@ final class Onyx_Revalidate {
 		if ( 'product' !== $after->post_type || $after->post_name === $before->post_name || '' === $before->post_name ) {
 			return;
 		}
-		self::enqueue( 'product:' . $before->post_name, array( 'type' => 'product', 'slug' => $before->post_name ) );
+		self::enqueue( 'product:' . $before->post_name, array( 'type' => 'product', 'id' => (int) $post_id, 'slug' => $before->post_name ) );
 	}
 
 	public static function category_term( $term_id ) {
 		$term = get_term( $term_id, 'product_cat' );
 		if ( $term && ! is_wp_error( $term ) ) {
-			self::enqueue( 'category:' . $term->slug, array( 'type' => 'category', 'slug' => $term->slug ) );
+			self::enqueue( 'category:' . $term->slug, array( 'type' => 'category', 'id' => (int) $term->term_id, 'slug' => $term->slug ) );
 		}
 	}
 
@@ -151,6 +151,7 @@ final class Onyx_Revalidate {
 			'product:' . $slug,
 			array(
 				'type'       => 'product',
+				'id'         => $product->get_id(),
 				'slug'       => $slug,
 				'categories' => array_values( array_unique( $categories ) ),
 			)

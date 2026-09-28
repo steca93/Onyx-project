@@ -9,15 +9,19 @@ import { TAGS } from "@/lib/repo/live/cache";
  *
  *   POST /api/revalidate
  *   Authorization: Bearer <REVALIDATE_SECRET>
- *   { "type": "product", "slug": "…", "categories": ["…"] }
- *   { "type": "category", "slug": "…" }
+ *   { "type": "product", "id": 123, "slug": "…", "categories": ["…"] }
+ *   { "type": "category", "id": 45, "slug": "…" }
+ *
+ * The slug is the cache key: catalog data is fetched once (Serbian source)
+ * and the EN/DE overlay is applied in memory, so one tag covers all three
+ * locales' pages. `id` is accepted for logging/traceability.
  *   { "type": "menu" } | { "type": "settings" } | { "type": "all" }
  */
 export const dynamic = "force-dynamic";
 
 type Payload =
-  | { type: "product"; slug?: string; categories?: string[] }
-  | { type: "category"; slug?: string }
+  | { type: "product"; id?: number; slug?: string; categories?: string[] }
+  | { type: "category"; id?: number; slug?: string }
   | { type: "menu" | "settings" | "all" };
 
 function authorized(request: NextRequest): boolean {
@@ -79,5 +83,7 @@ export async function POST(request: NextRequest) {
     revalidatePath("/sitemap.xml");
   }
 
+  const id = "id" in payload ? payload.id : undefined;
+  console.info(`revalidate: ${payload.type}${id ? ` #${id}` : ""} → ${tags.join(", ")}`);
   return NextResponse.json({ ok: true, tags }, { headers: noStore });
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { hasLocale } from "next-intl";
+import { ClientMessages } from "@/i18n/ClientMessages";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Questrial, Space_Mono } from "next/font/google";
@@ -99,7 +100,7 @@ export default async function RootLayout({
       className={`${questrial.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-onyx-850 font-sans text-text">
-        <NextIntlClientProvider>
+        <ClientMessages locale={locale}>
           <ProductNamesProvider names={getProductNameTranslations(locale)}>
             <UtilityBar />
             <Header categories={navCategories} />
@@ -108,7 +109,7 @@ export default async function RootLayout({
             <DeferredCartDrawer />
             <CookieConsent />
           </ProductNamesProvider>
-        </NextIntlClientProvider>
+        </ClientMessages>
       </body>
     </html>
   );

@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts && node scripts/client-messages.mts --check",
     "perf:graphql": "node scripts/graphql-timing.mts",
     "perf:lighthouse": "node scripts/lighthouse.mts",
     "perf:bundle": "node scripts/route-js.mts",
     "seo:audit": "node scripts/seo-audit.mts",
-    "test:seo": "playwright test"
+    "test:seo": "playwright test",
+    "i18n:client-messages": "node scripts/client-messages.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

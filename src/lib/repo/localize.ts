@@ -10,6 +10,16 @@ import type {
 
 type Catalog = CatalogTranslations;
 
+/**
+ * Whether an EN/DE version of a product/category exists. Untranslated
+ * items don't exist in that locale at all: 404, and left out of listings,
+ * hreflang and the sitemap — never shown with Serbian text instead.
+ */
+export function isTranslated(catalog: Catalog, kind: "product" | "category", slug: string): boolean {
+  const entry = kind === "product" ? catalog.products[slug] : catalog.categories[slug];
+  return Boolean(entry?.name?.trim());
+}
+
 function term(catalog: Catalog, value: string): string {
   return catalog.terms[value] ?? value;
 }

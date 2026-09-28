@@ -46,6 +46,7 @@ export default defineConfig({
     // rendered pages, and renders it in <head> for crawlers. Test what
     // search engines see.
     userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    browserName: "chromium",
   },
   projects: [
     { name: "production", testMatch: /seo\/.*\.prod\.spec\.ts/, use: { baseURL: `http://localhost:${PROD_PORT}` } },
