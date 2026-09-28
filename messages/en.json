@@ -133,23 +133,416 @@
   },
   "BecomeInstallerPage": {
     "title": "Become an Installer",
-    "metaDescription": "Join the network of authorized ONYX centers for installing PPF films and ceramic coatings."
+    "metaDescription": "Join the network of authorized ONYX centers for installing PPF films and ceramic coatings.",
+    "eyebrow": "JOIN THE NETWORK",
+    "description": "Join the network of authorized ONYX centers for PPF film and ceramic coating installation in Serbia and the region.",
+    "benefits": [
+      {
+        "title": "Training & certification",
+        "text": "Free technical training in PPF film and ceramic coating installation, with an official ONYX certificate."
+      },
+      {
+        "title": "Marketing support",
+        "text": "A listing in the official network of authorized centers on our website, promotional materials, and joint campaigns."
+      },
+      {
+        "title": "Priority stock",
+        "text": "Direct purchasing at distributor prices and priority access to limited product runs."
+      }
+    ],
+    "requirementsEyebrow": "REQUIREMENTS",
+    "requirementsHeading": "What you need",
+    "requirements": [
+      {
+        "number": "01",
+        "text": "A workshop or dedicated space for vehicle installation"
+      },
+      {
+        "number": "02",
+        "text": "Completed ONYX training in film and coating installation"
+      },
+      {
+        "number": "03",
+        "text": "A signed distribution agreement with ONYX Evolution"
+      }
+    ],
+    "applyEyebrow": "APPLICATION",
+    "applyHeading": "Send your application",
+    "successMessage": "Your application has been sent. Our network development team will contact you within the next few days.",
+    "companyLabel": "COMPANY NAME",
+    "pibLabel": "TAX ID (PIB)",
+    "cityLabel": "CITY",
+    "contactNameLabel": "CONTACT PERSON",
+    "emailLabel": "EMAIL",
+    "phoneLabel": "PHONE",
+    "messageLabel": "MESSAGE",
+    "submitLabel": "SEND APPLICATION",
+    "submittingLabel": "SENDING…",
+    "companyError": "Enter the company name.",
+    "pibError": "The tax ID (PIB) must be exactly 9 digits.",
+    "cityError": "Enter the city.",
+    "contactNameError": "Enter the contact person's name.",
+    "emailError": "Enter a valid email address.",
+    "phoneError": "Enter a phone number.",
+    "messageError": "Message must be at least 10 characters."
   },
   "CartPage": {
-    "title": "Cart"
+    "title": "Cart",
+    "eyebrow": "YOUR ORDER",
+    "heading": "Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "CONTINUE SHOPPING",
+    "proceedToCheckout": "PROCEED TO CHECKOUT"
   },
   "WarrantyPage": {
     "title": "Register Your Warranty",
-    "metaDescription": "Register your ONYX Warranty for an installed PPF film or ceramic coating and get a digital certificate."
+    "metaDescription": "Register your ONYX Warranty for an installed PPF film or ceramic coating and get a digital certificate.",
+    "breadcrumb": "Warranty",
+    "description": "Every installation at an authorized center comes with a {years}-year warranty against yellowing, cracking, and film delamination.",
+    "steps": [
+      {
+        "number": "01",
+        "text": "Enter the chassis number and installation date"
+      },
+      {
+        "number": "02",
+        "text": "Attach the authorized center's invoice"
+      },
+      {
+        "number": "03",
+        "text": "Receive a digital certificate by email"
+      }
+    ],
+    "successEyebrow": "WARRANTY REGISTERED",
+    "successTitle": "Thank you",
+    "successBody": "Your digital certificate has been sent to your email address.",
+    "certificateNumberLabel": "CERTIFICATE NUMBER",
+    "chassisNumberLabel": "CHASSIS NUMBER (VIN)",
+    "installationDateLabel": "INSTALLATION DATE",
+    "installerLabel": "AUTHORIZED CENTER",
+    "installerPlaceholder": "Select a center",
+    "ownerNameLabel": "OWNER'S FULL NAME",
+    "emailLabel": "EMAIL",
+    "phoneLabel": "PHONE",
+    "receiptLabel": "INVOICE (PDF/IMAGE)",
+    "consentLabel": "I agree to the terms of the ONYX Warranty program.",
+    "submitLabel": "REGISTER WARRANTY",
+    "submittingLabel": "PROCESSING…"
   },
   "InstallersPage": {
     "title": "Authorized Centers",
-    "metaDescription": "Network of authorized ONYX installers for PPF film and ceramic coating installation in Serbia."
+    "metaDescription": "Network of authorized ONYX installers for PPF film and ceramic coating installation in Serbia.",
+    "description": "A network of authorized installers for ONYX films and coatings across Serbia.",
+    "cityFilterLabel": "Filter by city",
+    "allCities": "ALL",
+    "viewOnMap": "VIEW ON MAP →",
+    "noResults": "No centers in this city.",
+    "days": {
+      "monFri": "Mon–Fri",
+      "monSat": "Mon–Sat",
+      "sat": "Sat"
+    },
+    "hoursRange": "{days} {from}:00–{to}:00"
   },
   "CheckoutPage": {
-    "title": "Checkout"
+    "title": "Checkout",
+    "eyebrow": "CHECKOUT",
+    "heading": "Checkout",
+    "emptyCart": "Your cart is empty — add some products before proceeding to checkout",
+    "backToCart": "BACK TO CART",
+    "shippingNotice": "Delivery in 1–3 business days · Free over {amount}",
+    "sectionDelivery": "DELIVERY",
+    "sectionPayment": "PAYMENT",
+    "sectionReview": "REVIEW",
+    "deliverTo": "Delivering to: {address}",
+    "notesLabel": "ORDER NOTES (OPTIONAL)",
+    "notesPlaceholder": "E.g. extra instructions for the courier, preferred delivery time…",
+    "acceptTerms": "I agree to the <termsLink>terms of use</termsLink> and privacy policy.",
+    "submitting": "PROCESSING…",
+    "submit": "PLACE ORDER"
   },
   "OrderConfirmationPage": {
-    "title": "Order Confirmation"
+    "title": "Order Confirmation",
+    "noOrderEyebrow": "CONFIRMATION",
+    "noOrderHeading": "No order found",
+    "noOrderBody": "We couldn't find a recent order to display.",
+    "backHome": "BACK TO HOME",
+    "eyebrow": "ORDER RECEIVED",
+    "heading": "Thank you for your order",
+    "emailNotice": "We'll send a confirmation and delivery details to {email}.",
+    "orderNumber": "ORDER NUMBER",
+    "items": "ITEMS",
+    "notes": "NOTES",
+    "total": "Total",
+    "continueShopping": "CONTINUE SHOPPING"
+  },
+  "ProductPage": {
+    "tabs": {
+      "description": "DESCRIPTION",
+      "specs": "SPECIFICATIONS",
+      "installation": "INSTALLATION",
+      "warranty": "WARRANTY"
+    },
+    "descriptionSoon": "Description coming soon.",
+    "specsSoon": "Specifications coming soon.",
+    "installationSoon": "Installation instructions coming soon.",
+    "warrantySoon": "Warranty information coming soon.",
+    "relatedEyebrow": "SIMILAR PRODUCTS",
+    "relatedTitle": "Related products"
+  },
+  "CategoryPage": {
+    "sort": {
+      "featured": "FEATURED",
+      "priceAsc": "PRICE: LOW TO HIGH",
+      "priceDesc": "PRICE: HIGH TO LOW",
+      "nameAsc": "NAME A-Z",
+      "newest": "NEWEST"
+    },
+    "priceLabel": "PRICE (RSD)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max",
+    "minPriceAria": "Minimum price",
+    "maxPriceAria": "Maximum price",
+    "inStockOnly": "In stock only",
+    "sortLabel": "Sort by",
+    "applyFilters": "APPLY FILTERS",
+    "clearFilters": "CLEAR FILTERS →",
+    "productCount": "{count, plural, one {# PRODUCT} other {# PRODUCTS}}",
+    "empty": "NO PRODUCTS MATCH THE SELECTED FILTERS."
+  },
+  "SearchPage": {
+    "title": "Search",
+    "titleWithQuery": "Search: \"{query}\"",
+    "resultsFor": "Results for \"{query}\"",
+    "allProducts": "All products",
+    "productCount": "{count, plural, one {# PRODUCT} other {# PRODUCTS}}",
+    "empty": "NO RESULTS FOR THIS SEARCH.",
+    "backHome": "BACK TO HOME"
+  },
+  "ProductPurchasePanel": {
+    "addToCart": "ADD TO CART",
+    "addedToCart": "ADDED TO CART",
+    "askInstallation": "ASK ABOUT INSTALLATION"
+  },
+  "ProductGallery": {
+    "showImage": "Show image {index}"
+  },
+  "StockStatus": {
+    "outOfStock": "CURRENTLY UNAVAILABLE",
+    "onBackorder": "AVAILABLE ON BACKORDER"
+  },
+  "HomePage": {
+    "title": "ONYX EVOLUTION — PPF films and ceramic coatings",
+    "metaDescription": "Authorized distributor of PPF films and ceramic coatings for cars in Serbia. Warranty of up to {years} years, installation at authorized centers.",
+    "ogDescription": "PPF films and ceramic coatings with a factory warranty. Authorized distribution and an installer network in Serbia and the region.",
+    "organizationDescription": "Authorized distributor of PPF films and ceramic coatings for cars in Serbia.",
+    "ctaEyebrow": "LIMITED SERIES",
+    "ctaHeadingLine1": "The next generation",
+    "ctaHeadingLine2": "of PPF protection",
+    "ctaBody": "200 µm thick, with a self-healing layer and an adhesive that leaves no residue on removal.",
+    "ctaButton": "EXPLORE WHAT'S NEW"
+  },
+  "SpecTicker": {
+    "warranty": "{years}-YEAR WARRANTY",
+    "selfHealing": "SELF-HEALING TOP COAT",
+    "thickness": "8 MIL / 200 µm",
+    "clarity": "99% CLARITY",
+    "centers": "40+ AUTHORIZED CENTERS"
+  },
+  "Hero": {
+    "eyebrow": "PPF WARRANTY PROGRAM",
+    "heading": "Protection<br></br>you <accent>can't see</accent>",
+    "body": "Self-healing PPF films for paint, headlights and wheels. 99% optical clarity, installation at authorized centers and a warranty of up to <strong>{years} years</strong>.",
+    "exploreFilms": "EXPLORE FILMS",
+    "registerWarranty": "REGISTER WARRANTY"
+  },
+  "KitCarousel": {
+    "eyebrow": "FEATURED",
+    "heading": "Installation kits",
+    "previous": "Previous kits",
+    "next": "Next kits",
+    "goToPage": "Go to page {page}"
+  },
+  "SplitPromo": {
+    "imageAlt": "PROFESSIONAL POLISHING PADS",
+    "eyebrow": "NEW IN STOCK",
+    "headingLine1": "Professional",
+    "headingLine2": "polishing",
+    "body": "A complete line of polishing pads — from heavy paint correction to the final gloss, for every step of vehicle prep.",
+    "button": "SHOP NOW"
+  },
+  "Bestsellers": {
+    "eyebrow": "OUR FAVORITES",
+    "heading": "Bestsellers",
+    "viewAll": "VIEW ALL →"
+  },
+  "WarrantyBlock": {
+    "imageAlt": "FACETED ONYX · FILM DETAIL",
+    "headingLine1": "Register",
+    "headingLine2": "your warranty",
+    "body": "Every installation at an authorized center comes with a {years}-year warranty against yellowing, cracking and film delamination. Registration takes two minutes.",
+    "step1": "Enter your VIN and installation date",
+    "step2": "Attach the authorized center's invoice",
+    "step3": "Receive a digital certificate by email",
+    "button": "REGISTER WARRANTY"
+  },
+  "CategoriesSection": {
+    "eyebrow": "FIND WHAT YOU NEED",
+    "heading": "Shop by category",
+    "productCount": "{count, plural, one {# PRODUCT} other {# PRODUCTS}}"
+  },
+  "CategoryTile": {
+    "view": "VIEW"
+  },
+  "ProductCard": {
+    "newBadge": "NEW"
+  },
+  "Breadcrumb": {
+    "ariaLabel": "Breadcrumb"
+  },
+  "Pagination": {
+    "ariaLabel": "Pages"
+  },
+  "QuantityStepper": {
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity"
+  },
+  "ImageSlot": {
+    "placeholder": "IMAGE COMING SOON"
+  },
+  "NotFound": {
+    "eyebrow": "ERROR 404",
+    "heading": "404 / PAGE NOT FOUND",
+    "body": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "BACK TO HOME"
+  },
+  "CartDrawer": {
+    "dialogLabel": "Cart",
+    "heading": "CART",
+    "closeLabel": "Close cart",
+    "removeLabel": "Remove",
+    "empty": "Your cart is empty",
+    "continueShopping": "CONTINUE SHOPPING",
+    "subtotal": "Subtotal",
+    "proceedToCheckout": "PROCEED TO CHECKOUT",
+    "viewCart": "VIEW CART"
+  },
+  "CartLineItem": {
+    "remove": "REMOVE",
+    "quantity": "Qty: {quantity}"
+  },
+  "OrderSummary": {
+    "heading": "ORDER SUMMARY",
+    "subtotal": "Subtotal",
+    "remainingForFreeShipping": "{amount} away from free shipping",
+    "freeShippingReached": "You've unlocked free shipping",
+    "total": "Total"
+  },
+  "DeliveryForm": {
+    "fullName": "FULL NAME",
+    "email": "EMAIL",
+    "phone": "PHONE",
+    "address": "ADDRESS",
+    "city": "CITY",
+    "postalCode": "POSTAL CODE"
+  },
+  "PaymentMethods": {
+    "codTitle": "Cash on delivery",
+    "codDescription": "Pay the courier in cash or by card on delivery",
+    "cardTitle": "Card payment (Banca Intesa)",
+    "cardDescription": "Secure card payment, coming soon",
+    "comingSoon": "COMING SOON"
+  },
+  "CookieConsent": {
+    "message": "This site uses essential cookies to keep your cart and session active. See our <privacyLink>privacy policy</privacyLink> for details.",
+    "accept": "GOT IT"
+  },
+  "CheckoutErrors": {
+    "validation": {
+      "fullName": "Enter your full name.",
+      "email": "Enter a valid email address.",
+      "phone": "Enter your phone number.",
+      "address": "Enter your delivery address.",
+      "city": "Enter your city.",
+      "postalCode": "Enter your postal code.",
+      "notesTooLong": "Notes can be at most 500 characters.",
+      "acceptTerms": "You must accept the terms of use."
+    },
+    "submit": {
+      "generic": "Something went wrong while placing your order. Please try again.",
+      "outOfStock": "Some items in your cart aren't available in the requested quantity. Please check your cart and try again.",
+      "invalidDetails": "Your delivery details are invalid. Please check them and try again.",
+      "sessionExpired": "Your session has expired. Refresh the page and try again.",
+      "paymentMethod": "The selected payment method is currently unavailable.",
+      "emptyCart": "Your cart is empty — add some products before placing an order."
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "WarrantyForm": {
+    "chassisNumberMin": "Enter a valid chassis number (VIN).",
+    "chassisNumberFormat": "The chassis number may contain only letters and digits.",
+    "installationDateRequired": "Enter the installation date.",
+    "installationDateFuture": "The installation date can't be in the future.",
+    "installerRequired": "Select an authorized center.",
+    "ownerNameRequired": "Enter your full name.",
+    "emailInvalid": "Enter a valid email address.",
+    "phoneRequired": "Enter a phone number.",
+    "consentRequired": "You must accept the warranty terms."
+  },
+  "InstallGuidePage": {
+    "title": "Installation Guide",
+    "metaDescription": "Preparation, conditions, and steps for correctly installing ONYX PPF films and ceramic coatings.",
+    "description": "Basic guidelines for preparation and installation — every product comes with a full technical data sheet.",
+    "surfaceHeading": "Surface preparation",
+    "surfaceBody1": "The paint must be clean, decontaminated, and free of any wax or silicone-based protection before installation. We recommend washing, clay-bar decontamination, and an IPA wipe-down immediately before applying the film or coating.",
+    "surfaceBody2": "Any paint imperfections — scratches, dents, signs of corrosion — should be repaired before installation. The film follows the contour of the surface and does not hide existing damage.",
+    "environmentHeading": "Installation environment",
+    "environmentBody": "Installation is carried out in an enclosed, controlled, dust-free space at a temperature between 18°C and 26°C. Humidity that is too low makes it harder for the adhesive to activate, while humidity that is too high extends drying time — authorized centers monitor both factors when scheduling appointments.",
+    "curingHeading": "Curing & first care",
+    "curingBody1": "After PPF installation, allow at least 48 hours of curing before the vehicle's first wash. Avoid automatic car washes and high-pressure water aimed directly at the film edges for the first 7 days.",
+    "curingBody2": "Ceramic coatings require the curing period stated on the product label — usually 12–24 hours before exposure to moisture, and an additional 7 days before applying another layer or wax over the coating.",
+    "authorizedHeading": "Installation at an authorized center",
+    "authorizedBody": "These guidelines cover general preparation and care — the full {years}-year warranty on material and labor applies only to installation at an <centersLink>authorized ONYX center</centersLink> and registration in the <warrantyLink>ONYX Warranty program</warrantyLink>. You'll receive detailed technical instructions for each product from the authorized center at installation."
+  },
+  "TermsPage": {
+    "title": "Terms of Use",
+    "metaDescription": "Terms of use for the ONYX EVOLUTION website and privacy policy — orders, payment, shipping, complaints, and personal data protection.",
+    "description": "By using the ONYX EVOLUTION website and shopping in our store, you accept the terms and privacy policy below.",
+    "siteUseTitle": "Use of the website",
+    "siteUseBody": "The ONYX EVOLUTION website is intended for personal and non-commercial use. You agree not to use the website for unlawful purposes, attempt unauthorized access to the system, or transmit harmful content. We reserve the right to restrict access in the event of a breach of these terms.",
+    "ordersTitle": "Orders and payment",
+    "ordersBody": "By placing an order, you confirm that all information entered is accurate. Orders are subject to item availability, and we reserve the right to cancel an order if an item is unavailable. Prices are shown in Serbian dinars (RSD) and include VAT at the statutory rate. Payment is made by cash on delivery or by card, in line with the options offered on the <checkoutLink>Checkout</checkoutLink> page.",
+    "conversionTitle": "Currency conversion statement",
+    "conversionBody": "All payments are processed in Serbian dinars (RSD). If your payment card was issued in a different currency, the amount charged will be expressed in your local currency at the exchange rate applied by the card-issuing bank at the time of the transaction, which may result in a slight difference from the price shown on the website.",
+    "shippingTitle": "Shipping and returns",
+    "shippingBody": "Shipping times, shipping costs, and return terms are described in detail on the <shippingLink>Shipping & Returns</shippingLink> page. In short: standard shipping within Serbia takes 1–3 business days and is free for orders over {amount}. Unopened and unused products can be returned within 14 days of receiving the parcel.",
+    "warrantyTitle": "Complaints and warranty",
+    "warrantyBody": "For PPF films and ceramic coatings installed by an authorized installer, the warranty on material and labor is honored exclusively through the ONYX Warranty program, not through a product return. For details on coverage, exclusions, and the claims procedure, see the <warrantyLink>Warranty</warrantyLink> page.",
+    "ipTitle": "Intellectual property",
+    "ipBody": "All content on this website — text, images, logos, and product information — is the property of ONYX EVOLUTION or its licensors. The content may not be reproduced, distributed, or used without prior written permission.",
+    "liabilityTitle": "Limitation of liability",
+    "liabilityBody": "To the extent permitted by law, ONYX EVOLUTION shall not be liable for any indirect, incidental, or consequential damages arising from the use of the website or our products. Total liability shall not exceed the purchase price of the relevant order.",
+    "lawTitle": "Governing law",
+    "lawBody": "These terms are governed by the laws of the Republic of Serbia. All disputes arising under these terms are subject to the exclusive jurisdiction of the competent courts in Serbia.",
+    "legalEyebrow": "LEGAL INFORMATION",
+    "privacyHeading": "Privacy Policy",
+    "privacyIntro": "How we collect, use, and protect your personal data.",
+    "merchantTitle": "Merchant information",
+    "merchantInfo": "Legal entity: ONYX EVOLUTION d.o.o.\nRegistered office: {address}\nEmail: {email}\nPhone: {phone}\nWorking hours: {hours}",
+    "merchantPending": "The company registration number, tax ID (PIB), and bank account number will be added once the business entity is registered.",
+    "dataCollectedTitle": "Data we collect",
+    "dataCollectedBody": "When you place an order or sign up for our newsletter, we collect personal data such as your name, email address, shipping address, and phone number. We may also collect non-personal data, such as browsing behavior, to improve the website.",
+    "dataUseTitle": "How we use data",
+    "dataUseBody": "Personal data is used exclusively to process orders, communicate about order and warranty status, and provide customer support. With your consent, we may send promotional emails about new products and offers — you can unsubscribe at any time via the link in the email.",
+    "transactionTitle": "Transaction data protection",
+    "transactionBody": "Payment card data is transmitted in protected (encrypted) form via the SSL protocol and is never accessible to our system — the entire payment process takes place on the bank's pages, with identity verification through the 3D Secure protocol. We do not store the card number, expiry date, or CVV/CVC code.",
+    "cookiesTitle": "Cookies",
+    "cookiesBody": "We use essential cookies to keep your cart and session active. We do not use third-party tracking cookies without your explicit consent. You can manage your cookie preferences through your browser settings.",
+    "rightsTitle": "Your rights",
+    "rightsBody": "Under the applicable personal data protection law, you have the right to access, correct, or delete your personal data. Submit your request via the <contactLink>Contact</contactLink> page — we will process it within 30 days.",
+    "lastUpdated": "Last updated: September 2026",
+    "questionLink": "Have a question? →"
   }
 }

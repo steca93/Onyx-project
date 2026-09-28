@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { useProductName } from "@/i18n/catalog/ProductNamesProvider";
 import { Link } from "@/i18n/navigation";
 import { useEffect } from "react";
 import { CloseIcon } from "@/components/icons";
@@ -22,11 +24,13 @@ function CartDrawerLineItem({
   onRemove,
 }: CartDrawerLineItemProps) {
   const lineTotal = Number.parseFloat(item.price) * item.quantity;
+  const name = useProductName(item.slug, item.name);
+  const t = useTranslations("CartDrawer");
 
   return (
     <div className="flex gap-4 border-b border-hairline py-5">
       <Link
-        href={`/proizvod/${item.slug}`}
+        href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
         className="relative h-16 w-16 shrink-0 border border-hairline bg-onyx-800"
       >
         <ImageSlot image={item.image} fill sizes="64px" />
@@ -34,10 +38,10 @@ function CartDrawerLineItem({
 
       <div className="min-w-0 flex-1">
         <Link
-          href={`/proizvod/${item.slug}`}
+          href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
           className="text-product-name line-clamp-2 text-text hover:text-accent"
         >
-          {item.name}
+          {name}
         </Link>
         {item.attributes && item.attributes.length > 0 && (
           <div className="mt-1.5 font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
@@ -53,7 +57,7 @@ function CartDrawerLineItem({
             </span>
             <button
               type="button"
-              aria-label="Ukloni"
+              aria-label={t("removeLabel")}
               onClick={onRemove}
               className="cursor-pointer text-text-40 transition-colors duration-200 hover:text-danger"
             >
@@ -67,6 +71,7 @@ function CartDrawerLineItem({
 }
 
 export function CartDrawer() {
+  const t = useTranslations("CartDrawer");
   const isOpen = useCartStore((s) => s.isDrawerOpen);
   const hasHydrated = useCartStore((s) => s.hasHydrated);
   const items = useCartStore((s) => s.items);
@@ -106,18 +111,18 @@ export function CartDrawer() {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Korpa"
+        aria-label={t("dialogLabel")}
         className={`absolute top-0 right-0 flex h-full w-full flex-col border-l border-hairline bg-onyx-850 transition-transform duration-300 ease-[cubic-bezier(.22,.61,.36,1)] lg:max-w-[420px] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex h-[72px] shrink-0 items-center justify-between border-b border-hairline px-6">
           <span className="label-nav text-text">
-            KORPA <span className="text-text-40">({count})</span>
+            {t("heading")} <span className="text-text-40">({count})</span>
           </span>
           <button
             type="button"
-            aria-label="Zatvori korpu"
+            aria-label={t("closeLabel")}
             onClick={closeDrawer}
             className="cursor-pointer text-text-60 transition-colors duration-200 hover:text-text"
           >
@@ -130,10 +135,10 @@ export function CartDrawer() {
         ) : items.length === 0 ? (
           <div className="flex flex-1 flex-col items-start gap-6 px-6 py-12">
             <p className="font-mono text-[11px] tracking-[.1em] text-text-40 uppercase">
-              Vaša korpa je prazna
+              {t("empty")}
             </p>
             <Button href="/" trailingArrow onClick={closeDrawer}>
-              NASTAVI KUPOVINU
+              {t("continueShopping")}
             </Button>
           </div>
         ) : (
@@ -151,7 +156,7 @@ export function CartDrawer() {
 
             <div className="shrink-0 border-t border-hairline px-6 py-6">
               <div className="flex items-center justify-between">
-                <span className="text-body text-text">Međuzbir</span>
+                <span className="text-body text-text">{t("subtotal")}</span>
                 <span className="text-price text-accent">
                   {formatPrice(subtotal)}
                 </span>
@@ -163,7 +168,7 @@ export function CartDrawer() {
                   className="w-full"
                   onClick={closeDrawer}
                 >
-                  NASTAVI NA PLAĆANJE
+                  {t("proceedToCheckout")}
                 </Button>
                 <Button
                   href="/korpa"
@@ -171,7 +176,7 @@ export function CartDrawer() {
                   className="w-full"
                   onClick={closeDrawer}
                 >
-                  PRIKAŽI KORPU
+                  {t("viewCart")}
                 </Button>
               </div>
             </div>

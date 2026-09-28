@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BurgerIcon, ChevronRightIcon, CloseIcon } from "@/components/icons";
@@ -43,9 +44,18 @@ function CartChip() {
   );
 }
 
+/** Slug of the category page currently open, if any. `usePathname()` from
+ * next-intl returns the internal route template ("/kategorija/[slug]") once
+ * localized pathnames are configured, so the slug has to come from params. */
+function useActiveCategorySlug(): string | null {
+  const pathname = usePathname();
+  const params = useParams<{ slug?: string }>();
+  return pathname === "/kategorija/[slug]" ? (params.slug ?? null) : null;
+}
+
 function CategoryNav({ categories }: { categories: ProductCategory[] }) {
   const t = useTranslations("Header");
-  const pathname = usePathname();
+  const activeSlug = useActiveCategorySlug();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -77,12 +87,11 @@ function CategoryNav({ categories }: { categories: ProductCategory[] }) {
         className="scrollbar-hide flex h-12 items-center gap-8.5 overflow-x-auto label-nav text-text-60"
       >
         {categories.map((category) => {
-          const href = `/kategorija/${category.slug}`;
-          const active = pathname.startsWith(href);
+          const active = category.slug === activeSlug;
           return (
             <Link
               key={category.slug}
-              href={href}
+              href={{ pathname: "/kategorija/[slug]", params: { slug: category.slug } }}
               aria-current={active ? "page" : undefined}
               className={`shrink-0 border-b pb-0.5 whitespace-nowrap transition-colors duration-200 ${
                 active
@@ -126,7 +135,6 @@ interface MobileMenuDrawerProps {
   open: boolean;
   onClose: () => void;
   categories: ProductCategory[];
-  pathname: string;
 }
 
 /**
@@ -137,8 +145,9 @@ interface MobileMenuDrawerProps {
  * sidesteps that entirely, same reason src/components/cart/CartDrawer.tsx
  * lives at the layout root rather than inside Header.
  */
-function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDrawerProps) {
+function MobileMenuDrawer({ open, onClose, categories }: MobileMenuDrawerProps) {
   const t = useTranslations("Header");
+  const activeSlug = useActiveCategorySlug();
   return (
     <div
       className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
@@ -176,12 +185,11 @@ function MobileMenuDrawer({ open, onClose, categories, pathname }: MobileMenuDra
 
           <nav aria-label={t("categoryNavAriaLabel")} className="mt-8 flex flex-col">
             {categories.map((category) => {
-              const href = `/kategorija/${category.slug}`;
-              const active = pathname.startsWith(href);
+              const active = category.slug === activeSlug;
               return (
                 <Link
                   key={category.slug}
-                  href={href}
+                  href={{ pathname: "/kategorija/[slug]", params: { slug: category.slug } }}
                   aria-current={active ? "page" : undefined}
                   className={`flex min-h-[52px] items-center border-b border-hairline font-mono text-[13px] tracking-[.14em] uppercase transition-colors duration-200 ${
                     active ? "text-accent" : "text-text-60 hover:text-text"
@@ -299,7 +307,6 @@ export function Header({ categories }: HeaderProps) {
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
             categories={categories}
-            pathname={pathname}
           />,
           document.body,
         )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { VariantSelector } from "@/components/ui/VariantSelector";
@@ -13,6 +14,8 @@ export interface ProductPurchasePanelProps {
 }
 
 export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
+  const t = useTranslations("ProductPurchasePanel");
+  const tStock = useTranslations("StockStatus");
   const addItem = useCartStore((s) => s.addItem);
   const [variation, setVariation] = useState<ProductVariation | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -72,10 +75,10 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
       )}
 
       {stockStatus === "OUT_OF_STOCK" && (
-        <p className="label-nav text-danger">TRENUTNO NEDOSTUPNO</p>
+        <p className="label-nav text-danger">{tStock("outOfStock")}</p>
       )}
       {stockStatus === "ON_BACKORDER" && (
-        <p className="label-nav text-warning">DOSTUPNO PO PORUDŽBINI</p>
+        <p className="label-nav text-warning">{tStock("onBackorder")}</p>
       )}
 
       <div className="flex flex-wrap items-center gap-4">
@@ -86,12 +89,12 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
           trailingArrow
           className="disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {justAdded ? "DODATO U KORPU" : "DODAJ U KORPU"}
+          {justAdded ? t("addedToCart") : t("addToCart")}
         </Button>
       </div>
 
       <Button href="/kontakt" variant="secondary" compact className="self-start">
-        PITAJ ZA MONTAŽU
+        {t("askInstallation")}
       </Button>
     </div>
   );

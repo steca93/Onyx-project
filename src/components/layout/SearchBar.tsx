@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CloseIcon, SearchIcon } from "@/components/icons";
@@ -16,11 +16,14 @@ export interface SearchBarProps {
 // SearchBar instance (desktop bar + mobile drawer both mount one). Once this
 // resolves, every keystroke after is a client-side filter, not a network
 // call — that's what makes the dropdown feel instant.
-let indexPromise: Promise<SearchIndexProduct[]> | null = null;
+// Keyed by locale: switching language is a client-side navigation, so the
+// module (and this cache) survives it.
+const indexPromises = new Map<string, Promise<SearchIndexProduct[]>>();
 
-function fetchIndex(): Promise<SearchIndexProduct[]> {
+function fetchIndex(locale: string): Promise<SearchIndexProduct[]> {
+  let indexPromise = indexPromises.get(locale);
   if (!indexPromise) {
-    indexPromise = fetch("/api/search-index")
+    indexPromise = fetch(`/api/search-index/${locale}`)
       .then((res) => {
         if (!res.ok) throw new Error(`search-index ${res.status}`);
         return res.json() as Promise<SearchIndexProduct[]>;
@@ -30,15 +33,16 @@ function fetchIndex(): Promise<SearchIndexProduct[]> {
         // transiently — let the next search attempt retry instead of
         // caching the miss for the rest of the page's lifetime.
         if (!Array.isArray(data) || data.length === 0) {
-          indexPromise = null;
+          indexPromises.delete(locale);
           return [];
         }
         return data;
       })
       .catch(() => {
-        indexPromise = null;
+        indexPromises.delete(locale);
         return [];
       });
+    indexPromises.set(locale, indexPromise);
   }
   return indexPromise;
 }
@@ -65,6 +69,7 @@ function useDebounce<T>(value: T, delay: number): T {
 
 export function SearchBar({ className = "" }: SearchBarProps) {
   const t = useTranslations("SearchBar");
+  const locale = useLocale();
   const router = useRouter();
 
   const [query, setQuery] = useState("");
@@ -82,8 +87,8 @@ export function SearchBar({ className = "" }: SearchBarProps) {
 
   // Warm the index up as soon as the bar mounts, before the user types.
   useEffect(() => {
-    fetchIndex();
-  }, []);
+    fetchIndex(locale);
+  }, [locale]);
 
   // Filter the (already-fetched) index whenever the debounced query changes.
   // The "too short, clear everything" case is handled synchronously in
@@ -94,7 +99,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
 
     let cancelled = false;
 
-    fetchIndex().then((index) => {
+    fetchIndex(locale).then((index) => {
       if (cancelled) return;
       setResults(filterProducts(index, debouncedQuery));
       setResolvedQuery(debouncedQuery);
@@ -104,7 +109,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery]);
+  }, [debouncedQuery, locale]);
 
   const fetched = resolvedQuery === debouncedQuery && debouncedQuery.length >= 2;
   const loading = debouncedQuery.length >= 2 && !fetched;
@@ -144,7 +149,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
     const trimmed = query.trim();
     if (!trimmed) return;
     setOpen(false);
-    router.push(`/pretraga?q=${encodeURIComponent(trimmed)}`);
+    router.push({ pathname: "/pretraga", query: { q: trimmed } });
   }
 
   function handleResultClick() {
@@ -239,7 +244,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
                 {results.map((product) => (
                   <li key={product.id} className="border-b border-hairline last:border-0">
                     <Link
-                      href={`/proizvod/${product.slug}`}
+                      href={{ pathname: "/proizvod/[slug]", params: { slug: product.slug } }}
                       onClick={handleResultClick}
                       className="group flex items-center gap-3.5 px-4 py-3 transition-colors duration-200 hover:bg-onyx-800"
                     >
@@ -262,7 +267,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
               </ul>
 
               <Link
-                href={`/pretraga?q=${encodeURIComponent(trimmedQuery)}`}
+                href={{ pathname: "/pretraga", query: { q: trimmedQuery } }}
                 onClick={handleResultClick}
                 className="flex items-center gap-2 border-t border-hairline px-4 py-3 label-nav text-accent transition-colors duration-200 hover:bg-onyx-800 hover:text-accent-hi"
               >

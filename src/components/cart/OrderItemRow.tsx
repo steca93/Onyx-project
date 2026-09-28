@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { useProductName } from "@/i18n/catalog/ProductNamesProvider";
 import { Link } from "@/i18n/navigation";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import type { CartLineItem } from "@/lib/cart/types";
@@ -16,11 +20,13 @@ export interface OrderItemRowProps {
  */
 export function OrderItemRow({ item }: OrderItemRowProps) {
   const lineTotal = Number.parseFloat(item.price) * item.quantity;
+  const name = useProductName(item.slug, item.name);
+  const t = useTranslations("CartLineItem");
 
   return (
     <div className="flex gap-3.5">
       <Link
-        href={`/proizvod/${item.slug}`}
+        href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
         className="relative h-14 w-14 shrink-0 border border-hairline bg-onyx-900"
       >
         <ImageSlot image={item.image} fill sizes="56px" />
@@ -28,10 +34,10 @@ export function OrderItemRow({ item }: OrderItemRowProps) {
 
       <div className="min-w-0 flex-1">
         <Link
-          href={`/proizvod/${item.slug}`}
+          href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
           className="text-product-name line-clamp-2 text-text hover:text-accent"
         >
-          {item.name}
+          {name}
         </Link>
         {item.attributes && item.attributes.length > 0 && (
           <div className="mt-1 font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
@@ -39,7 +45,7 @@ export function OrderItemRow({ item }: OrderItemRowProps) {
           </div>
         )}
         <div className="mt-1 font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
-          Količina: {item.quantity}
+          {t("quantity", { quantity: item.quantity })}
         </div>
       </div>
 

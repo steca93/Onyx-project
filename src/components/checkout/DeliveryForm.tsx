@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import type { CheckoutFormValues } from "@/lib/checkout/schema";
@@ -8,37 +9,39 @@ export interface DeliveryFormProps {
 }
 
 export function DeliveryForm({ register, errors }: DeliveryFormProps) {
+  const t = useTranslations("DeliveryForm");
+
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
       <div className="sm:col-span-2">
         <Input
-          label="IME I PREZIME"
+          label={t("fullName")}
           {...register("fullName")}
           error={errors.fullName?.message}
         />
       </div>
       <Input
-        label="EMAIL"
+        label={t("email")}
         type="email"
         {...register("email")}
         error={errors.email?.message}
       />
       <Input
-        label="TELEFON"
+        label={t("phone")}
         type="tel"
         {...register("phone")}
         error={errors.phone?.message}
       />
       <div className="sm:col-span-2">
         <Input
-          label="ADRESA"
+          label={t("address")}
           {...register("address")}
           error={errors.address?.message}
         />
       </div>
-      <Input label="GRAD" {...register("city")} error={errors.city?.message} />
+      <Input label={t("city")} {...register("city")} error={errors.city?.message} />
       <Input
-        label="POŠTANSKI BROJ"
+        label={t("postalCode")}
         {...register("postalCode")}
         error={errors.postalCode?.message}
       />

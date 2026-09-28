@@ -12,7 +12,7 @@ export interface KitCardProps {
 export function KitCard({ product, kicker, className = "" }: KitCardProps) {
   return (
     <Link
-      href={`/proizvod/${product.slug}`}
+      href={{ pathname: "/proizvod/[slug]", params: { slug: product.slug } }}
       className={`group notch notch-22 flex w-[424px] shrink-0 flex-col border border-hairline bg-onyx-800 transition-colors duration-200 hover:border-[rgba(42,179,230,.4)] ${className}`}
     >
       <div className="relative h-[300px] border-b border-hairline">

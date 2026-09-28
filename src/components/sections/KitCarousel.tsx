@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { KitCard } from "@/components/ui/KitCard";
@@ -11,6 +12,7 @@ export interface KitCarouselProps {
 }
 
 export function KitCarousel({ kits }: KitCarouselProps) {
+  const t = useTranslations("KitCarousel");
   const trackRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const lastPage = 1;
@@ -29,13 +31,13 @@ export function KitCarousel({ kits }: KitCarouselProps) {
     <section className="container-onyx mt-19 lg:mt-24">
       <div className="mb-10 flex items-end justify-between">
         <div>
-          <Eyebrow className="mb-4">IZDVOJENO</Eyebrow>
-          <h2 className="text-[32px] sm:text-h2">Setovi za montažu</h2>
+          <Eyebrow className="mb-4">{t("eyebrow")}</Eyebrow>
+          <h2 className="text-[32px] sm:text-h2">{t("heading")}</h2>
         </div>
         <div className="hidden gap-2.5 sm:flex">
           <button
             type="button"
-            aria-label="Prethodni setovi"
+            aria-label={t("previous")}
             disabled={page === 0}
             onClick={() => scrollToPage(page - 1)}
             className="flex h-11.5 w-11.5 items-center justify-center border border-hairline-strong text-text-60 transition-colors duration-200 hover:border-accent hover:text-accent disabled:opacity-30"
@@ -44,7 +46,7 @@ export function KitCarousel({ kits }: KitCarouselProps) {
           </button>
           <button
             type="button"
-            aria-label="Sledeći setovi"
+            aria-label={t("next")}
             disabled={page === lastPage}
             onClick={() => scrollToPage(page + 1)}
             className="flex h-11.5 w-11.5 items-center justify-center border border-hairline-strong text-text-60 transition-colors duration-200 hover:border-accent hover:text-accent disabled:opacity-30"
@@ -70,7 +72,7 @@ export function KitCarousel({ kits }: KitCarouselProps) {
           <button
             key={i}
             type="button"
-            aria-label={`Idi na stranicu ${i + 1}`}
+            aria-label={t("goToPage", { page: i + 1 })}
             aria-current={page === i}
             onClick={() => scrollToPage(i)}
             className={`h-0.5 w-8.5 ${page === i ? "bg-accent" : "bg-[rgba(255,255,255,.18)]"}`}

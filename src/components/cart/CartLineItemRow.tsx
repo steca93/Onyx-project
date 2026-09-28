@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { useProductName } from "@/i18n/catalog/ProductNamesProvider";
 import { Link } from "@/i18n/navigation";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { ImageSlot } from "@/components/ui/ImageSlot";
@@ -16,11 +20,13 @@ export function CartLineItemRow({
   onRemove,
 }: CartLineItemRowProps) {
   const lineTotal = Number.parseFloat(item.price) * item.quantity;
+  const name = useProductName(item.slug, item.name);
+  const t = useTranslations("CartLineItem");
 
   return (
     <div className="flex flex-col gap-5 border-b border-hairline py-6 sm:flex-row sm:items-center sm:gap-6">
       <Link
-        href={`/proizvod/${item.slug}`}
+        href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
         className="relative h-20 w-20 shrink-0 border border-hairline bg-onyx-800"
       >
         <ImageSlot image={item.image} fill sizes="80px" />
@@ -28,10 +34,10 @@ export function CartLineItemRow({
 
       <div className="min-w-0 flex-1">
         <Link
-          href={`/proizvod/${item.slug}`}
+          href={{ pathname: "/proizvod/[slug]", params: { slug: item.slug } }}
           className="text-product-name block text-text hover:text-accent"
         >
-          {item.name}
+          {name}
         </Link>
         {item.attributes && item.attributes.length > 0 && (
           <div className="mt-1.5 font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
@@ -43,7 +49,7 @@ export function CartLineItemRow({
           onClick={onRemove}
           className="mt-2 cursor-pointer font-mono text-[10px] tracking-[.16em] text-text-40 uppercase transition-colors duration-200 hover:text-danger"
         >
-          UKLONI
+          {t("remove")}
         </button>
       </div>
 

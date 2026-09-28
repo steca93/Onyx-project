@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ProductPurchasePanel } from "@/components/sections/ProductPurchasePanel";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -10,10 +11,11 @@ import {
   getProductBySlug,
   getRelatedProducts,
 } from "@/lib/repo";
+import { toLocale } from "@/i18n/routing";
 import { stripHtml } from "@/lib/utils/strip-html";
 
 interface ProductPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -40,9 +42,11 @@ const STOCK_AVAILABILITY: Record<string, string> = {
 };
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params;
+  const { locale: requested, slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
+
+  const t = await getTranslations({ locale: toLocale(requested), namespace: "ProductPage" });
 
   const related = await getRelatedProducts(slug, 4);
   const category = product.productCategories.nodes[0];
@@ -109,19 +113,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
           tabs={[
             {
               id: "opis",
-              label: "OPIS",
+              label: t("tabs.description"),
               content: stripHtml(product.description) ? (
                 <div
                   className="prose-onyx max-w-[720px] text-body text-text-60"
                   dangerouslySetInnerHTML={{ __html: product.description! }}
                 />
               ) : (
-                <p className="max-w-[720px] text-body text-text-60">Opis uskoro.</p>
+                <p className="max-w-[720px] text-body text-text-60">{t("descriptionSoon")}</p>
               ),
             },
             {
               id: "specifikacija",
-              label: "SPECIFIKACIJA",
+              label: t("tabs.specs"),
               content:
                 product.specs.length > 0 ? (
                   <div className="lattice max-w-[620px] grid-cols-2">
@@ -135,24 +139,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-body text-text-60">Specifikacija uskoro.</p>
+                  <p className="text-body text-text-60">{t("specsSoon")}</p>
                 ),
             },
             {
               id: "montaza",
-              label: "MONTAŽA",
+              label: t("tabs.installation"),
               content: (
                 <p className="max-w-[720px] text-body text-text-60">
-                  {product.installationNotes ?? "Uputstvo za montažu uskoro."}
+                  {product.installationNotes ?? t("installationSoon")}
                 </p>
               ),
             },
             {
               id: "garancija",
-              label: "GARANCIJA",
+              label: t("tabs.warranty"),
               content: (
                 <p className="max-w-[720px] text-body text-text-60">
-                  {product.warrantyNotes ?? "Podaci o garanciji uskoro."}
+                  {product.warrantyNotes ?? t("warrantySoon")}
                 </p>
               ),
             },
@@ -162,8 +166,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {related.length > 0 && (
         <div className="mt-20 lg:mt-24">
-          <Eyebrow className="mb-4">SLIČNI PROIZVODI</Eyebrow>
-          <h2 className="mb-10 text-[32px] sm:text-h2">Povezani proizvodi</h2>
+          <Eyebrow className="mb-4">{t("relatedEyebrow")}</Eyebrow>
+          <h2 className="mb-10 text-[32px] sm:text-h2">{t("relatedTitle")}</h2>
           <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />

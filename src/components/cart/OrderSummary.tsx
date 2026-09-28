@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { OrderItemRow } from "@/components/cart/OrderItemRow";
 import { siteSettings } from "@/data/site-settings";
@@ -21,6 +22,7 @@ export function OrderSummary({
   showItems = false,
   children,
 }: OrderSummaryProps) {
+  const t = useTranslations("OrderSummary");
   const subtotal = cartSubtotal(items);
   const threshold = siteSettings.freeShippingThresholdRsd;
   const remaining = Math.max(0, threshold - subtotal);
@@ -28,7 +30,7 @@ export function OrderSummary({
 
   return (
     <div className="bg-promo-panel border border-hairline p-7 sm:p-8">
-      <div className="eyebrow mb-6">PREGLED PORUDŽBINE</div>
+      <div className="eyebrow mb-6">{t("heading")}</div>
 
       {showItems && (
         <div className="mb-6 flex flex-col gap-5 border-b border-hairline pb-6">
@@ -39,7 +41,7 @@ export function OrderSummary({
       )}
 
       <div className="flex items-center justify-between text-body-sm text-text-60">
-        <span>Međuzbir</span>
+        <span>{t("subtotal")}</span>
         <span className="text-price-sm text-text">{formatPrice(subtotal)}</span>
       </div>
 
@@ -47,11 +49,11 @@ export function OrderSummary({
         <div className="mt-6">
           {remaining > 0 ? (
             <p className="font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
-              Još {formatPrice(remaining)} do besplatne dostave
+              {t("remainingForFreeShipping", { amount: formatPrice(remaining) })}
             </p>
           ) : (
             <p className="font-mono text-[10px] tracking-[.1em] text-success uppercase">
-              Ostvarena besplatna dostava
+              {t("freeShippingReached")}
             </p>
           )}
           <div className="mt-2.5 h-1 w-full border border-hairline bg-onyx-800">
@@ -64,7 +66,7 @@ export function OrderSummary({
       )}
 
       <div className="mt-6 flex items-center justify-between border-t border-hairline pt-6">
-        <span className="text-body text-text">Ukupno</span>
+        <span className="text-body text-text">{t("total")}</span>
         <span className="text-price text-accent">{formatPrice(subtotal)}</span>
       </div>
 

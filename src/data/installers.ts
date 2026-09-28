@@ -1,10 +1,20 @@
+export type WorkingDays = "monFri" | "monSat" | "sat";
+
+export interface WorkingHours {
+  days: WorkingDays;
+  /** Two-digit hour, e.g. "08". */
+  from: string;
+  to: string;
+}
+
 export interface Installer {
   id: string;
   name: string;
   city: string;
   address: string;
   phone: string;
-  workingHours: string;
+  /** Rendered via the "InstallersPage" messages (days + hoursRange). */
+  workingHours: WorkingHours[];
   mapsUrl: string;
 }
 
@@ -19,7 +29,7 @@ export const installers: Installer[] = [
     city: "Beograd",
     address: "Bulevar Oslobođenja 12, Beograd",
     phone: "+381 11 2456 890",
-    workingHours: "Pon–Sub 08–18h",
+    workingHours: [{ days: "monSat", from: "08", to: "18" }],
     mapsUrl: mapsUrl("Bulevar Oslobođenja 12, Beograd"),
   },
   {
@@ -28,7 +38,7 @@ export const installers: Installer[] = [
     city: "Novi Sad",
     address: "Rumenačka 68, Novi Sad",
     phone: "+381 21 4789 213",
-    workingHours: "Pon–Pet 08–17h",
+    workingHours: [{ days: "monFri", from: "08", to: "17" }],
     mapsUrl: mapsUrl("Rumenačka 68, Novi Sad"),
   },
   {
@@ -37,7 +47,10 @@ export const installers: Installer[] = [
     city: "Niš",
     address: "Bulevar Nemanjića 45, Niš",
     phone: "+381 18 4523 671",
-    workingHours: "Pon–Pet 09–17h, Sub 09–14h",
+    workingHours: [
+      { days: "monFri", from: "09", to: "17" },
+      { days: "sat", from: "09", to: "14" },
+    ],
     mapsUrl: mapsUrl("Bulevar Nemanjića 45, Niš"),
   },
   {
@@ -46,7 +59,7 @@ export const installers: Installer[] = [
     city: "Kragujevac",
     address: "Kralja Petra I 88, Kragujevac",
     phone: "+381 34 6712 340",
-    workingHours: "Pon–Pet 08–16h",
+    workingHours: [{ days: "monFri", from: "08", to: "16" }],
     mapsUrl: mapsUrl("Kralja Petra I 88, Kragujevac"),
   },
   {
@@ -55,7 +68,7 @@ export const installers: Installer[] = [
     city: "Subotica",
     address: "Segedinski put 92, Subotica",
     phone: "+381 24 5541 780",
-    workingHours: "Pon–Pet 08–17h",
+    workingHours: [{ days: "monFri", from: "08", to: "17" }],
     mapsUrl: mapsUrl("Segedinski put 92, Subotica"),
   },
   {
@@ -64,7 +77,10 @@ export const installers: Installer[] = [
     city: "Čačak",
     address: "Gospodar Jovanova 21, Čačak",
     phone: "+381 32 3345 129",
-    workingHours: "Pon–Pet 08–16h, Sub 09–13h",
+    workingHours: [
+      { days: "monFri", from: "08", to: "16" },
+      { days: "sat", from: "09", to: "13" },
+    ],
     mapsUrl: mapsUrl("Gospodar Jovanova 21, Čačak"),
   },
   {
@@ -73,7 +89,7 @@ export const installers: Installer[] = [
     city: "Kraljevo",
     address: "Cara Dušana 14, Kraljevo",
     phone: "+381 36 3312 456",
-    workingHours: "Pon–Pet 09–17h",
+    workingHours: [{ days: "monFri", from: "09", to: "17" }],
     mapsUrl: mapsUrl("Cara Dušana 14, Kraljevo"),
   },
   {
@@ -82,7 +98,7 @@ export const installers: Installer[] = [
     city: "Novi Pazar",
     address: "AVNOJ-a 33, Novi Pazar",
     phone: "+381 20 3321 998",
-    workingHours: "Pon–Sub 08–17h",
+    workingHours: [{ days: "monSat", from: "08", to: "17" }],
     mapsUrl: mapsUrl("AVNOJ-a 33, Novi Pazar"),
   },
   {
@@ -91,7 +107,7 @@ export const installers: Installer[] = [
     city: "Zrenjanin",
     address: "Kralja Aleksandra I 57, Zrenjanin",
     phone: "+381 23 5610 224",
-    workingHours: "Pon–Pet 08–16h",
+    workingHours: [{ days: "monFri", from: "08", to: "16" }],
     mapsUrl: mapsUrl("Kralja Aleksandra I 57, Zrenjanin"),
   },
   {
@@ -100,7 +116,7 @@ export const installers: Installer[] = [
     city: "Pančevo",
     address: "Vojvode Radomira Putnika 9, Pančevo",
     phone: "+381 13 3348 765",
-    workingHours: "Pon–Pet 09–17h",
+    workingHours: [{ days: "monFri", from: "09", to: "17" }],
     mapsUrl: mapsUrl("Vojvode Radomira Putnika 9, Pančevo"),
   },
 ];

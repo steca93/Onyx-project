@@ -24,6 +24,45 @@ export interface LiveOrderResult {
   total: number;
 }
 
+/**
+ * Stable, locale-independent reasons a checkout can fail — the page maps
+ * each one to a "CheckoutErrors.submit.*" message. WooCommerce's own
+ * `message` is written in whatever language the WordPress site runs in, so
+ * it's kept only as the Error's (developer-facing) message, never shown.
+ */
+export type CheckoutErrorCode =
+  | "generic"
+  | "outOfStock"
+  | "invalidDetails"
+  | "sessionExpired"
+  | "paymentMethod"
+  | "emptyCart";
+
+export class CheckoutError extends Error {
+  readonly code: CheckoutErrorCode;
+
+  constructor(code: CheckoutErrorCode, message?: string) {
+    super(message ?? code);
+    this.name = "CheckoutError";
+    this.code = code;
+  }
+}
+
+/** Buckets the Store API's error `code` (e.g.
+ * `woocommerce_rest_product_out_of_stock`, `woocommerce_rest_invalid_nonce`,
+ * `rest_invalid_param`) into the handful of cases we have copy for. */
+function checkoutErrorCodeFromStoreApi(code: unknown): CheckoutErrorCode {
+  if (typeof code !== "string") return "generic";
+  if (code.includes("stock") || code.includes("not_purchasable")) return "outOfStock";
+  if (code.includes("nonce")) return "sessionExpired";
+  if (code.includes("cart_empty") || code.includes("empty_cart")) return "emptyCart";
+  if (code.includes("payment_method")) return "paymentMethod";
+  if (code === "rest_invalid_param" || code.includes("invalid_address") || code.includes("email")) {
+    return "invalidDetails";
+  }
+  return "generic";
+}
+
 interface StoreApiAddress {
   first_name: string;
   last_name: string;
@@ -102,8 +141,9 @@ export async function submitLiveOrder(
 
   const body = await res.json().catch(() => null);
   if (!res.ok) {
-    throw new Error(
-      body?.message ?? "Greška prilikom slanja porudžbine. Pokušaj ponovo.",
+    throw new CheckoutError(
+      checkoutErrorCodeFromStoreApi(body?.code),
+      body?.message ?? `Checkout failed with HTTP ${res.status}`,
     );
   }
 

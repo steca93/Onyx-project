@@ -52,6 +52,10 @@ function filterProducts(
   if (opts.maxPrice !== undefined) {
     result = result.filter((p) => priceNumber(p) <= opts.maxPrice!);
   }
+  if (opts.slugs) {
+    const allowed = new Set(opts.slugs);
+    result = result.filter((p) => allowed.has(p.slug));
+  }
   if (opts.inStockOnly) {
     result = result.filter((p) => p.stockStatus === "IN_STOCK");
   }

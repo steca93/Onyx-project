@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { MinusIcon, PlusIcon } from "@/components/icons";
 
 export interface QuantityStepperProps {
@@ -13,6 +14,7 @@ export function QuantityStepper({
   min = 1,
   max,
 }: QuantityStepperProps) {
+  const t = useTranslations("QuantityStepper");
   const canDecrease = value > min;
   const canIncrease = max === undefined || value < max;
 
@@ -20,7 +22,7 @@ export function QuantityStepper({
     <div className="inline-flex h-11 items-stretch border border-hairline">
       <button
         type="button"
-        aria-label="Smanji količinu"
+        aria-label={t("decrease")}
         disabled={!canDecrease}
         onClick={() => onChange(Math.max(min, value - 1))}
         className="flex w-10 cursor-pointer items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-text-60"
@@ -32,7 +34,7 @@ export function QuantityStepper({
       </span>
       <button
         type="button"
-        aria-label="Povećaj količinu"
+        aria-label={t("increase")}
         disabled={!canIncrease}
         onClick={() => onChange(max ? Math.min(max, value + 1) : value + 1)}
         className="flex w-10 cursor-pointer items-center justify-center text-text-60 transition-colors duration-200 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-text-60"

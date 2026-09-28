@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import { Link, type AppHref } from "@/i18n/navigation";
 import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
@@ -19,7 +19,7 @@ type ButtonAsButton = SharedProps &
   ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
 
 type ButtonAsLink = SharedProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & { href: AppHref };
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
@@ -57,7 +57,7 @@ export function Button({
       <Link
         href={href}
         className={base}
-        {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+        {...(rest as Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">)}
       >
         {content}
       </Link>

@@ -133,23 +133,416 @@
   },
   "BecomeInstallerPage": {
     "title": "Installateur werden",
-    "metaDescription": "Werden Sie Teil des Netzwerks autorisierter ONYX-Zentren für die Montage von PPF-Folien und Keramikversiegelungen."
+    "metaDescription": "Werden Sie Teil des Netzwerks autorisierter ONYX-Zentren für die Montage von PPF-Folien und Keramikversiegelungen.",
+    "eyebrow": "WERDEN SIE TEIL DES NETZWERKS",
+    "description": "Werden Sie Teil des Netzwerks autorisierter ONYX Center für die Montage von PPF-Folien und Keramikversiegelungen in Serbien und der Region.",
+    "benefits": [
+      {
+        "title": "Schulung & Zertifizierung",
+        "text": "Kostenlose technische Schulung zur Montage von PPF-Folien und Keramikversiegelungen, inklusive offiziellem ONYX Zertifikat."
+      },
+      {
+        "title": "Marketing-Unterstützung",
+        "text": "Ein Eintrag im offiziellen Netzwerk autorisierter Center auf unserer Website, Werbematerialien und gemeinsame Kampagnen."
+      },
+      {
+        "title": "Bevorzugte Belieferung",
+        "text": "Direkter Einkauf zu Händlerpreisen und Vorrang bei limitierten Produktserien."
+      }
+    ],
+    "requirementsEyebrow": "VORAUSSETZUNGEN",
+    "requirementsHeading": "Was Sie benötigen",
+    "requirements": [
+      {
+        "number": "01",
+        "text": "Eine Werkstatt oder geeignete Räumlichkeiten für die Fahrzeugmontage"
+      },
+      {
+        "number": "02",
+        "text": "Abgeschlossene ONYX Schulung zur Montage von Folien und Versiegelungen"
+      },
+      {
+        "number": "03",
+        "text": "Ein unterzeichneter Vertriebsvertrag mit ONYX Evolution"
+      }
+    ],
+    "applyEyebrow": "BEWERBUNG",
+    "applyHeading": "Bewerbung senden",
+    "successMessage": "Ihre Bewerbung wurde gesendet. Unser Team für Netzwerkentwicklung wird sich in den nächsten Tagen bei Ihnen melden.",
+    "companyLabel": "FIRMENNAME",
+    "pibLabel": "STEUERNUMMER (PIB)",
+    "cityLabel": "STADT",
+    "contactNameLabel": "ANSPRECHPARTNER",
+    "emailLabel": "E-MAIL",
+    "phoneLabel": "TELEFON",
+    "messageLabel": "NACHRICHT",
+    "submitLabel": "BEWERBUNG SENDEN",
+    "submittingLabel": "WIRD GESENDET…",
+    "companyError": "Geben Sie den Firmennamen ein.",
+    "pibError": "Die Steuernummer (PIB) muss genau 9 Ziffern haben.",
+    "cityError": "Geben Sie die Stadt ein.",
+    "contactNameError": "Geben Sie den Namen des Ansprechpartners ein.",
+    "emailError": "Geben Sie eine gültige E-Mail-Adresse ein.",
+    "phoneError": "Geben Sie eine Telefonnummer ein.",
+    "messageError": "Die Nachricht muss mindestens 10 Zeichen lang sein."
   },
   "CartPage": {
-    "title": "Warenkorb"
+    "title": "Warenkorb",
+    "eyebrow": "IHRE BESTELLUNG",
+    "heading": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "continueShopping": "WEITER EINKAUFEN",
+    "proceedToCheckout": "ZUR KASSE"
   },
   "WarrantyPage": {
     "title": "Garantie registrieren",
-    "metaDescription": "Registrieren Sie Ihre ONYX Warranty für eine montierte PPF-Folie oder Keramikversiegelung und erhalten Sie ein digitales Zertifikat."
+    "metaDescription": "Registrieren Sie Ihre ONYX Warranty für eine montierte PPF-Folie oder Keramikversiegelung und erhalten Sie ein digitales Zertifikat.",
+    "breadcrumb": "Garantie",
+    "description": "Jede Montage in einem autorisierten Center ist mit einer {years}-jährigen Garantie gegen Vergilbung, Rissbildung und Ablösen der Folie abgesichert.",
+    "steps": [
+      {
+        "number": "01",
+        "text": "Fahrgestellnummer und Montagedatum eingeben"
+      },
+      {
+        "number": "02",
+        "text": "Rechnung des autorisierten Centers beifügen"
+      },
+      {
+        "number": "03",
+        "text": "Digitales Zertifikat per E-Mail erhalten"
+      }
+    ],
+    "successEyebrow": "GARANTIE REGISTRIERT",
+    "successTitle": "Vielen Dank",
+    "successBody": "Das digitale Zertifikat wurde an Ihre E-Mail-Adresse gesendet.",
+    "certificateNumberLabel": "ZERTIFIKATSNUMMER",
+    "chassisNumberLabel": "FAHRGESTELLNUMMER",
+    "installationDateLabel": "MONTAGEDATUM",
+    "installerLabel": "AUTORISIERTES CENTER",
+    "installerPlaceholder": "Center auswählen",
+    "ownerNameLabel": "VOR- UND NACHNAME DES HALTERS",
+    "emailLabel": "E-MAIL",
+    "phoneLabel": "TELEFON",
+    "receiptLabel": "RECHNUNG (PDF/BILD)",
+    "consentLabel": "Ich stimme den Bedingungen des ONYX Warranty Programms zu.",
+    "submitLabel": "GARANTIE REGISTRIEREN",
+    "submittingLabel": "WIRD VERARBEITET…"
   },
   "InstallersPage": {
     "title": "Autorisierte Zentren",
-    "metaDescription": "Netzwerk autorisierter ONYX-Installateure für die Montage von PPF-Folien und Keramikversiegelungen in Serbien."
+    "metaDescription": "Netzwerk autorisierter ONYX-Installateure für die Montage von PPF-Folien und Keramikversiegelungen in Serbien.",
+    "description": "Ein Netzwerk autorisierter Installateure für ONYX Folien und Versiegelungen in Serbien.",
+    "cityFilterLabel": "Nach Stadt filtern",
+    "allCities": "ALLE",
+    "viewOnMap": "AUF KARTE ANSEHEN →",
+    "noResults": "Keine Center in dieser Stadt.",
+    "days": {
+      "monFri": "Mo–Fr",
+      "monSat": "Mo–Sa",
+      "sat": "Sa"
+    },
+    "hoursRange": "{days} {from}–{to} Uhr"
   },
   "CheckoutPage": {
-    "title": "Kasse"
+    "title": "Kasse",
+    "eyebrow": "BEZAHLUNG",
+    "heading": "Kasse",
+    "emptyCart": "Ihr Warenkorb ist leer — fügen Sie Produkte hinzu, bevor Sie zur Kasse gehen",
+    "backToCart": "ZURÜCK ZUM WARENKORB",
+    "shippingNotice": "Lieferung in 1–3 Werktagen · Kostenlos ab {amount}",
+    "sectionDelivery": "LIEFERUNG",
+    "sectionPayment": "ZAHLUNG",
+    "sectionReview": "ÜBERPRÜFUNG",
+    "deliverTo": "Lieferung an: {address}",
+    "notesLabel": "ANMERKUNG ZUR BESTELLUNG (OPTIONAL)",
+    "notesPlaceholder": "Z. B. zusätzliche Hinweise für den Kurier, gewünschter Liefertermin…",
+    "acceptTerms": "Ich stimme den <termsLink>Nutzungsbedingungen</termsLink> und der Datenschutzerklärung zu.",
+    "submitting": "WIRD BEARBEITET…",
+    "submit": "BESTELLUNG ABSCHICKEN"
   },
   "OrderConfirmationPage": {
-    "title": "Bestellbestätigung"
+    "title": "Bestellbestätigung",
+    "noOrderEyebrow": "BESTÄTIGUNG",
+    "noOrderHeading": "Keine Bestellung",
+    "noOrderBody": "Wir konnten keine aktuelle Bestellung zur Anzeige finden.",
+    "backHome": "ZURÜCK ZUR STARTSEITE",
+    "eyebrow": "BESTELLUNG EINGEGANGEN",
+    "heading": "Vielen Dank für Ihre Bestellung",
+    "emailNotice": "Wir senden die Bestätigung und die Lieferdetails an {email}.",
+    "orderNumber": "BESTELLNUMMER",
+    "items": "ARTIKEL",
+    "notes": "ANMERKUNG",
+    "total": "Gesamt",
+    "continueShopping": "WEITER EINKAUFEN"
+  },
+  "ProductPage": {
+    "tabs": {
+      "description": "BESCHREIBUNG",
+      "specs": "SPEZIFIKATIONEN",
+      "installation": "MONTAGE",
+      "warranty": "GARANTIE"
+    },
+    "descriptionSoon": "Beschreibung folgt in Kürze.",
+    "specsSoon": "Spezifikationen folgen in Kürze.",
+    "installationSoon": "Montageanleitung folgt in Kürze.",
+    "warrantySoon": "Garantieinformationen folgen in Kürze.",
+    "relatedEyebrow": "ÄHNLICHE PRODUKTE",
+    "relatedTitle": "Verwandte Produkte"
+  },
+  "CategoryPage": {
+    "sort": {
+      "featured": "EMPFOHLEN",
+      "priceAsc": "PREIS AUFSTEIGEND",
+      "priceDesc": "PREIS ABSTEIGEND",
+      "nameAsc": "NAME A-Z",
+      "newest": "NEUESTE"
+    },
+    "priceLabel": "PREIS (RSD)",
+    "minPlaceholder": "Min.",
+    "maxPlaceholder": "Max.",
+    "minPriceAria": "Mindestpreis",
+    "maxPriceAria": "Höchstpreis",
+    "inStockOnly": "Nur vorrätige Artikel",
+    "sortLabel": "Sortieren",
+    "applyFilters": "FILTER ANWENDEN",
+    "clearFilters": "FILTER ZURÜCKSETZEN →",
+    "productCount": "{count, plural, one {# PRODUKT} other {# PRODUKTE}}",
+    "empty": "KEINE PRODUKTE ENTSPRECHEN DEN GEWÄHLTEN FILTERN."
+  },
+  "SearchPage": {
+    "title": "Suche",
+    "titleWithQuery": "Suche: „{query}“",
+    "resultsFor": "Ergebnisse für „{query}“",
+    "allProducts": "Alle Produkte",
+    "productCount": "{count, plural, one {# PRODUKT} other {# PRODUKTE}}",
+    "empty": "KEINE ERGEBNISSE FÜR DIESE SUCHE.",
+    "backHome": "ZURÜCK ZUR STARTSEITE"
+  },
+  "ProductPurchasePanel": {
+    "addToCart": "IN DEN WARENKORB",
+    "addedToCart": "IN DEN WARENKORB GELEGT",
+    "askInstallation": "NACH MONTAGE FRAGEN"
+  },
+  "ProductGallery": {
+    "showImage": "Bild {index} anzeigen"
+  },
+  "StockStatus": {
+    "outOfStock": "DERZEIT NICHT VERFÜGBAR",
+    "onBackorder": "AUF BESTELLUNG ERHÄLTLICH"
+  },
+  "HomePage": {
+    "title": "ONYX EVOLUTION — PPF-Folien und Keramikversiegelungen",
+    "metaDescription": "Autorisierter Distributor von PPF-Folien und Keramikversiegelungen für Autos in Serbien. Bis zu {years} Jahre Garantie, Montage in autorisierten Centern.",
+    "ogDescription": "PPF-Folien und Keramikversiegelungen mit Herstellergarantie. Autorisierter Vertrieb und ein Installateur-Netzwerk in Serbien und der Region.",
+    "organizationDescription": "Autorisierter Distributor von PPF-Folien und Keramikversiegelungen für Autos in Serbien.",
+    "ctaEyebrow": "LIMITIERTE SERIE",
+    "ctaHeadingLine1": "Die neue Generation",
+    "ctaHeadingLine2": "des PPF-Schutzes",
+    "ctaBody": "200 µm Stärke, selbstheilende Schicht und ein Kleber, der beim Entfernen keine Rückstände hinterlässt.",
+    "ctaButton": "NEUHEITEN ENTDECKEN"
+  },
+  "SpecTicker": {
+    "warranty": "{years} JAHRE GARANTIE",
+    "selfHealing": "SELBSTHEILENDER TOP COAT",
+    "thickness": "8 MIL / 200 µm",
+    "clarity": "99 % TRANSPARENZ",
+    "centers": "40+ AUTORISIERTE CENTER"
+  },
+  "Hero": {
+    "eyebrow": "PPF WARRANTY PROGRAM",
+    "heading": "Schutz,<br></br>den man <accent>nicht sieht</accent>",
+    "body": "Selbstheilende PPF-Folien für Lack, Scheinwerfer und Felgen. 99 % optische Transparenz, Montage in autorisierten Centern und bis zu <strong>{years} Jahre</strong> Garantie.",
+    "exploreFilms": "FOLIEN ENTDECKEN",
+    "registerWarranty": "GARANTIE REGISTRIEREN"
+  },
+  "KitCarousel": {
+    "eyebrow": "EMPFEHLUNGEN",
+    "heading": "Montage-Sets",
+    "previous": "Vorherige Sets",
+    "next": "Nächste Sets",
+    "goToPage": "Zu Seite {page}"
+  },
+  "SplitPromo": {
+    "imageAlt": "PADS FÜR PROFESSIONELLES POLIEREN",
+    "eyebrow": "NEU IM SORTIMENT",
+    "headingLine1": "Professionelles",
+    "headingLine2": "Polieren",
+    "body": "Eine komplette Linie an Polierpads — von der groben Lackkorrektur bis zum finalen Glanz, für jeden Schritt der Fahrzeugaufbereitung.",
+    "button": "JETZT KAUFEN"
+  },
+  "Bestsellers": {
+    "eyebrow": "UNSERE FAVORITEN",
+    "heading": "Bestseller",
+    "viewAll": "ALLE ANSEHEN →"
+  },
+  "WarrantyBlock": {
+    "imageAlt": "FACETED ONYX · FOLIENDETAIL",
+    "headingLine1": "Registrieren Sie",
+    "headingLine2": "Ihre Garantie",
+    "body": "Jede Montage in einem autorisierten Center ist mit einer {years}-jährigen Garantie gegen Vergilben, Rissbildung und Ablösen der Folie abgesichert. Die Registrierung dauert zwei Minuten.",
+    "step1": "Geben Sie die Fahrgestellnummer und das Montagedatum ein",
+    "step2": "Fügen Sie die Rechnung des autorisierten Centers bei",
+    "step3": "Sie erhalten ein digitales Zertifikat per E-Mail",
+    "button": "GARANTIE REGISTRIEREN"
+  },
+  "CategoriesSection": {
+    "eyebrow": "FINDEN SIE, WAS SIE BRAUCHEN",
+    "heading": "Nach Kategorie einkaufen",
+    "productCount": "{count, plural, one {# PRODUKT} other {# PRODUKTE}}"
+  },
+  "CategoryTile": {
+    "view": "ANSEHEN"
+  },
+  "ProductCard": {
+    "newBadge": "NEU"
+  },
+  "Breadcrumb": {
+    "ariaLabel": "Brotkrümelnavigation"
+  },
+  "Pagination": {
+    "ariaLabel": "Seiten"
+  },
+  "QuantityStepper": {
+    "decrease": "Menge verringern",
+    "increase": "Menge erhöhen"
+  },
+  "ImageSlot": {
+    "placeholder": "BILD FOLGT IN KÜRZE"
+  },
+  "NotFound": {
+    "eyebrow": "FEHLER 404",
+    "heading": "404 / SEITE NICHT GEFUNDEN",
+    "body": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "ZURÜCK ZUR STARTSEITE"
+  },
+  "CartDrawer": {
+    "dialogLabel": "Warenkorb",
+    "heading": "WARENKORB",
+    "closeLabel": "Warenkorb schließen",
+    "removeLabel": "Entfernen",
+    "empty": "Ihr Warenkorb ist leer",
+    "continueShopping": "WEITER EINKAUFEN",
+    "subtotal": "Zwischensumme",
+    "proceedToCheckout": "ZUR KASSE",
+    "viewCart": "WARENKORB ANZEIGEN"
+  },
+  "CartLineItem": {
+    "remove": "ENTFERNEN",
+    "quantity": "Menge: {quantity}"
+  },
+  "OrderSummary": {
+    "heading": "BESTELLÜBERSICHT",
+    "subtotal": "Zwischensumme",
+    "remainingForFreeShipping": "Noch {amount} bis zum kostenlosen Versand",
+    "freeShippingReached": "Kostenloser Versand erreicht",
+    "total": "Gesamt"
+  },
+  "DeliveryForm": {
+    "fullName": "VOR- UND NACHNAME",
+    "email": "E-MAIL",
+    "phone": "TELEFON",
+    "address": "ADRESSE",
+    "city": "STADT",
+    "postalCode": "POSTLEITZAHL"
+  },
+  "PaymentMethods": {
+    "codTitle": "Nachnahme",
+    "codDescription": "Sie bezahlen den Kurier bei Lieferung bar oder mit Karte",
+    "cardTitle": "Kartenzahlung (Banca Intesa)",
+    "cardDescription": "Sichere Kartenzahlung, in Kürze verfügbar",
+    "comingSoon": "DEMNÄCHST"
+  },
+  "CookieConsent": {
+    "message": "Diese Website verwendet notwendige Cookies, damit Ihr Warenkorb und Ihre Sitzung aktiv bleiben. Details finden Sie in unserer <privacyLink>Datenschutzerklärung</privacyLink>.",
+    "accept": "VERSTANDEN"
+  },
+  "CheckoutErrors": {
+    "validation": {
+      "fullName": "Bitte geben Sie Ihren Vor- und Nachnamen ein.",
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "phone": "Bitte geben Sie Ihre Telefonnummer ein.",
+      "address": "Bitte geben Sie Ihre Lieferadresse ein.",
+      "city": "Bitte geben Sie Ihre Stadt ein.",
+      "postalCode": "Bitte geben Sie Ihre Postleitzahl ein.",
+      "notesTooLong": "Die Anmerkung darf höchstens 500 Zeichen lang sein.",
+      "acceptTerms": "Sie müssen die Nutzungsbedingungen akzeptieren."
+    },
+    "submit": {
+      "generic": "Beim Absenden der Bestellung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "outOfStock": "Einige Artikel in Ihrem Warenkorb sind nicht in der gewünschten Menge verfügbar. Bitte prüfen Sie Ihren Warenkorb und versuchen Sie es erneut.",
+      "invalidDetails": "Ihre Lieferdaten sind ungültig. Bitte prüfen Sie Ihre Angaben und versuchen Sie es erneut.",
+      "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.",
+      "paymentMethod": "Die gewählte Zahlungsart ist derzeit nicht verfügbar.",
+      "emptyCart": "Ihr Warenkorb ist leer — fügen Sie Produkte hinzu, bevor Sie die Bestellung absenden."
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Sprache"
+  },
+  "WarrantyForm": {
+    "chassisNumberMin": "Geben Sie eine gültige Fahrgestellnummer ein.",
+    "chassisNumberFormat": "Die Fahrgestellnummer darf nur Buchstaben und Ziffern enthalten.",
+    "installationDateRequired": "Geben Sie das Montagedatum ein.",
+    "installationDateFuture": "Das Montagedatum darf nicht in der Zukunft liegen.",
+    "installerRequired": "Wählen Sie ein autorisiertes Center aus.",
+    "ownerNameRequired": "Geben Sie Ihren vollständigen Namen ein.",
+    "emailInvalid": "Geben Sie eine gültige E-Mail-Adresse ein.",
+    "phoneRequired": "Geben Sie eine Telefonnummer ein.",
+    "consentRequired": "Sie müssen die Garantiebedingungen akzeptieren."
+  },
+  "InstallGuidePage": {
+    "title": "Montageanleitung",
+    "metaDescription": "Vorbereitung, Bedingungen und Schritte für die fachgerechte Montage von ONYX PPF-Folien und Keramikversiegelungen.",
+    "description": "Grundlegende Hinweise zu Vorbereitung und Montage — ein vollständiges technisches Datenblatt erhalten Sie zu jedem Produkt.",
+    "surfaceHeading": "Oberflächenvorbereitung",
+    "surfaceBody1": "Der Lack muss vor der Montage sauber, dekontaminiert und frei von Wachs- oder Silikonrückständen sein. Wir empfehlen Waschen, Dekontamination mit Reinigungsknete und Abwischen mit IPA-Lösung unmittelbar vor dem Aufbringen der Folie oder Versiegelung.",
+    "surfaceBody2": "Alle Lackmängel — Kratzer, Dellen, Korrosionsspuren — sollten vor der Montage behoben werden. Die Folie folgt der Oberfläche und kaschiert keine vorhandenen Schäden.",
+    "environmentHeading": "Bedingungen im Montageraum",
+    "environmentBody": "Die Montage erfolgt in einem geschlossenen, kontrollierten und staubfreien Raum bei einer Temperatur zwischen 18 °C und 26 °C. Zu niedrige Luftfeuchtigkeit erschwert die Aktivierung des Klebers, zu hohe verlängert die Trocknungszeit — autorisierte Center berücksichtigen beide Faktoren bei der Terminplanung.",
+    "curingHeading": "Aushärtung & erste Pflege",
+    "curingBody1": "Nach der Montage der PPF-Folie ist eine Trocknungszeit von mindestens 48 Stunden vor der ersten Fahrzeugwäsche erforderlich. Vermeiden Sie in den ersten 7 Tagen Waschanlagen und Hochdruckwasser direkt auf die Folienkanten.",
+    "curingBody2": "Keramikversiegelungen benötigen die auf dem Produktetikett angegebene Aushärtezeit — in der Regel 12–24 Stunden, bevor sie Feuchtigkeit ausgesetzt werden, und weitere 7 Tage, bevor eine zusätzliche Schicht oder Wachs aufgetragen wird.",
+    "authorizedHeading": "Montage in einem autorisierten Center",
+    "authorizedBody": "Diese Anleitung behandelt die allgemeine Vorbereitung und Pflege — die volle {years}-jährige Garantie auf Material und Arbeit gilt ausschließlich bei Montage in einem <centersLink>autorisierten ONYX Center</centersLink> und Registrierung im <warrantyLink>ONYX Warranty Programm</warrantyLink>. Eine detaillierte technische Anleitung zu jedem Produkt erhalten Sie bei der Montage im autorisierten Center."
+  },
+  "TermsPage": {
+    "title": "Nutzungsbedingungen",
+    "metaDescription": "Nutzungsbedingungen der ONYX EVOLUTION Website und Datenschutzerklärung — Bestellungen, Zahlung, Versand, Reklamationen und Schutz personenbezogener Daten.",
+    "description": "Durch die Nutzung der ONYX EVOLUTION Website und den Einkauf in unserem Shop akzeptieren Sie die nachstehenden Bedingungen und die Datenschutzerklärung.",
+    "siteUseTitle": "Nutzung der Website",
+    "siteUseBody": "Die ONYX EVOLUTION Website ist für den persönlichen und nichtkommerziellen Gebrauch bestimmt. Sie verpflichten sich, die Website nicht für rechtswidrige Zwecke zu nutzen, keinen unbefugten Zugriff auf das System zu versuchen und keine schädlichen Inhalte zu übertragen. Wir behalten uns das Recht vor, den Zugang bei Verstößen gegen diese Bedingungen einzuschränken.",
+    "ordersTitle": "Bestellungen und Zahlung",
+    "ordersBody": "Mit der Aufgabe einer Bestellung bestätigen Sie, dass alle eingegebenen Daten korrekt sind. Bestellungen stehen unter dem Vorbehalt der Verfügbarkeit, und wir behalten uns das Recht vor, sie bei Nichtverfügbarkeit zu stornieren. Die Preise sind in serbischen Dinar (RSD) angegeben und enthalten die Mehrwertsteuer zum gesetzlich vorgeschriebenen Satz. Die Zahlung erfolgt per Nachnahme oder Karte, entsprechend den auf der Seite <checkoutLink>Kasse</checkoutLink> angebotenen Optionen.",
+    "conversionTitle": "Erklärung zur Währungsumrechnung",
+    "conversionBody": "Alle Zahlungen werden in serbischen Dinar (RSD) abgewickelt. Wurde Ihre Zahlungskarte in einer anderen Währung ausgegeben, wird der belastete Betrag in Ihrer Landeswährung zu dem Wechselkurs ausgewiesen, den die kartenausgebende Bank zum Zeitpunkt der Transaktion anwendet. Dies kann zu einer geringfügigen Abweichung vom auf der Website angegebenen Preis führen.",
+    "shippingTitle": "Versand und Rückgabe",
+    "shippingBody": "Lieferzeiten, Versandkosten und Rückgabebedingungen sind auf der Seite <shippingLink>Versand & Rückgabe</shippingLink> ausführlich beschrieben. Kurz gesagt: Der Standardversand innerhalb Serbiens dauert 1–3 Werktage und ist für Bestellungen über {amount} kostenlos. Ungeöffnete und unbenutzte Produkte können Sie innerhalb von 14 Tagen nach Erhalt der Sendung zurückgeben.",
+    "warrantyTitle": "Reklamationen und Garantie",
+    "warrantyBody": "Für PPF-Folien und Keramikversiegelungen, die von einem autorisierten Installateur montiert wurden, wird die Garantie auf Material und Arbeit ausschließlich über das ONYX Warranty Programm gewährt, nicht über eine Produktrückgabe. Einzelheiten zu Umfang, Ausschlüssen und dem Meldeverfahren finden Sie auf der Seite <warrantyLink>Garantie</warrantyLink>.",
+    "ipTitle": "Geistiges Eigentum",
+    "ipBody": "Alle Inhalte dieser Website — Texte, Bilder, Logos und Produktinformationen — sind Eigentum von ONYX EVOLUTION oder deren Lizenzgebern. Die Inhalte dürfen ohne vorherige schriftliche Genehmigung weder vervielfältigt, verbreitet noch verwendet werden.",
+    "liabilityTitle": "Haftungsbeschränkung",
+    "liabilityBody": "Soweit gesetzlich zulässig, haftet ONYX EVOLUTION nicht für indirekte, zufällige oder Folgeschäden, die aus der Nutzung der Website oder unserer Produkte entstehen. Die Gesamthaftung übersteigt nicht den Kaufpreis der betreffenden Bestellung.",
+    "lawTitle": "Anwendbares Recht",
+    "lawBody": "Diese Bedingungen unterliegen dem Recht der Republik Serbien. Für alle Streitigkeiten aus diesen Bedingungen sind ausschließlich die zuständigen Gerichte in Serbien zuständig.",
+    "legalEyebrow": "RECHTLICHE HINWEISE",
+    "privacyHeading": "Datenschutzerklärung",
+    "privacyIntro": "Wie wir Ihre personenbezogenen Daten erheben, verwenden und schützen.",
+    "merchantTitle": "Angaben zum Händler",
+    "merchantInfo": "Juristische Person: ONYX EVOLUTION d.o.o.\nSitz: {address}\nE-Mail: {email}\nTelefon: {phone}\nÖffnungszeiten: {hours}",
+    "merchantPending": "Registernummer, Steuernummer (PIB) und Bankverbindung werden nach der Registrierung des Unternehmens ergänzt.",
+    "dataCollectedTitle": "Welche Daten wir erheben",
+    "dataCollectedBody": "Wenn Sie eine Bestellung aufgeben oder sich für den Newsletter anmelden, erheben wir personenbezogene Daten wie Name, E-Mail-Adresse, Lieferadresse und Telefonnummer. Zur Verbesserung der Website können wir auch nicht personenbezogene Daten wie das Surfverhalten erheben.",
+    "dataUseTitle": "Wie wir Daten verwenden",
+    "dataUseBody": "Personenbezogene Daten werden ausschließlich zur Bearbeitung von Bestellungen, zur Kommunikation über Bestell- und Garantiestatus sowie für den Kundensupport verwendet. Mit Ihrer Einwilligung können wir Ihnen Werbe-E-Mails zu neuen Produkten und Angeboten senden — eine Abmeldung ist jederzeit über den Link in der E-Mail möglich.",
+    "transactionTitle": "Schutz von Transaktionsdaten",
+    "transactionBody": "Zahlungskartendaten werden in geschützter (verschlüsselter) Form über das SSL-Protokoll übertragen und sind für unser System niemals zugänglich — der gesamte Zahlungsvorgang erfolgt auf den Seiten der Bank, mit Identitätsprüfung über das 3D-Secure-Protokoll. Wir speichern weder Kartennummer noch Ablaufdatum oder CVV/CVC-Code.",
+    "cookiesTitle": "Cookies",
+    "cookiesBody": "Wir verwenden notwendige Cookies, um Ihren Warenkorb und Ihre Sitzung aktiv zu halten. Tracking-Cookies von Drittanbietern verwenden wir nicht ohne Ihre ausdrückliche Einwilligung. Ihre Cookie-Einstellungen können Sie über die Einstellungen Ihres Browsers verwalten.",
+    "rightsTitle": "Ihre Rechte",
+    "rightsBody": "Nach dem geltenden Datenschutzgesetz haben Sie das Recht auf Auskunft, Berichtigung oder Löschung Ihrer personenbezogenen Daten. Senden Sie Ihre Anfrage über die Seite <contactLink>Kontakt</contactLink> — wir bearbeiten sie innerhalb von 30 Tagen.",
+    "lastUpdated": "Zuletzt aktualisiert: September 2026",
+    "questionLink": "Haben Sie eine Frage? →"
   }
 }

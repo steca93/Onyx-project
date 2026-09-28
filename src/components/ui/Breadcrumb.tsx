@@ -1,8 +1,9 @@
-import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { Link, type AppHref } from "@/i18n/navigation";
 
 export interface BreadcrumbItem {
   label: string;
-  href?: string;
+  href?: AppHref;
 }
 
 export interface BreadcrumbProps {
@@ -10,8 +11,10 @@ export interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
+  const t = useTranslations("Breadcrumb");
+
   return (
-    <nav aria-label="Navigacija" className="flex items-center gap-2 font-mono text-[9px] tracking-[.24em] text-text-40 uppercase">
+    <nav aria-label={t("ariaLabel")} className="flex items-center gap-2 font-mono text-[9px] tracking-[.24em] text-text-40 uppercase">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (

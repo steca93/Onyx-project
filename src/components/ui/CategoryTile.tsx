@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 export interface CategoryTileProps {
@@ -7,9 +8,11 @@ export interface CategoryTileProps {
 }
 
 export function CategoryTile({ name, slug, countLabel }: CategoryTileProps) {
+  const t = useTranslations("CategoryTile");
+
   return (
     <Link
-      href={`/kategorija/${slug}`}
+      href={{ pathname: "/kategorija/[slug]", params: { slug: slug } }}
       className="flex min-h-[208px] flex-col justify-between px-[34px] py-10 transition-colors duration-200 hover:bg-onyx-700"
     >
       <div className="label-column text-text-40">{countLabel}</div>
@@ -17,7 +20,7 @@ export function CategoryTile({ name, slug, countLabel }: CategoryTileProps) {
         <div className="text-h3-card mb-3.5 text-text">{name}</div>
         <div className="flex items-center gap-2.5 font-mono text-[9px] tracking-[.2em] text-accent uppercase">
           <span className="h-px w-[22px] bg-accent" aria-hidden />
-          POGLEDAJ
+          {t("view")}
         </div>
       </div>
     </Link>

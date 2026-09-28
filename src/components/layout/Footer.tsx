@@ -100,7 +100,7 @@ export function Footer({ categories }: FooterProps) {
             {categories.map((category) => (
               <Link
                 key={category.slug}
-                href={`/kategorija/${category.slug}`}
+                href={{ pathname: "/kategorija/[slug]", params: { slug: category.slug } }}
                 className="text-body-sm text-text-60 hover:text-accent"
               >
                 {category.name}
@@ -116,7 +116,7 @@ export function Footer({ categories }: FooterProps) {
           <div className="flex flex-col gap-3">
             {footerLinks.podrska.map((link) => (
               <Link
-                key={link.href}
+                key={link.labelKey}
                 href={link.href}
                 className="text-body-sm text-text-60 hover:text-accent"
               >

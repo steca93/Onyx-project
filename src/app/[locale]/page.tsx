@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Bestsellers } from "@/components/sections/Bestsellers";
 import { Categories } from "@/components/sections/Categories";
 import { Hero } from "@/components/sections/Hero";
@@ -8,6 +9,7 @@ import { WarrantyBlock } from "@/components/sections/WarrantyBlock";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { SpecTicker } from "@/components/ui/SpecTicker";
 import { siteSettings } from "@/data/site-settings";
+import { routing, toLocale } from "@/i18n/routing";
 import {
   getAllCategories,
   getFeaturedProducts,
@@ -16,46 +18,44 @@ import {
   searchProducts,
 } from "@/lib/repo";
 
-const SPEC_TICKER_ITEMS = [
-  `${siteSettings.warrantyYears} GODINA GARANCIJE`,
-  "SAMOOBNAVLJAJUĆI TOP COAT",
-  "8 MIL / 200 µm",
-  "PROZIRNOST 99%",
-  "40+ OVLAŠĆENIH CENTARA",
-];
+const OG_LOCALES = { sr: "sr_RS", en: "en_US", de: "de_DE" } as const;
 
-const ORGANIZATION_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: `${siteSettings.brandName} ${siteSettings.brandSuffix}`,
-  description:
-    "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji.",
-  telephone: siteSettings.contact.phone,
-  email: siteSettings.contact.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: siteSettings.contact.address,
-    addressCountry: "RS",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: requested } = await params;
+  const locale = toLocale(requested);
+  const t = await getTranslations({ locale, namespace: "HomePage" });
 
-export const metadata: Metadata = {
-  title: "ONYX EVOLUTION — PPF folije i keramički premazi",
-  description:
-    "Ovlašćeni distributer PPF folija i keramičkih premaza za automobile u Srbiji. Garancija do 12 godina, montaža u ovlašćenim centrima.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "ONYX EVOLUTION",
-    description:
-      "PPF folije i keramički premazi sa fabričkom garancijom. Ovlašćena distribucija i mreža instalatera u Srbiji i regionu.",
-    type: "website",
-    locale: "sr_RS",
-  },
-};
+  return {
+    title: t("title"),
+    description: t("metaDescription", { years: siteSettings.warrantyYears }),
+    alternates: {
+      canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
+    },
+    openGraph: {
+      title: "ONYX EVOLUTION",
+      description: t("ogDescription"),
+      type: "website",
+      locale: OG_LOCALES[locale],
+    },
+  };
+}
 
 const POLISHING_PADS_CATEGORY_SLUG = "ulozak-za-poliranje";
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: requested } = await params;
+  const locale = toLocale(requested);
+  const t = await getTranslations({ locale, namespace: "HomePage" });
+  const tTicker = await getTranslations({ locale, namespace: "SpecTicker" });
+
   const [kits, featured, categories, polishingPads] = await Promise.all([
     getKits(4),
     getFeaturedProducts(8),
@@ -82,29 +82,51 @@ export default async function Home() {
       product.productCategories.nodes[1]?.name ??
       product.productCategories.nodes[0]?.name ??
       ""
-    ).toUpperCase(),
+    ).toLocaleUpperCase(locale),
   }));
+
+  const specTickerItems = [
+    tTicker("warranty", { years: siteSettings.warrantyYears }),
+    tTicker("selfHealing"),
+    tTicker("thickness"),
+    tTicker("clarity"),
+    tTicker("centers"),
+  ];
+
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: `${siteSettings.brandName} ${siteSettings.brandSuffix}`,
+    description: t("organizationDescription"),
+    telephone: siteSettings.contact.phone,
+    email: siteSettings.contact.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteSettings.contact.address,
+      addressCountry: "RS",
+    },
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
       <Hero />
-      <SpecTicker items={SPEC_TICKER_ITEMS} />
+      <SpecTicker items={specTickerItems} />
       {kitCards.length > 0 && <KitCarousel kits={kitCards} />}
       <SplitPromo image={polishingPads.products[0]?.image} />
       <Bestsellers products={bestsellers} />
       <WarrantyBlock />
       <Categories categories={shoppableCategories} />
       <CtaBand
-        eyebrow="OGRANIČENA SERIJA"
-        headingLine1="Nova generacija"
-        headingLine2="PPF zaštite"
-        body="Debljina 200 µm, samoobnavljajući sloj i lepak koji ne ostavlja tragove pri skidanju."
-        buttonLabel="ISTRAŽI NOVITETE"
-        buttonHref="/kategorija/ppf-auto-folija"
+        eyebrow={t("ctaEyebrow")}
+        headingLine1={t("ctaHeadingLine1")}
+        headingLine2={t("ctaHeadingLine2")}
+        body={t("ctaBody")}
+        buttonLabel={t("ctaButton")}
+        buttonHref={{ pathname: "/kategorija/[slug]", params: { slug: "ppf-auto-folija" } }}
       />
     </>
   );

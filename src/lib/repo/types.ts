@@ -28,7 +28,11 @@ export interface ProductCategoryRef {
 export interface ProductAttribute {
   name: string;
   label: string;
+  /** Raw option values — what variations and the Store API match on. */
   options: string[];
+  /** Display text per raw option, when it differs (translated storefront
+   * locales). Absent means show the raw option as-is. */
+  optionLabels?: Record<string, string>;
 }
 
 export interface VariationAttributeValue {
@@ -126,6 +130,9 @@ export interface ProductListOptions {
    * (e.g. the homepage) that only want the product list and would otherwise
    * pay for a category fetch whose result they'd immediately discard. */
   skipCategory?: boolean;
+  /** Restrict results to these product slugs — used by translated-locale
+   * search, which matches on translated names this backend doesn't know. */
+  slugs?: string[];
 }
 
 /** Minimal per-product shape for the header's live search dropdown — just
