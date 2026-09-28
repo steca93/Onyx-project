@@ -1,5 +1,31 @@
 # ONYX storefront — performance + SEO: summary
 
+> **Update: multilingual round (branch `seo-i18n`).** The first round (below) covered all three languages at the page level. This round closes the multilingual gaps. Details: [`baseline-i18n/`](baseline-i18n/README.md) → [`phase2-i18n/`](phase2-i18n/README.md) → [`phase3-i18n/`](phase3-i18n/README.md) → [`after-i18n/`](after-i18n/README.md).
+>
+> **Changes**
+> - **Translations sent to the browser:** only the active language's namespaces that client components need, 26–29 KB → ~2 KB per page, HTML −33..−51%. The namespace lists are generated from the import graph and checked in `typecheck`.
+> - **Untranslated EN/DE items** return a 404 and are left out of listings, hreflang and the sitemap. Missing EN/DE text never falls back to Serbian.
+> - **Language switcher:** crawlable `<a href hreflang>` links to the equivalent page. This also fixed the header's active-category highlight, which had silently broken with the localized URLs.
+> - **Structured data:** JSON-LD is wrapped in WebPage/CollectionPage with `inLanguage`.
+> - **Metadata for crawlers:** Googlebot always gets metadata in `<head>`; it used to be streamed into `<body>` on cold renders.
+> - **Build time:** products are prerendered per locale up to a cap.
+> - **Revalidation:** `/api/revalidate` accepts `{ type, id, slug }`, and one call refreshes all three languages.
+> - **Content audit:** runs per locale with stale-translation tracking; SEO suggestions cover sr/en/de; there's a terminology glossary.
+> - **Tests:** 97 (9 pages × checks, reciprocal hreflang, no `Accept-Language` redirects, 404 for untranslated items, 32-route browser smoke test for missing messages).
+>
+> **Translation coverage:**
+> - Products: en 32/32, de 32/32.
+> - Categories: en 11/11, de 11/11.
+> - UI strings: 366/366 in all three languages.
+> - Stale translations: 0.
+> - Serbian leftovers in EN/DE: 0.
+>
+> The EN/DE catalog translations live in the repo (`src/i18n/catalog/`), not WordPress. **A new WooCommerce product is Serbian-only (404 in EN/DE) until its translation is added there.**
+>
+> **Currency:** RSD only, in every language. There's no conversion.
+>
+> ---
+
 Branch `perf-seo` (based on `feat/i18n-full`). One commit per phase. `lint`, `typecheck` and `build` pass after each phase, and the SEO test suite passes (31 tests).
 
 ## Results

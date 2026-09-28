@@ -17,6 +17,7 @@ export interface ParsedPage {
   robots: string | null;
   ogImage: string | null;
   ogLocale: string | null;
+  ogLocaleAlternates: string[];
   hreflang: Record<string, string>;
   jsonLd: Record<string, unknown>[];
   h1Count: number;
@@ -53,6 +54,7 @@ export async function fetchPage(request: APIRequestContext, path: string): Promi
     robots: meta(head, "name", "robots"),
     ogImage: meta(head, "property", "og:image"),
     ogLocale: meta(head, "property", "og:locale"),
+    ogLocaleAlternates: [...head.matchAll(/<meta property="og:locale:alternate" content="([^"]+)"/g)].map((m) => m[1]),
     hreflang,
     jsonLd,
     h1Count: (html.split("<body")[1] ?? "").match(/<h1[\s>]/g)?.length ?? 0,

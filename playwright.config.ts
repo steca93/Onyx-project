@@ -14,6 +14,10 @@ const PROD_PORT = 3210;
 const PREVIEW_PORT = 3211;
 const build = process.env.SEO_SKIP_BUILD ? "" : "next build && ";
 
+/** A real product whose EN/DE translation the test builds hide (see
+ * src/i18n/catalog/index.ts) to exercise the untranslated-item paths. */
+export const HIDDEN_TRANSLATION = "krpa-za-detaljno-ciscenje";
+
 function server(port: number, indexable: boolean, distDir: string) {
   return {
     command: `${build}next start -p ${port}`,
@@ -24,6 +28,7 @@ function server(port: number, indexable: boolean, distDir: string) {
       NEXT_DIST_DIR: distDir,
       SITE_INDEXABLE: String(indexable),
       NEXT_PUBLIC_SITE_URL: `http://localhost:${port}`,
+      SEO_TEST_HIDE_TRANSLATION: HIDDEN_TRANSLATION,
     },
   };
 }

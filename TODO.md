@@ -33,6 +33,16 @@ Zadaci van koda: podešavanja na Vercelu i WordPressu, sređivanje podataka u Wo
 - [ ] Pregledati i uvesti `reports/seo-suggestions.csv` (kratki opisi, alt tekstovi slika, uvodi kategorija).
 - [ ] Ubuduće: kad se promeni slug proizvoda ili kategorije koji je već objavljen, dodati 301 preusmerenje u `src/data/redirects.ts`.
 
+## Prevodi (en/de)
+
+- [ ] **Novi proizvod ili kategorija u WooCommerce-u je na en/de stranici 404 dok se ne doda prevod** u `src/i18n/catalog/en.json` i `de.json` (ime, kratki i dugi opis), pa deploy. Srpska verzija radi odmah.
+- [ ] Posle izmene prevoda pokrenuti `npm run i18n:stamp <slug>`, da audit zna od koje verzije srpskog teksta je prevod.
+- [ ] Povremeno pokrenuti `npm run seo:audit`. Ako se srpski tekst u WooCommerce-u izmeni posle prevoda, audit prijavljuje `stale_translation`.
+- [ ] Obrisati internu napomenu i iz en/de opisa crvenog Hex sunđera za finiš („NOTE: …" / „HINWEIS: …").
+- [ ] Pregledati `reports/seo-suggestions.csv`, koji sada ima sr/en/de redove. Srpski tekst ide u WooCommerce; en/de izmene idu u `src/i18n/catalog/*.json` (to mogu ja da uradim).
+- [ ] Nemački prevodi: specifikacije za PPF pišu „1.52m x 15m" (nemački zapis je „1,52 × 15 m"), a crni sunđer za finiš i dalje ima „Medium Cut" u imenu. Detalji su u `notes` koloni CSV-a.
+- [ ] **Na Vercelu nikad ne postavljati `SEO_TEST_HIDE_TRANSLATION`**: služi samo za testove.
+
 ## Kasnije
 
 - [ ] **Prelazak na `cms.onyx.com`:** promeniti `WORDPRESS_API_URL` na Vercelu, a kad sve radi, izbaciti stari Cloudways host iz `next.config.ts`.

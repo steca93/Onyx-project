@@ -196,7 +196,7 @@ export function webPageJsonLd(opts: {
     url: opts.url,
     name: opts.name,
     inLanguage: opts.language,
-    isPartOf: { "@type": "WebSite", name: BRAND, url: SITE_URL },
+    isPartOf: { "@type": "WebSite", name: BRAND, url: SITE_URL, inLanguage: opts.language },
     breadcrumb: strip(opts.breadcrumb),
     mainEntity: strip(opts.mainEntity),
   } as WithContext<WebPage | CollectionPage>;
