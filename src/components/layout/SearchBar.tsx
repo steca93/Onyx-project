@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CloseIcon, SearchIcon } from "@/components/icons";
 import { ImageSlot } from "@/components/ui/ImageSlot";
@@ -64,6 +64,7 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 export function SearchBar({ className = "" }: SearchBarProps) {
+  const t = useTranslations("SearchBar");
   const router = useRouter();
 
   const [query, setQuery] = useState("");
@@ -179,8 +180,8 @@ export function SearchBar({ className = "" }: SearchBarProps) {
           onFocus={() => {
             if (fetched && trimmedQuery.length >= 2) setOpen(true);
           }}
-          placeholder="TRAŽI FOLIJE, ALAT, PREMAZE…"
-          aria-label="Pretraga proizvoda"
+          placeholder={t("placeholder")}
+          aria-label={t("ariaLabel")}
           aria-autocomplete="list"
           autoComplete="off"
           className="notch notch-12 h-11 w-full border border-hairline bg-onyx-800 pr-11 pl-10.5 font-sans text-[13.5px] tracking-normal text-text outline-none placeholder:font-mono placeholder:text-[10.5px] placeholder:tracking-[.18em] placeholder:text-text-34 focus:border-[rgba(42,179,230,.55)]"
@@ -189,7 +190,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
           <button
             type="button"
             onClick={handleClear}
-            aria-label="Obriši pretragu"
+            aria-label={t("clearAriaLabel")}
             className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer text-text-40 transition-colors duration-200 hover:text-accent"
           >
             <CloseIcon size={12} />
@@ -197,7 +198,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
         ) : (
           <button
             type="submit"
-            aria-label="Pretraži"
+            aria-label={t("submitAriaLabel")}
             className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer font-mono text-accent"
           >
             ↵
@@ -224,10 +225,10 @@ export function SearchBar({ className = "" }: SearchBarProps) {
           {results.length === 0 && !loading && fetched && (
             <div className="px-5 py-8 text-center">
               <p className="label-nav text-text">
-                NEMA REZULTATA ZA &quot;{trimmedQuery}&quot;
+                {t("noResults", { query: trimmedQuery })}
               </p>
               <p className="mt-2.5 font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
-                Probaj drugi pojam ili pregledaj kategorije
+                {t("noResultsHint")}
               </p>
             </div>
           )}
@@ -266,7 +267,7 @@ export function SearchBar({ className = "" }: SearchBarProps) {
                 className="flex items-center gap-2 border-t border-hairline px-4 py-3 label-nav text-accent transition-colors duration-200 hover:bg-onyx-800 hover:text-accent-hi"
               >
                 <SearchIcon size={11} />
-                PRIKAŽI SVE REZULTATE ZA &quot;{trimmedQuery}&quot;
+                {t("showAllResults", { query: trimmedQuery })}
               </Link>
             </>
           )}

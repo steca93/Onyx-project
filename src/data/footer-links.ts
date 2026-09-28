@@ -1,5 +1,7 @@
 export interface FooterLink {
-  label: string;
+  /** Key into the Footer.links.* messages namespace — labels live in the
+   * translation catalogs, not here, so this list stays locale-agnostic. */
+  labelKey: "warranty" | "authorizedCenters" | "shipping" | "installGuide" | "faq" | "contact" | "terms" | "privacy";
   href: string;
 }
 
@@ -7,13 +9,13 @@ export interface FooterLink {
 // not listed here — only the static support pages are fixed.
 export const footerLinks: { podrska: FooterLink[] } = {
   podrska: [
-    { label: "Registracija garancije", href: "/garancija" },
-    { label: "Ovlašćeni centri", href: "/ovlasceni-centri" },
-    { label: "Dostava i povraćaj", href: "/dostava-i-povracaj" },
-    { label: "Uputstva za montažu", href: "/uputstva-za-montazu" },
-    { label: "Česta pitanja", href: "/cesta-pitanja" },
-    { label: "Kontakt", href: "/kontakt" },
-    { label: "Uslovi korišćenja", href: "/uslovi-koriscenja" },
-    { label: "Politika privatnosti", href: "/uslovi-koriscenja#politika-privatnosti" },
+    { labelKey: "warranty", href: "/garancija" },
+    { labelKey: "authorizedCenters", href: "/ovlasceni-centri" },
+    { labelKey: "shipping", href: "/dostava-i-povracaj" },
+    { labelKey: "installGuide", href: "/uputstva-za-montazu" },
+    { labelKey: "faq", href: "/cesta-pitanja" },
+    { labelKey: "contact", href: "/kontakt" },
+    { labelKey: "terms", href: "/uslovi-koriscenja" },
+    { labelKey: "privacy", href: "/uslovi-koriscenja#politika-privatnosti" },
   ],
 };
