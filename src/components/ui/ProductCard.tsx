@@ -20,7 +20,7 @@ export function ProductCard({ product, badge }: ProductCardProps) {
       className="group notch notch-18 flex min-w-0 flex-col border border-hairline bg-onyx-800 transition-colors duration-200 hover:border-[rgba(42,179,230,.4)]"
     >
       <div className="relative h-[232px] border-b border-hairline">
-        <ImageSlot image={product.image} fill sizes="(min-width: 1200px) 25vw, 50vw" />
+        <ImageSlot image={product.image} fill sizes="(min-width: 1024px) 25vw, 50vw" />
         {displayBadge && (
           <Badge className="absolute top-0 left-0">{displayBadge}</Badge>
         )}

@@ -1,62 +1,9 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { footerLinks } from "@/data/footer-links";
 import { siteSettings } from "@/data/site-settings";
 import type { ProductCategory } from "@/lib/repo/types";
-
-function NewsletterForm() {
-  const t = useTranslations("Footer");
-
-  const newsletterSchema = z.object({
-    email: z.string().email(t("newsletterEmailError")),
-  });
-  type NewsletterValues = z.infer<typeof newsletterSchema>;
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm<NewsletterValues>({ resolver: zodResolver(newsletterSchema) });
-
-  function onSubmit() {
-    reset();
-  }
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-      <input
-        type="email"
-        placeholder={t("newsletterPlaceholder")}
-        aria-label={t("newsletterAriaLabel")}
-        aria-invalid={errors.email ? true : undefined}
-        {...register("email")}
-        className="h-12 border border-hairline-strong bg-onyx-800 px-4 font-mono text-[11px] tracking-[.12em] text-text placeholder:text-text-34 outline-none focus:border-accent"
-      />
-      {errors.email && (
-        <p className="font-mono text-[10px] tracking-[.08em] text-danger">
-          {errors.email.message}
-        </p>
-      )}
-      {isSubmitSuccessful && !errors.email && (
-        <p className="font-mono text-[10px] tracking-[.08em] text-success">
-          {t("newsletterSuccess")}
-        </p>
-      )}
-      <button
-        type="submit"
-        className="notch notch-12 flex h-12 items-center justify-center border border-accent label-nav text-[10px] tracking-[.24em] text-accent transition-colors duration-200 hover:bg-accent hover:text-onyx-900"
-      >
-        {t("newsletterSubmit")}
-      </button>
-    </form>
-  );
-}
 
 export interface FooterProps {
   categories: ProductCategory[];

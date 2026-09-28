@@ -1,3 +1,4 @@
+import { rewriteWpHtml } from "@/lib/utils/wp-html";
 import { stripHtml } from "@/lib/utils/strip-html";
 import { Breadcrumb } from "./Breadcrumb";
 import type { BreadcrumbItem } from "./Breadcrumb";
@@ -20,7 +21,7 @@ export function PageHeader({ breadcrumb, title, description }: PageHeaderProps) 
         {stripHtml(description) && (
           <div
             className="prose-onyx text-body max-w-[620px] text-text-60"
-            dangerouslySetInnerHTML={{ __html: description! }}
+            dangerouslySetInnerHTML={{ __html: rewriteWpHtml(description) }}
           />
         )}
       </div>

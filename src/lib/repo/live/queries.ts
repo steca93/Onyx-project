@@ -10,27 +10,20 @@
  *   GraphQL UNION, which has no shared fields at all. Every field, shared
  *   or not, must live inside a per-type inline fragment there.
  *
- * SHARED_FIELDS/SIMPLE_FIELDS/VARIABLE_FIELDS get composed differently for
- * each case below — this was verified against the live schema, not guessed.
+ * The field sets below get composed differently for each case — this was
+ * verified against the live schema, not guessed.
  */
 
-const SHARED_FIELDS = /* GraphQL */ `
+/** Fields every product view needs — name, price, one image, categories. */
+const CARD_SHARED_FIELDS = /* GraphQL */ `
   id
   databaseId
   name
   slug
-  description
-  shortDescription
   date
   image {
     sourceUrl
     altText
-  }
-  galleryImages {
-    nodes {
-      sourceUrl
-      altText
-    }
   }
   productCategories {
     nodes {
@@ -41,13 +34,27 @@ const SHARED_FIELDS = /* GraphQL */ `
   }
 `;
 
-const SIMPLE_ONLY_FIELDS = /* GraphQL */ `
+const CARD_TYPE_FIELDS = /* GraphQL */ `
   price(format: RAW)
   regularPrice(format: RAW)
   salePrice(format: RAW)
   stockStatus
-  sku
   featured
+`;
+
+/** Extra fields only the product detail page renders. */
+const DETAIL_SHARED_FIELDS = /* GraphQL */ `
+  description
+  shortDescription
+  galleryImages {
+    nodes {
+      sourceUrl
+      altText
+    }
+  }
+`;
+
+const ATTRIBUTE_FIELDS = /* GraphQL */ `
   attributes {
     nodes {
       name
@@ -58,20 +65,13 @@ const SIMPLE_ONLY_FIELDS = /* GraphQL */ `
   }
 `;
 
-const VARIABLE_ONLY_FIELDS = /* GraphQL */ `
-  price(format: RAW)
-  regularPrice(format: RAW)
-  salePrice(format: RAW)
-  stockStatus
-  featured
-  attributes {
-    nodes {
-      name
-      label
-      options
-      variation
-    }
-  }
+const DETAIL_SIMPLE_FIELDS = /* GraphQL */ `
+  sku
+  ${ATTRIBUTE_FIELDS}
+`;
+
+const DETAIL_VARIABLE_FIELDS = /* GraphQL */ `
+  ${ATTRIBUTE_FIELDS}
   variations(first: 50) {
     nodes {
       id
@@ -95,54 +95,61 @@ const VARIABLE_ONLY_FIELDS = /* GraphQL */ `
   }
 `;
 
-/** For the `products(...)` connection — nodes are the `Product` interface. */
-const INTERFACE_PRODUCT_FIELDS = /* GraphQL */ `
-  ${SHARED_FIELDS}
+/**
+ * Listing cards, for the `products(...)` connection — nodes are the
+ * `Product` interface, so shared fields sit at the top level. No
+ * descriptions, galleries, attributes or variations: cards don't render
+ * them, and they made up most of each listing response's size.
+ */
+const CARD_PRODUCT_FIELDS = /* GraphQL */ `
   __typename
+  ${CARD_SHARED_FIELDS}
   ... on SimpleProduct {
-    ${SIMPLE_ONLY_FIELDS}
+    ${CARD_TYPE_FIELDS}
   }
   ... on VariableProduct {
-    ${VARIABLE_ONLY_FIELDS}
+    ${CARD_TYPE_FIELDS}
   }
 `;
 
 /**
- * For the singular `product(...)` field AND `related(...)` — both are
- * `ProductUnion`, not the `Product` interface, so every field (shared or
- * not) must be duplicated inside each type's inline fragment. No `related`
- * field here to avoid infinite nesting; the query below adds it one level
- * up for the top-level product only.
+ * The singular `product(...)` field and `related(...)` are `ProductUnion`,
+ * not the `Product` interface — every field, shared or not, must be
+ * repeated inside each type's inline fragment. Related products are cards.
  */
-const UNION_PRODUCT_FIELDS_NO_RELATED = /* GraphQL */ `
+const UNION_CARD_FIELDS = /* GraphQL */ `
   __typename
   ... on SimpleProduct {
-    ${SHARED_FIELDS}
-    ${SIMPLE_ONLY_FIELDS}
+    ${CARD_SHARED_FIELDS}
+    ${CARD_TYPE_FIELDS}
   }
   ... on VariableProduct {
-    ${SHARED_FIELDS}
-    ${VARIABLE_ONLY_FIELDS}
+    ${CARD_SHARED_FIELDS}
+    ${CARD_TYPE_FIELDS}
   }
 `;
 
-const UNION_PRODUCT_FIELDS = /* GraphQL */ `
+const UNION_DETAIL_FIELDS = /* GraphQL */ `
   __typename
   ... on SimpleProduct {
-    ${SHARED_FIELDS}
-    ${SIMPLE_ONLY_FIELDS}
+    ${CARD_SHARED_FIELDS}
+    ${DETAIL_SHARED_FIELDS}
+    ${CARD_TYPE_FIELDS}
+    ${DETAIL_SIMPLE_FIELDS}
     related(first: 4) {
       nodes {
-        ${UNION_PRODUCT_FIELDS_NO_RELATED}
+        ${UNION_CARD_FIELDS}
       }
     }
   }
   ... on VariableProduct {
-    ${SHARED_FIELDS}
-    ${VARIABLE_ONLY_FIELDS}
+    ${CARD_SHARED_FIELDS}
+    ${DETAIL_SHARED_FIELDS}
+    ${CARD_TYPE_FIELDS}
+    ${DETAIL_VARIABLE_FIELDS}
     related(first: 4) {
       nodes {
-        ${UNION_PRODUCT_FIELDS_NO_RELATED}
+        ${UNION_CARD_FIELDS}
       }
     }
   }
@@ -152,7 +159,7 @@ export const PRODUCTS_QUERY = /* GraphQL */ `
   query Products($first: Int!, $where: RootQueryToProductConnectionWhereArgs) {
     products(first: $first, where: $where) {
       nodes {
-        ${INTERFACE_PRODUCT_FIELDS}
+        ${CARD_PRODUCT_FIELDS}
       }
       pageInfo {
         hasNextPage
@@ -165,7 +172,7 @@ export const PRODUCTS_QUERY = /* GraphQL */ `
 export const PRODUCT_BY_SLUG_QUERY = /* GraphQL */ `
   query ProductBySlug($slug: ID!) {
     product(id: $slug, idType: SLUG) {
-      ${UNION_PRODUCT_FIELDS}
+      ${UNION_DETAIL_FIELDS}
     }
   }
 `;

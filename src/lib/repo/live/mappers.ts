@@ -39,11 +39,12 @@ export interface RawProductNode {
   databaseId: number;
   name: string;
   slug: string;
-  description: string | null;
-  shortDescription: string | null;
+  /** Absent on listing (card) queries — only the PDP query selects it. */
+  description?: string | null;
+  shortDescription?: string | null;
   date: string | null;
   image: RawImage | null;
-  galleryImages: { nodes: RawImage[] };
+  galleryImages?: { nodes: RawImage[] };
   productCategories: { nodes: { id: string; name: string; slug: string }[] };
   price?: string | null;
   regularPrice?: string | null;
@@ -90,10 +91,10 @@ export function mapProduct(raw: RawProductNode): AnyProduct | null {
     databaseId: raw.databaseId,
     name: raw.name,
     slug: raw.slug,
-    description: raw.description,
-    shortDescription: raw.shortDescription,
+    description: raw.description ?? null,
+    shortDescription: raw.shortDescription ?? null,
     image: image(raw.image),
-    galleryImages: { nodes: raw.galleryImages.nodes.map((n) => image(n)!).filter(Boolean) },
+    galleryImages: { nodes: (raw.galleryImages?.nodes ?? []).map((n) => image(n)!).filter(Boolean) },
     productCategories: { nodes: raw.productCategories.nodes },
     specs: specsFromAttributes(raw.attributes?.nodes),
     // No custom-field convention exists on the live backend yet for these —

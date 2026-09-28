@@ -3,8 +3,8 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Questrial, Space_Mono } from "next/font/google";
-import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { DeferredCartDrawer } from "@/components/layout/DeferredUI";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { UtilityBar } from "@/components/layout/UtilityBar";
@@ -89,7 +89,7 @@ export default async function RootLayout({
             <Header categories={navCategories} />
             <main className="flex flex-1 flex-col">{children}</main>
             <Footer categories={navCategories} />
-            <CartDrawer />
+            <DeferredCartDrawer />
             <CookieConsent />
           </ProductNamesProvider>
         </NextIntlClientProvider>

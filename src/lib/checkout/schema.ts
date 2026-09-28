@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod/mini";
 
 /** Keys under the "CheckoutErrors.validation" messages namespace — the
  * schema only knows which message it needs, the caller supplies the
@@ -25,17 +25,15 @@ export type PaymentMethod = z.infer<typeof paymentMethodSchema>;
  */
 export function createCheckoutSchema(message: ValidationMessage) {
   return z.object({
-    fullName: z.string().min(2, message("fullName")),
-    email: z.string().email(message("email")),
-    phone: z.string().min(6, message("phone")),
-    address: z.string().min(3, message("address")),
-    city: z.string().min(2, message("city")),
-    postalCode: z.string().min(4, message("postalCode")),
-    notes: z.string().max(500, message("notesTooLong")).optional(),
+    fullName: z.string().check(z.minLength(2, message("fullName"))),
+    email: z.email(message("email")),
+    phone: z.string().check(z.minLength(6, message("phone"))),
+    address: z.string().check(z.minLength(3, message("address"))),
+    city: z.string().check(z.minLength(2, message("city"))),
+    postalCode: z.string().check(z.minLength(4, message("postalCode"))),
+    notes: z.optional(z.string().check(z.maxLength(500, message("notesTooLong")))),
     paymentMethod: paymentMethodSchema,
-    acceptTerms: z.boolean().refine((v) => v === true, {
-      message: message("acceptTerms"),
-    }),
+    acceptTerms: z.boolean().check(z.refine((v) => v === true, message("acceptTerms"))),
   });
 }
 

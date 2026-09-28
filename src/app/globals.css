@@ -118,6 +118,10 @@
 @layer utilities {
   /* Content container — full-bleed backgrounds, constrained content. §3 */
   .container-onyx {
+    /* Full width even as a flex child (<main> is flex-col): with auto
+       margins a flex item otherwise shrinks to its content, so any content
+       change after hydration shifted and re-centered the whole column. */
+    width: 100%;
     max-width: 1440px;
     margin-inline: auto;
     padding-inline: 72px;

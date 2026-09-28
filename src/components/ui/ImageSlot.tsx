@@ -10,6 +10,8 @@ export interface ImageSlotProps {
   aspectRatio?: string;
   fill?: boolean;
   sizes?: string;
+  /** Mark only a template's LCP image: loads eagerly with
+   * fetchpriority="high" (Next 16 deprecates `priority` for this). */
   priority?: boolean;
   className?: string;
   diamond?: boolean;
@@ -53,7 +55,7 @@ export function ImageSlot({
           alt={image.altText}
           fill
           sizes={sizes}
-          priority={priority}
+          {...(priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {})}
           className="object-cover"
         />
       </div>
@@ -70,7 +72,8 @@ export function ImageSlot({
         alt={image.altText}
         width={width}
         height={height}
-        priority={priority}
+        sizes={sizes}
+        {...(priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {})}
         className="h-full w-full object-cover"
       />
     </div>

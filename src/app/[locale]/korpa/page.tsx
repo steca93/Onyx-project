@@ -15,7 +15,10 @@ export default function CartPage() {
   const removeItem = useCartStore((s) => s.removeItem);
 
   return (
-    <div className="container-onyx py-16 sm:py-20 lg:py-24">
+    // min-h: the cart only renders after the client store hydrates, and the
+    // loading/empty/filled states differ in height — keep the footer below
+    // the fold in all of them so nothing shifts (CLS).
+    <div className="container-onyx min-h-[75vh] py-16 sm:py-20 lg:py-24">
       <Eyebrow className="mb-4">{t("eyebrow")}</Eyebrow>
       <h1 className="text-[32px] sm:text-h2">{t("heading")}</h1>
 

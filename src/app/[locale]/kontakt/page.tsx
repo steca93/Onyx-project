@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod/mini";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Lattice } from "@/components/ui/Lattice";
@@ -16,10 +16,10 @@ export default function ContactPage() {
   const tSite = useTranslations("Site");
 
   const contactSchema = z.object({
-    fullName: z.string().min(2, t("fullNameError")),
-    email: z.string().email(t("emailError")),
-    subject: z.string().min(2, t("subjectError")),
-    message: z.string().min(10, t("messageError")),
+    fullName: z.string().check(z.minLength(2, t("fullNameError"))),
+    email: z.email(t("emailError")),
+    subject: z.string().check(z.minLength(2, t("subjectError"))),
+    message: z.string().check(z.minLength(10, t("messageError"))),
   });
   type ContactFormValues = z.infer<typeof contactSchema>;
 

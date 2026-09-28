@@ -1,13 +1,20 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-import { WC_STORE_API_URL } from "@/lib/repo/live/client";
+import { wcStoreApiUrl } from "@/lib/env/wordpress";
 
 /**
  * Proxies the browser's cart/checkout calls to WooCommerce's Store API.
  * The browser only ever talks to same-origin `/api/store/*` — it never
  * sees the WordPress host, the real Cart-Token, or the CSRF nonce. Those
  * live in httpOnly cookies set here, never exposed to client JS.
+ *
+ * Everything here is per-visitor (cart contents, checkout), so it must
+ * never be cached anywhere: the route is forced dynamic, the upstream fetch
+ * is no-store, and every response says `private, no-store`.
  */
+export const dynamic = "force-dynamic";
+
+const NO_STORE = "private, no-store, max-age=0";
 const CART_TOKEN_COOKIE = "onyx_cart_token";
 const NONCE_COOKIE = "onyx_cart_nonce";
 
@@ -24,7 +31,7 @@ async function proxy(request: NextRequest, method: string, path: string[]) {
   const cartToken = cookieStore.get(CART_TOKEN_COOKIE)?.value;
   const nonce = cookieStore.get(NONCE_COOKIE)?.value;
 
-  const targetUrl = `${WC_STORE_API_URL}/${path.join("/")}${request.nextUrl.search}`;
+  const targetUrl = `${wcStoreApiUrl()}/${path.join("/")}${request.nextUrl.search}`;
 
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (cartToken) headers["Cart-Token"] = cartToken;
@@ -42,16 +49,21 @@ async function proxy(request: NextRequest, method: string, path: string[]) {
       cache: "no-store",
     });
   } catch {
+    // Same `{ code, message }` shape as Store API errors, so the client's
+    // error-code mapping handles it (and shows its own translated text).
     return NextResponse.json(
-      { error: "Prodavnica trenutno nije dostupna. Pokušaj ponovo." },
-      { status: 502 },
+      { code: "onyx_store_unavailable", message: "Store backend unreachable" },
+      { status: 502, headers: { "Cache-Control": NO_STORE } },
     );
   }
 
   const responseText = await upstream.text();
   const response = new NextResponse(responseText, {
     status: upstream.status,
-    headers: { "Content-Type": upstream.headers.get("Content-Type") ?? "application/json" },
+    headers: {
+      "Content-Type": upstream.headers.get("Content-Type") ?? "application/json",
+      "Cache-Control": NO_STORE,
+    },
   });
 
   const newCartToken = upstream.headers.get("Cart-Token");

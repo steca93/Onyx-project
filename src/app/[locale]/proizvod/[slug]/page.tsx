@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { ProductGallery } from "@/components/sections/ProductGallery";
@@ -13,6 +14,7 @@ import {
 } from "@/lib/repo";
 import { toLocale } from "@/i18n/routing";
 import { stripHtml } from "@/lib/utils/strip-html";
+import { rewriteWpHtml } from "@/lib/utils/wp-html";
 
 interface ProductPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -41,6 +43,30 @@ const STOCK_AVAILABILITY: Record<string, string> = {
   ON_BACKORDER: "https://schema.org/BackOrder",
 };
 
+async function RelatedProducts({
+  slug,
+  eyebrow,
+  title,
+}: {
+  slug: string;
+  eyebrow: string;
+  title: string;
+}) {
+  const related = await getRelatedProducts(slug, 4);
+  if (related.length === 0) return null;
+  return (
+    <div className="mt-20 lg:mt-24">
+      <Eyebrow className="mb-4">{eyebrow}</Eyebrow>
+      <h2 className="mb-10 text-[32px] sm:text-h2">{title}</h2>
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+        {related.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default async function ProductPage({ params }: ProductPageProps) {
   const { locale: requested, slug } = await params;
   const product = await getProductBySlug(slug);
@@ -48,7 +74,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const t = await getTranslations({ locale: toLocale(requested), namespace: "ProductPage" });
 
-  const related = await getRelatedProducts(slug, 4);
   const category = product.productCategories.nodes[0];
 
   const jsonLd = {
@@ -87,7 +112,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {stripHtml(product.shortDescription) && (
             <div
               className="prose-onyx mt-5 max-w-[470px] text-body text-text-60"
-              dangerouslySetInnerHTML={{ __html: product.shortDescription! }}
+              dangerouslySetInnerHTML={{ __html: rewriteWpHtml(product.shortDescription) }}
             />
           )}
 
@@ -117,7 +142,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               content: stripHtml(product.description) ? (
                 <div
                   className="prose-onyx max-w-[720px] text-body text-text-60"
-                  dangerouslySetInnerHTML={{ __html: product.description! }}
+                  dangerouslySetInnerHTML={{ __html: rewriteWpHtml(product.description) }}
                 />
               ) : (
                 <p className="max-w-[720px] text-body text-text-60">{t("descriptionSoon")}</p>
@@ -164,17 +189,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
         />
       </div>
 
-      {related.length > 0 && (
-        <div className="mt-20 lg:mt-24">
-          <Eyebrow className="mb-4">{t("relatedEyebrow")}</Eyebrow>
-          <h2 className="mb-10 text-[32px] sm:text-h2">{t("relatedTitle")}</h2>
-          <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
-            {related.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Streams after the main product content — not needed for first paint. */}
+      <Suspense fallback={null}>
+        <RelatedProducts slug={slug} eyebrow={t("relatedEyebrow")} title={t("relatedTitle")} />
+      </Suspense>
     </div>
   );
 }

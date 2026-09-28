@@ -16,7 +16,6 @@ export function Hero() {
           altText: "",
         }}
         fill
-        priority
         sizes="100vw"
         className="absolute inset-0"
       />

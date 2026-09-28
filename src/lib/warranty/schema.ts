@@ -1,4 +1,6 @@
-import { z } from "zod";
+// zod/mini: same validation, a fraction of the bundle (classic zod isn't
+// tree-shakeable and was ~300 KB raw on every form page).
+import * as z from "zod/mini";
 
 export type WarrantyErrorKey =
   | "chassisNumberMin"
@@ -17,22 +19,18 @@ export function createWarrantySchema(t: (key: WarrantyErrorKey) => string) {
   return z.object({
     chassisNumber: z
       .string()
-      .min(5, t("chassisNumberMin"))
-      .regex(/^[A-Za-z0-9]+$/, t("chassisNumberFormat")),
+      .check(z.minLength(5, t("chassisNumberMin")), z.regex(/^[A-Za-z0-9]+$/, t("chassisNumberFormat"))),
     installationDate: z
       .string()
-      .min(1, t("installationDateRequired"))
-      .refine(
-        (date) => new Date(date).getTime() <= Date.now(),
-        t("installationDateFuture"),
+      .check(
+        z.minLength(1, t("installationDateRequired")),
+        z.refine((date) => new Date(date).getTime() <= Date.now(), t("installationDateFuture")),
       ),
-    installerId: z.string().min(1, t("installerRequired")),
-    ownerName: z.string().min(2, t("ownerNameRequired")),
-    email: z.string().email(t("emailInvalid")),
-    phone: z.string().min(6, t("phoneRequired")),
-    consent: z.boolean().refine((v) => v === true, {
-      message: t("consentRequired"),
-    }),
+    installerId: z.string().check(z.minLength(1, t("installerRequired"))),
+    ownerName: z.string().check(z.minLength(2, t("ownerNameRequired"))),
+    email: z.email(t("emailInvalid")),
+    phone: z.string().check(z.minLength(6, t("phoneRequired"))),
+    consent: z.boolean().check(z.refine((v) => v === true, t("consentRequired"))),
   });
 }
 
