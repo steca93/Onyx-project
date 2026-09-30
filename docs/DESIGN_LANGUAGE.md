@@ -167,6 +167,7 @@ Restrained by design. The energy is typographic.
 - Carousel: transform only, `.55s cubic-bezier(.22,.61,.36,1)`.
 - No entrance animations, no scroll reveals, no parallax, no counters, no marquees, no hover lift or scale.
 - Respect `prefers-reduced-motion: reduce` — drop to no transition.
+- **One exception — waiting states.** While an order is being placed (`CheckoutProcessing`), a full-screen `onyx-900` overlay shows the mark with a cyan gleam travelling clockwise around its facets (`accent-hi`, opacity only, 2.4s loop) and a 1px hairline track with an accent segment scanning across it (transform only). No spinners, no fake progress bars. Under reduced motion the mark is static and the scan is hidden. Reuse this for any other long blocking wait; don't invent a second loader.
 
 ## 6. Page architecture
 

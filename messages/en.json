@@ -259,7 +259,13 @@
     "notesPlaceholder": "E.g. extra instructions for the courier, preferred delivery time…",
     "acceptTerms": "I agree to the <termsLink>terms of use</termsLink> and privacy policy.",
     "submitting": "PROCESSING…",
-    "submit": "PLACE ORDER"
+    "submit": "PLACE ORDER",
+    "processingEyebrow": "ORDER IN PROGRESS",
+    "processingHeadingLine1": "Confirming",
+    "processingHeadingLine2": "your order",
+    "processingStatus": "Processing your order…",
+    "processingStatusLong": "Almost there — please keep this page open",
+    "processingStatusSlow": "This is taking longer than usual. Please keep this page open, your order is still being processed"
   },
   "OrderConfirmationPage": {
     "title": "Order Confirmation",

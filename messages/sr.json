@@ -259,7 +259,13 @@
     "notesPlaceholder": "Npr. dodatna uputstva za kurira, željeni termin dostave…",
     "acceptTerms": "Slažem se sa <termsLink>uslovima korišćenja</termsLink> i politikom privatnosti.",
     "submitting": "OBRAĐUJE SE…",
-    "submit": "POTVRDI PORUDŽBINU"
+    "submit": "POTVRDI PORUDŽBINU",
+    "processingEyebrow": "PORUDŽBINA U OBRADI",
+    "processingHeadingLine1": "Potvrđujemo",
+    "processingHeadingLine2": "vašu porudžbinu",
+    "processingStatus": "Obrađujemo vašu porudžbinu…",
+    "processingStatusLong": "Još samo trenutak — ne zatvarajte ovu stranicu",
+    "processingStatusSlow": "Obrada traje duže nego obično. Ne zatvarajte stranicu, porudžbina se i dalje obrađuje"
   },
   "OrderConfirmationPage": {
     "title": "Potvrda porudžbine",

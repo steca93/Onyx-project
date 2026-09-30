@@ -37,6 +37,34 @@
      Override Tailwind's default `lg` (1024) to line up with the spec's
      desktop tier so `md:`/`lg:` map directly to the tablet/desktop split. */
   --breakpoint-lg: 1200px;
+
+  /* §5 Motion — the order-processing overlay (CheckoutProcessing) is the one
+     place with a looping animation: the cyan gleam travels around the mark's
+     facets while a hairline scan runs underneath. Transform/opacity only. */
+  --animate-facet-gleam: facet-gleam 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) infinite both;
+  --animate-hairline-scan: hairline-scan 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+
+  @keyframes facet-gleam {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    16% {
+      opacity: 0.9;
+    }
+    42% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hairline-scan {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(340%);
+    }
+  }
 }
 
 /* §1 Gradients — only these three exist anywhere in the app. */
