@@ -6,11 +6,14 @@ import { wpGraphqlUrl } from "@/lib/env/wordpress";
  * error handling takes over). During `next build`, though, dozens of pages
  * prerender at once against a backend with no GraphQL caching of its own —
  * slow answers are expected there, and a timeout would fail the deploy.
+ * `next dev` is in the same spot: it starts with an empty data cache, so the
+ * first page load sends every query to WordPress at once.
  */
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
-const TIMEOUT_MS = IS_BUILD ? 30_000 : 8_000;
+const IS_DEV = process.env.NODE_ENV === "development";
+const TIMEOUT_MS = IS_BUILD || IS_DEV ? 30_000 : 8_000;
 /** One retry (after a short pause) for timeouts, network errors and 5xx. */
-const RETRY_DELAY_MS = IS_BUILD ? 2_000 : 300;
+const RETRY_DELAY_MS = IS_BUILD || IS_DEV ? 2_000 : 300;
 
 export class GraphQLRequestError extends Error {
   constructor(
