@@ -65,7 +65,10 @@ export default async function ShippingReturnsPage({
           <p className="text-body text-text-60">
             {t.rich("trackingBody", {
               phoneLink: () => (
-                <a href={`tel:${siteSettings.supportPhone.replace(/\s/g, "")}`}>
+                <a
+                  href={`tel:${siteSettings.supportPhone.replace(/\s/g, "")}`}
+                  className="underline underline-offset-2 hover:no-underline"
+                >
                   {siteSettings.supportPhone}
                 </a>
               ),

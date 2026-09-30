@@ -38,7 +38,7 @@ export function LanguageSwitcher({ untranslated }: { untranslated: UntranslatedS
     <nav className="flex items-center gap-1.5" aria-label={t("label")}>
       {routing.locales.map((loc, index) => (
         <span key={loc} className="flex items-center gap-1.5">
-          {index > 0 && <span className="text-text-34">/</span>}
+          {index > 0 && <span className="text-text-34" aria-hidden>/</span>}
           {loc === locale ? (
             <span aria-current="true" lang={loc} className="text-accent">
               {LABELS[loc]}

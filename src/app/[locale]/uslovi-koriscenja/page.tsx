@@ -133,7 +133,7 @@ export default async function TermsOfServicePage({
                 hours: tSite("workingHours"),
               })}
             </p>
-            <p className="mt-3 text-[11px] text-text-34">
+            <p className="mt-3 text-[11px] text-text-40">
               {t("merchantPending")}
             </p>
           </Section>
@@ -167,7 +167,7 @@ export default async function TermsOfServicePage({
           </Section>
 
           <div className="border-t border-hairline pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-mono text-[10px] tracking-[.1em] text-text-34 uppercase">
+            <p className="font-mono text-[10px] tracking-[.1em] text-text-40 uppercase">
               {t("lastUpdated")}
             </p>
             <Link

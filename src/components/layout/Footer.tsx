@@ -86,7 +86,7 @@ export function Footer({ categories }: FooterProps) {
       </div>
 
       <div className="container-onyx mt-16 flex flex-col gap-4 border-t border-hairline py-10 sm:flex-row sm:items-center sm:justify-between">
-        <div className="font-mono text-[9.5px] tracking-[.16em] text-text-34">
+        <div className="font-mono text-[9.5px] tracking-[.16em] text-text-40">
           {t("copyright", { year: new Date().getFullYear() })}
         </div>
         <div className="flex flex-wrap gap-2 font-mono text-[8.5px] tracking-[.14em] text-text-40">
