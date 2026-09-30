@@ -259,7 +259,13 @@
     "notesPlaceholder": "Z. B. zusätzliche Hinweise für den Kurier, gewünschter Liefertermin…",
     "acceptTerms": "Ich stimme den <termsLink>Nutzungsbedingungen</termsLink> und der Datenschutzerklärung zu.",
     "submitting": "WIRD BEARBEITET…",
-    "submit": "BESTELLUNG ABSCHICKEN"
+    "submit": "BESTELLUNG ABSCHICKEN",
+    "processingEyebrow": "BESTELLUNG IN BEARBEITUNG",
+    "processingHeadingLine1": "Wir bestätigen",
+    "processingHeadingLine2": "Ihre Bestellung",
+    "processingStatus": "Ihre Bestellung wird bearbeitet…",
+    "processingStatusLong": "Nur noch einen Moment — bitte schließen Sie diese Seite nicht",
+    "processingStatusSlow": "Das dauert länger als üblich. Bitte lassen Sie diese Seite geöffnet, Ihre Bestellung wird weiter bearbeitet"
   },
   "OrderConfirmationPage": {
     "title": "Bestellbestätigung",

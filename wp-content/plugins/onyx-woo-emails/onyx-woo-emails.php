@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ONYX WooCommerce Emails
  * Description: Branded email templates for ONYX EVOLUTION WooCommerce orders, in Serbian.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: ONYX EVOLUTION
  */
 
@@ -84,6 +84,13 @@ add_filter('woocommerce_email_from_name', function($name) {
 add_filter('woocommerce_email_from_address', function($email) {
     return get_option('admin_email');
 });
+
+// ── Send order emails after checkout, not during it ──────────────────────────
+
+// By default WooCommerce sends the customer + admin emails inside the
+// checkout request, so the storefront's "confirm order" call waits on the
+// mail server. Deferred, they are queued and sent at the end of the request.
+add_filter('woocommerce_defer_transactional_emails', '__return_true');
 
 // ── Admin settings page ───────────────────────────────────────────────────────
 
