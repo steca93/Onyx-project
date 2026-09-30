@@ -16,7 +16,7 @@ const build = process.env.SEO_SKIP_BUILD ? "" : "next build && ";
 
 /** A real product whose EN/DE translation the test builds hide (see
  * src/i18n/catalog/index.ts) to exercise the untranslated-item paths. */
-export const HIDDEN_TRANSLATION = "krpa-za-detaljno-ciscenje";
+export const HIDDEN_TRANSLATION = "vafel-krpa-za-staklo-onyx-evolution-waffle-wipe-1-kom";
 
 function server(port: number, indexable: boolean, distDir: string) {
   return {

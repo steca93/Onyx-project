@@ -130,6 +130,9 @@ function buildListResult(
   };
 }
 
+/** WooCommerce's default category for products with none assigned. */
+const UNCATEGORIZED_SLUG = "uncategorized";
+
 export const liveRepo: Repo = {
   async getAllCategories() {
     const data = await graphqlFetch<{ productCategories: { nodes: Parameters<typeof mapCategory>[0][] } }>(
@@ -139,11 +142,13 @@ export const liveRepo: Repo = {
       { revalidate: REVALIDATE.categories, tags: [TAGS.categories, TAGS.menu] },
     );
     return (data?.productCategories.nodes ?? [])
-      .filter((c) => c.slug !== "uncategorized")
+      .filter((c) => c.slug !== UNCATEGORIZED_SLUG)
       .map(mapCategory);
   },
 
   async getCategoryBySlug(slug) {
+    // WooCommerce's catch-all bucket: never listed, so no page for it either.
+    if (slug === UNCATEGORIZED_SLUG) return null;
     const data = await graphqlFetch<{ productCategory: Parameters<typeof mapCategory>[0] | null }>(
       CATEGORY_BY_SLUG_QUERY,
       { slug },
