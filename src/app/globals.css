@@ -14,8 +14,11 @@
 
   --color-text: #eaeef1;
   --color-text-60: rgba(234, 238, 241, 0.62);
-  --color-text-40: rgba(234, 238, 241, 0.4);
-  --color-text-34: rgba(234, 238, 241, 0.34);
+  /* text-40 and text-34 are named for their original opacity; raised to
+     .52 / .42 for WCAG AA contrast (≥4.5:1 and ≥3:1 large text on every
+     onyx surface). Names kept so every usage updates at once. */
+  --color-text-40: rgba(234, 238, 241, 0.52);
+  --color-text-34: rgba(234, 238, 241, 0.42);
 
   --color-accent: #2ab3e6;
   --color-accent-hi: #7fd6f5;

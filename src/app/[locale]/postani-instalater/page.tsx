@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod/mini";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +13,7 @@ import { StepRow } from "@/components/ui/StepRow";
 
 export default function BecomeInstallerPage() {
   const t = useTranslations("BecomeInstallerPage");
+  const messageId = useId();
 
   const applicationSchema = z.object({
     company: z.string().check(z.minLength(2, t("companyError"))),
@@ -133,10 +134,11 @@ export default function BecomeInstallerPage() {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="mb-2 block label-column text-text-40">
+                  <label htmlFor={messageId} className="mb-2 block label-column text-text-40">
                     {t("messageLabel")}
                   </label>
                   <textarea
+                    id={messageId}
                     rows={5}
                     {...register("message")}
                     aria-invalid={errors.message ? true : undefined}

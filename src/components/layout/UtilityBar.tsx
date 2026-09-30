@@ -23,7 +23,7 @@ export function UtilityBar({ untranslated }: { untranslated: UntranslatedSlugs }
           <span className="hidden md:inline">
             {t("support", { phone: siteSettings.supportPhone })}
           </span>
-          <span className="hidden text-text-34 md:inline">|</span>
+          <span className="hidden text-text-34 md:inline" aria-hidden>|</span>
           <LanguageSwitcher untranslated={untranslated} />
         </div>
       </div>

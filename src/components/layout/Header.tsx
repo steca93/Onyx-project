@@ -20,7 +20,7 @@ function Logo() {
     <Link href="/" className="flex shrink-0 flex-col gap-1.5" aria-label={t("logoAriaLabel")}>
       <span className="text-[25px] leading-none tracking-[.3em]">
         ON<span className="text-accent">Y</span>X
-      </span>
+      </span>{" "}
       <span className="flex items-center gap-2">
         <span className="h-px w-2.5 bg-accent" aria-hidden />
         <span className="text-badge text-accent">EVOLUTION</span>

@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StepRow } from "@/components/ui/StepRow";
@@ -27,6 +27,7 @@ export default function WarrantyPage() {
   const t = useTranslations("WarrantyPage");
   const tForm = useTranslations("WarrantyForm");
   const tCommon = useTranslations("Common");
+  const receiptId = useId();
 
   const warrantySchema = createWarrantySchema((key) => tForm(key));
   const steps = t.raw("steps") as { number: string; text: string }[];
@@ -133,10 +134,11 @@ export default function WarrantyPage() {
                 error={errors.phone?.message}
               />
               <div className="flex flex-col gap-2">
-                <label className="label-column text-text-40">
+                <label htmlFor={receiptId} className="label-column text-text-40">
                   {t("receiptLabel")}
                 </label>
                 <input
+                  id={receiptId}
                   type="file"
                   accept="image/*,application/pdf"
                   className="notch notch-12 h-11 border border-hairline bg-onyx-800 px-3 font-mono text-[10px] tracking-[.1em] text-text-60 file:mr-3 file:border-0 file:bg-accent file:px-3 file:py-2 file:font-mono file:text-[9px] file:tracking-[.2em] file:text-onyx-900"

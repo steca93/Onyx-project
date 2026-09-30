@@ -18,8 +18,8 @@ Define these once as theme tokens. Never hardcode a hex in a component.
 | `onyx-700` | `#12181D` | Hover state for tiles and rows |
 | `text` | `#EAEEF1` | Primary text |
 | `text-60` | `rgba(234,238,241,.62)` | Body copy |
-| `text-40` | `rgba(234,238,241,.40)` | Meta, mono labels, counts |
-| `text-34` | `rgba(234,238,241,.34)` | Decorative second lines, copyright. **Never** for information the user needs |
+| `text-40` | `rgba(234,238,241,.52)` | Meta, mono labels, counts. ≥4.9:1 on every onyx surface |
+| `text-34` | `rgba(234,238,241,.42)` | Large decorative second lines, separators, input placeholders (≥3.5:1). **Never** for small text or information the user needs |
 | `accent` | `#2AB3E6` | The logo cyan — accents, prices, primary buttons, active states |
 | `accent-hi` | `#7FD6F5` | Accent hover |
 | `accent-deep` | `#0E3547` | Dark teal, for pattern and gradient bases only |
@@ -181,7 +181,7 @@ Every page: utility bar → sticky header (two rows) → `main` → CTA band →
 
 **Page header (non-home)** — 260px band on `onyx-900`, bottom border `accent-line`. Breadcrumb in mono 9px `.24em` `text-40` with `/` separators, then the h1 at 72px, then optional one-line body in `text-60`. This replaces the hero on every interior page.
 
-**Footer** — `onyx-900`, top hairline, 76px top padding, columns `1.3fr 1fr 1fr 1.4fr`, 60px gap: brand lockup + description + `IG` `FB` `YT` hairline chips; `PRODAVNICA`; `PODRŠKA`; `BILTEN` (copy, email field, full-width outline accent button `PRIJAVI SE`). Column headers mono 9px `.28em` `text-40`; links Questrial 13.5px, hover accent. Bottom bar: hairline top, `© 2026 ONYX EVOLUTION · SVA PRAVA ZADRŽANA` left, five hairline payment chips right.
+**Footer** — `onyx-900`, top hairline, 76px top padding, columns `1.3fr 1fr 1fr 1.4fr`, 60px gap: brand lockup + description + `IG` `FB` `YT` hairline chips; `PRODAVNICA`; `PODRŠKA`; `BILTEN` (copy, email field, full-width outline accent button `PRIJAVI SE`). Column headers mono 9px `.28em` `text-40`; links Questrial 13.5px, hover accent. Bottom bar: hairline top, `© 2026 ONYX EVOLUTION · SVA PRAVA ZADRŽANA` in `text-40` left, five hairline payment chips right.
 
 ## 7. Copy
 
@@ -207,7 +207,7 @@ Three breakpoints. The reference is desktop at 1440.
 ## 9. Quality bar
 
 - Semantic HTML: one `h1` per page, `header`/`nav`/`main`/`footer`, real `button` and `a`, `aria-label` on icon-only controls, `aria-current` on active nav.
-- Contrast: body text and mono labels clear 4.5:1 against their surface. Verify accent-on-onyx and every `text-40` label. `text-34` is decorative only.
+- Contrast: body text and mono labels clear 4.5:1 against their surface. Verify accent-on-onyx and every `text-40` label. `text-34` is only for large or decorative text (3:1). The token names keep their original opacities (.40 / .34); the values were raised to meet WCAG AA.
 - Images: always `width`/`height` or `aspect-ratio` — zero layout shift. AVIF/WebP, `object-fit: cover`. Product photography on a near-black background so it merges with `onyx-800`.
 - Content lives in data files or a CMS collection, never hardcoded in components. Products, categories, nav and footer links are all client-editable.
 - Keyboard: full tab traversal, visible focus everywhere, no focus traps, Escape closes drawers and modals.
